@@ -1,0 +1,1338 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/malody.ico">
+  <link rel="icon" href="/img/malody.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Lumie">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="软工题解注：括号后的⭐️表示复习优先级，越多表示优先级越高（⭐️⭐️⭐️最高，⭐️最低）Chapter 1 **软件的本质 **The Nature of Software1. 软件是什么：（⭐️⭐️） 完成软件的特性，功能，性能等所需要的 计算机程序，指令代码——程序  ​		feature特性： 非功能需求 non-functional：如安全性，兼容性，可移植性，可扩展性等 ​		funct">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软工题解">
+<meta property="og:url" content="http://example.com/2023/03/06/%E8%BD%AF%E5%B7%A5%E9%A2%98%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Sekai">
+<meta property="og:description" content="软工题解注：括号后的⭐️表示复习优先级，越多表示优先级越高（⭐️⭐️⭐️最高，⭐️最低）Chapter 1 **软件的本质 **The Nature of Software1. 软件是什么：（⭐️⭐️） 完成软件的特性，功能，性能等所需要的 计算机程序，指令代码——程序  ​		feature特性： 非功能需求 non-functional：如安全性，兼容性，可移植性，可扩展性等 ​		funct">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://moe.photo/images/2023/03/06/98216ba2fa49577a354543e1d265c9bc.jpg">
+<meta property="article:published_time" content="2023-03-06T06:44:20.000Z">
+<meta property="article:modified_time" content="2023-03-06T06:55:26.699Z">
+<meta property="article:author" content="Lumie">
+<meta property="article:tag" content="软件工程">
+<meta property="article:tag" content="工程管理">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://moe.photo/images/2023/03/06/98216ba2fa49577a354543e1d265c9bc.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>软工题解 - Sekai</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 75vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Sekai</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/star.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="软工题解"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-06 14:44" pubdate>
+          2023年3月6日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          13k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          110 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">软工题解</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="软工题解"><a href="#软工题解" class="headerlink" title="软工题解"></a>软工题解</h1><h2 id="注：括号后的⭐️表示复习优先级，越多表示优先级越高（⭐️⭐️⭐️最高，⭐️最低）"><a href="#注：括号后的⭐️表示复习优先级，越多表示优先级越高（⭐️⭐️⭐️最高，⭐️最低）" class="headerlink" title="注：括号后的⭐️表示复习优先级，越多表示优先级越高（⭐️⭐️⭐️最高，⭐️最低）"></a>注：括号后的⭐️表示复习优先级，越多表示优先级越高（⭐️⭐️⭐️最高，⭐️最低）</h2><h2 id="Chapter-1-软件的本质-The-Nature-of-Software"><a href="#Chapter-1-软件的本质-The-Nature-of-Software" class="headerlink" title="Chapter 1 **软件的本质 **The Nature of Software"></a><strong>Chapter 1</strong> **软件的本质 **The Nature of Software</h2><h3 id="1-软件是什么：（⭐️⭐️）"><a href="#1-软件是什么：（⭐️⭐️）" class="headerlink" title="1. 软件是什么：（⭐️⭐️）"></a>1. 软件是什么：（⭐️⭐️）</h3><ol>
+<li>完成软件的特性，功能，性能等所需要的 <strong>计算机程序，指令代码</strong>——<strong>程序</strong></li>
+</ol>
+<p>​		feature特性： 非功能需求 non-functional：如安全性，兼容性，可移植性，可扩展性等</p>
+<p>​		function功能：与非功能需求相对应</p>
+<p>​		performance：feature的一部分，但因为很重要所以单拉出来</p>
+<ol start="2">
+<li><p>使得程序可以充分利用操纵信息所使用的 <strong>数据结构</strong>——<strong>数据</strong></p>
+</li>
+<li><p>描述程序操作使用的硬拷贝和虚拟形式的 <strong>描述性信息</strong>——<strong>文档</strong></p>
+</li>
+</ol>
+<h3 id="2-生命周期：（⭐️）"><a href="#2-生命周期：（⭐️）" class="headerlink" title="2. 生命周期：（⭐️）"></a>2. 生命周期：（⭐️）</h3><img src="C:\Users\Lumie/Pictures/Markdown/image-20230226192814338.png" srcset="/img/loading.gif" lazyload alt="image-20230226192814338" style="zoom:67%;" />
+
+<ol>
+<li>硬件的生命周期</li>
+</ol>
+<p>​		解读：浴缸曲线（早期的infant mortality是由于设计引起问题，当设计问题解决后可以平稳运行，直到硬件损耗，期间替换硬件不影响failure rate）**(**早期故障</p>
+<p>​		多，后期磨损）</p>
+<ol start="2">
+<li>理想曲线——开发后可以一致运行实际曲线——考虑：1.功能增强的update；2. 功能修改和错误修复modify &amp; bugfixed不断改变后failure rate的突然上升与总体上升: 修改change后导致其他新的问题出现，有”传染性”错误的可扩展性，这是功能调整增强的代价 **(**错误的扩展性，修复某问题的副作用 <strong>)</strong></li>
+</ol>
+<h3 id="3-软件的划分：（⭐️⭐️）"><a href="#3-软件的划分：（⭐️⭐️）" class="headerlink" title="3. 软件的划分：（⭐️⭐️）"></a>3. 软件的划分：（⭐️⭐️）</h3><p>​	1、系统软件（System Software）</p>
+<p>​	2、应用软件（Application Software）</p>
+<p>​	3、工程&#x2F;科学软件（Engineering&#x2F;scientific software）</p>
+<p>​	4、嵌入式软件（Embedded software）</p>
+<p>​	5、产品线软件（Product-line software）</p>
+<p>​	6、Web&#x2F;移动App（Web&#x2F;Mobile applications）</p>
+<p>​			Mobile app包括：</p>
+<p>​			<strong>user interface</strong> 用户界面</p>
+<p>​			<strong>interoperability</strong> **with Web-based resources **与基于web的资源的互操作性</p>
+<p>​			**local processing capabilities **本地处理能力</p>
+<p>​	7、人工智能软件（AI software）</p>
+<h3 id="4-遗留软件的特点：（⭐️⭐️）"><a href="#4-遗留软件的特点：（⭐️⭐️）" class="headerlink" title="4. 遗留软件的特点：（⭐️⭐️）"></a>4. 遗留软件的特点：（⭐️⭐️）</h3><ul>
+<li><p>生命周期长（老不死）</p>
+</li>
+<li><p>业务关键性（涉及ys的底层代码了）</p>
+</li>
+<li><p>质量差：<strong>设计难以扩展，代码令人费解，文档混乱</strong></p>
+</li>
+</ul>
+<h3 id="5-遗留系统演化原因：（⭐️）"><a href="#5-遗留系统演化原因：（⭐️）" class="headerlink" title="5. 遗留系统演化原因：（⭐️）"></a>5. 遗留系统演化原因：（⭐️）</h3><h4 id="AUEA"><a href="#AUEA" class="headerlink" title="AUEA"></a>AUEA</h4><ul>
+<li><p>**A **需要进行适应性调整，满足新的计算环境和计算需求（比如：密码升级到指纹） <strong>new tech adapted</strong></p>
+</li>
+<li><p>**U **升级以实现商业需求 <strong>enhanced implementation</strong></p>
+</li>
+<li><p>**E **扩展使得可以与更多的系统交互，如现代系统或数据库 <strong>extend</strong></p>
+</li>
+<li><p><strong>A</strong> 架构需要重新部署来适应新环境（例如下面以前没有mobile，或部署微服务框架等） <strong>rearchitected</strong></p>
+</li>
+</ul>
+<h3 id="6-云平台架构包括：（⭐️⭐️⭐️）"><a href="#6-云平台架构包括：（⭐️⭐️⭐️）" class="headerlink" title="6. 云平台架构包括：（⭐️⭐️⭐️）"></a>6. 云平台架构包括：（⭐️⭐️⭐️）</h3><ul>
+<li><p><strong>IaaS</strong>层（资源层)</p>
+</li>
+<li><p><strong>虚拟机</strong>（跨IaaS与PaaS）</p>
+</li>
+<li><p><strong>Paas</strong>层（平台层：资源监测；预警；优化决策，<strong>资预优</strong>)</p>
+</li>
+<li><p><strong>SaaS</strong>层 (软件，可视化界面)</p>
+</li>
+</ul>
+<h2 id="Chapter-2-软件工程-Software-Engineering"><a href="#Chapter-2-软件工程-Software-Engineering" class="headerlink" title="Chapter 2 软件工程 Software Engineering"></a><strong>Chapter 2</strong> <strong>软件工程</strong> Software Engineering</h2><h3 id="1-软件工程的定义：（⭐️⭐️⭐️）"><a href="#1-软件工程的定义：（⭐️⭐️⭐️）" class="headerlink" title="1. 软件工程的定义：（⭐️⭐️⭐️）"></a>1. 软件工程的定义：（⭐️⭐️⭐️）</h3><p>（1）将<strong>系统化的</strong>（systematic）、<strong>规范化的</strong>(disciplined)、<strong>可量化的</strong>(quantifiable)方法应用于软件的<strong>开发</strong>、<strong>运行</strong>和<strong>维护</strong></p>
+<p>（2）对（1）方法的研究</p>
+<h3 id="2-软件工程的层次：（⭐️）"><a href="#2-软件工程的层次：（⭐️）" class="headerlink" title="2. 软件工程的层次：（⭐️）"></a>2. 软件工程的层次：（⭐️）</h3><img src="C:\Users\Lumie/Pictures/Markdown/image-20230226200336664.png" srcset="/img/loading.gif" lazyload alt="image-20230226200336664" style="zoom:50%;" />
+
+
+
+<p>Q 质量: 为什么要有软件工程⇒因为要提高软件的质量，<strong>质量是根基</strong></p>
+<p>P 过程：回答了如何提高质量的问题</p>
+<p>M 方法：方法贯穿于过程中，eg：<strong>UseCase建模，数据库设计方法，架构方法，分析方法，设计方法，测试方法</strong>等多种方法</p>
+<p>T 工具：现在很多方法和技术都工具化了</p>
+<h3 id="3-软件工程的通用过程框架包括：（⭐️⭐️⭐️）"><a href="#3-软件工程的通用过程框架包括：（⭐️⭐️⭐️）" class="headerlink" title="3. 软件工程的通用过程框架包括：（⭐️⭐️⭐️）"></a>3. 软件工程的通用过程框架包括：（⭐️⭐️⭐️）</h3><h4 id="CPMCD"><a href="#CPMCD" class="headerlink" title="CPMCD"></a><strong>CPMCD</strong></h4><ol>
+<li><strong>交流Communication</strong>：需求收集requirement gathering&amp; 需求诱导 elicitation</li>
+<li><strong>计划Planing</strong>：planning是一个大的，阶段的计划（如人员安排等），有很多template</li>
+<li><strong>建模Modeling</strong>：包括分析建模(Analysis modeling)，概要设计(high-level design)， component design 组件设计(detailed design)</li>
+<li><strong>构建Construction</strong>：coding &amp; testing 写代码&amp;测试,测试包括单元测试，系统测试</li>
+<li><strong>部署Deployment</strong>：delivery &amp; maintenance &amp; feedback 交付，维护，反馈</li>
+</ol>
+<p><strong>软件开发过程包括很多迭代，并不是线性顺序的模型，而是循环往复</strong></p>
+<p><strong>Standard Process包含的Activity</strong></p>
+<ol>
+<li><p>requirement elicitation 需求诱导</p>
+</li>
+<li><p>requirement analysis modeling 需求分析建模</p>
+</li>
+<li><p>architecture design 架构设计</p>
+</li>
+<li><p>component design 组件设计</p>
+</li>
+<li><p>coding 写代码</p>
+</li>
+<li><p>unit testing 单元测试</p>
+</li>
+<li><p>integration testing 集成测试</p>
+</li>
+<li><p>system testing 系统测试</p>
+</li>
+<li><p>acceptance testing 验收测试（用户在开发环境下的测试）</p>
+</li>
+<li><p>Release &amp; Delivery， Feedback &amp; Support 发布，交付，反馈，支持</p>
+</li>
+</ol>
+<p><strong>对应CPMCD：</strong></p>
+<p>Communication: 1</p>
+<p>Planning:(umbrella activity)</p>
+<p>Modeling: 2、3、4</p>
+<p>Construction: 5、6、7、8、9 </p>
+<p>Deployment:10</p>
+<h3 id="4-伞形活动（umbrella-activity）包括：（⭐️⭐️⭐️）"><a href="#4-伞形活动（umbrella-activity）包括：（⭐️⭐️⭐️）" class="headerlink" title="4. 伞形活动（umbrella activity）包括：（⭐️⭐️⭐️）"></a>4. 伞形活动（umbrella activity）包括：（⭐️⭐️⭐️）</h3><h4 id="跟风质技测配复工（跟风至极，则配复工）"><a href="#跟风质技测配复工（跟风至极，则配复工）" class="headerlink" title="跟风质技测配复工（跟风至极，则配复工）"></a><strong>跟风质技测配复工</strong>（跟风至极，则配复工）</h4><ul>
+<li><p><strong>软件项目跟踪控制</strong>：根据计划评估进度，采取措施保证计划实施（如：人员计划，发挥成员特长能力，了解人员是tracking，调整人力是control）</p>
+</li>
+<li><p><strong>风险管理</strong>：对可能影响成果或产品质量的风险进行评估(例如，人员流失跳槽风险，新技术、云平台、数据库不熟悉等)</p>
+</li>
+<li><p><strong>软件质量保证</strong>：确定和执行保证软件质量的活动(编程管理，代码规范，需求规约等）</p>
+</li>
+<li><p><strong>技术评审</strong>：评估软件工程 (比如代码Review，需求Review等）</p>
+</li>
+<li><p><strong>测量</strong>：定义和收集过程、项目以及产品的度量（对schedule进行测量，对发现的缺陷进行度量，对人员工作量进行度量等）</p>
+</li>
+<li><p><strong>软件配置管理</strong>：整个软件过程中变更带来的影响（<strong>用Git进行版本控制</strong>）</p>
+</li>
+<li><p><strong>可复用管理</strong>：定义工作产品复用的标准，建立构建复用机制（苹果的复用做的很好，通过标准化可以降低成本）</p>
+</li>
+<li><p><strong>工作产品的准备和生产</strong>：包括生成产品所必须的活动（例如模型、文档、日志、表格和列表）</p>
+</li>
+</ul>
+<h2 id="Chapter-3-软件过程-Software-Process"><a href="#Chapter-3-软件过程-Software-Process" class="headerlink" title="Chapter 3 软件过程 Software Process"></a><strong>Chapter 3</strong> <strong>软件过程</strong> Software Process</h2><h3 id="1-过程模式（-process-patterns）包括：（⭐️⭐️）"><a href="#1-过程模式（-process-patterns）包括：（⭐️⭐️）" class="headerlink" title="1. 过程模式（ process patterns）包括：（⭐️⭐️）"></a>1. 过程模式（ <strong>process patterns</strong>）包括：（⭐️⭐️）</h3><p>混个眼熟</p>
+<p>​	1、模式名称（Pattern name）：</p>
+<p>​	2、驱动力（Forces）：</p>
+<p>​	3、类型：（Type）</p>
+<p>​	4、启动上下文（Initial context）</p>
+<p>​	5、问题（Problem）</p>
+<p>​	6、解决方案（Solution）</p>
+<p>​	7、结果上下文（Resulting context）</p>
+<p>​	8、相关模式（Related pattern）</p>
+<p>​	9、已知应用和实例（Known uses and examples）</p>
+<h3 id="2-过程流分为：（⭐️）"><a href="#2-过程流分为：（⭐️）" class="headerlink" title="2. 过程流分为：（⭐️）"></a><strong>2. 过程流分为：</strong>（⭐️）</h3><h4 id="线代进行"><a href="#线代进行" class="headerlink" title="线代进行"></a><strong>线代进行</strong></h4><ol>
+<li><p>Linear 线性</p>
+</li>
+<li><p>Iterative 迭代</p>
+</li>
+<li><p>Evolutionary 进化&#x2F;演化</p>
+</li>
+<li><p>Parallel 并行</p>
+</li>
+</ol>
+<h3 id="3-任务集的内容：（⭐️）"><a href="#3-任务集的内容：（⭐️）" class="headerlink" title="3. 任务集的内容：（⭐️）"></a>3. 任务集的内容：（⭐️）</h3><ul>
+<li><p>T：work tasks:</p>
+</li>
+<li><p>P：work products: 在work tasks之后形成一个work products</p>
+</li>
+<li><p>Q：quality assurance( QA ) points: 产生work products后要有质量保证</p>
+</li>
+<li><p>M：milestone: 形成里程碑</p>
+</li>
+</ul>
+<h3 id="4-软件改进方法有：（⭐️）"><a href="#4-软件改进方法有：（⭐️）" class="headerlink" title="4. 软件改进方法有：（⭐️）"></a>4. 软件改进方法有：（⭐️）</h3><ul>
+<li><p>用于过程改进的<strong>CMMI</strong>标准评估方法：</p>
+</li>
+<li><p>用于组织内部过程改进的<strong>CMM</strong>评估</p>
+</li>
+<li><p><strong>SPICE</strong></p>
+</li>
+<li><p>软件<strong>ISO</strong></p>
+</li>
+</ul>
+<h3 id="5-软件过程框架中定义了许多activities-actions-和tasks-举例说明并解释它们之间的关系（⭐️⭐️）"><a href="#5-软件过程框架中定义了许多activities-actions-和tasks-举例说明并解释它们之间的关系（⭐️⭐️）" class="headerlink" title="5.软件过程框架中定义了许多activities, actions, 和tasks, 举例说明并解释它们之间的关系（⭐️⭐️）"></a>5.软件过程框架中定义了许多activities, actions, 和tasks, 举例说明并解释它们之间的关系（⭐️⭐️）</h3><ul>
+<li><p><strong>活动activity</strong>主要实现宽泛的⽬标，与应⽤领域，项⽬⼤⼩，结果复杂性或者实施软件⼯程的重要程度没有直接关系</p>
+</li>
+<li><p><strong>动作action</strong>包含了主要⼯作产品⽣产过程中的⼀系列任务</p>
+</li>
+<li><p><strong>任务task</strong>关注⼩⽽明确的⽬标，能够⽣产实际的产品</p>
+</li>
+</ul>
+<p>​         例如testing这个activity,包括actions：单元测试、集成测试、系统测试、验收测试</p>
+<p>​         单元测试这个action包括tasks:计划、⽤例分析、设计测试⽤例、技术评审、运⾏测试⽤例、debug、软件配置管理</p>
+<h2 id="Chapter-4-过程模型-Process-Models"><a href="#Chapter-4-过程模型-Process-Models" class="headerlink" title="Chapter 4 **过程模型 **Process Models"></a><strong>Chapter 4</strong> **过程模型 **Process Models</h2><h3 id="1-简述瀑布模型，简述瀑布模型与V模型的关系：（⭐️⭐️⭐️）"><a href="#1-简述瀑布模型，简述瀑布模型与V模型的关系：（⭐️⭐️⭐️）" class="headerlink" title="1. 简述瀑布模型，简述瀑布模型与V模型的关系：（⭐️⭐️⭐️）"></a>1. 简述瀑布模型，简述瀑布模型与V模型的关系：（⭐️⭐️⭐️）</h3><p>瀑布模型：⼜称为<strong>经典</strong>⽣命周期，它提出了⼀个系统的，顺序的软件开发⽅法，从⽤户需求规格说明开始，通过策划、建模、构建、部署的过程，最终提供完整的软件⽀持。</p>
+<p>瀑布模型的⼀个变体称为V模型</p>
+<img src="C:\Users\Lumie/Pictures/Markdown/image-20230301134651997.png" srcset="/img/loading.gif" lazyload alt="image-20230301134651997" style="zoom: 44%;" />
+
+<p>随着软件团队⼯作沿着V模型左侧步骤向下推进，基本问题需求逐步细化，形成了对问题及解决⽅案的详尽且技术性的描述。⼀旦编码结束，团队沿着V模型右侧的步骤向上推进⼯作，其本质上是执⾏了⼀系列测试，与瀑布模型没有本质区别。</p>
+<h3 id="2-瀑布模型的问题：（⭐️⭐️⭐️）"><a href="#2-瀑布模型的问题：（⭐️⭐️⭐️）" class="headerlink" title="2. 瀑布模型的问题：（⭐️⭐️⭐️）"></a>2. 瀑布模型的问题：（⭐️⭐️⭐️）</h3><img src="C:\Users\Lumie\Pictures\Markdown\image-20230225193307697.png" srcset="/img/loading.gif" lazyload alt="image-20230225193307697" style="zoom:67%;" />
+
+<ol>
+<li><p>实际项目很少遵守瀑布模型的顺序。虽然线性模型可以加入迭代，但它是用直接的方式实现的，可能造成混乱。</p>
+</li>
+<li><p>客户很难描述清楚需求，瀑布模型要求客户明确需求，很难适应项目开始阶段的不确定性。</p>
+</li>
+<li><p>客户必须要有耐心，因为只有项目接近尾声才能得到可执行程序。</p>
+</li>
+<li><p>对于系统中的重大缺陷，如果在可执行程序评审前没有发现，可能造成惨重损失。</p>
+</li>
+<li><p>线性特性在某些项目中会导致阻塞状态。</p>
+</li>
+</ol>
+<h3 id="3-增量过程模型的例子：（⭐️⭐️）"><a href="#3-增量过程模型的例子：（⭐️⭐️）" class="headerlink" title="3. 增量过程模型的例子：（⭐️⭐️）"></a>3. 增量过程模型的例子：（⭐️⭐️）</h3><img src="C:\Users\Lumie\Pictures\Markdown\image-20230225193913207.png" srcset="/img/loading.gif" lazyload alt="image-20230225193913207" style="zoom:67%;" />
+
+<p>例如，采用增量模型开发文字处理软件，</p>
+<p>在第一个增量中提供基本的文件管理、编辑和文档生成功能；</p>
+<p>在第二个增量中提供更为复杂的编辑和文档生成功能；</p>
+<p>在第三个增量中提供拼写和语法检查功能；</p>
+<p>在第四个增量中提供高级页面排版功能。</p>
+<h3 id="4-增量过程模型的特点：（⭐️⭐️）"><a href="#4-增量过程模型的特点：（⭐️⭐️）" class="headerlink" title="4. 增量过程模型的特点：（⭐️⭐️）"></a>4. 增量过程模型的特点：（⭐️⭐️）</h3><p>每一次增量都生成可发布的产品increment producut，第一个增量形成核心基本产品，后续增量形成完善版本</p>
+<p>每次增量是一个waterfall，一次增量内不主张迭代</p>
+<p>不同增量间可并行开发（比如：第2个做coding时，第3个可做需求建模）——纵轴重合</p>
+<h3 id="5-为什么要用Prototype：（⭐️）"><a href="#5-为什么要用Prototype：（⭐️）" class="headerlink" title="5. 为什么要用Prototype：（⭐️）"></a>5. 为什么要用Prototype：（⭐️）</h3><p>客户定义了一组软件的<strong>一般目标但没有具体需求</strong>时；开发者不知道具体开发细节时，可帮助您和其他利益相关者更好地了解在需求模糊时要构建的内容。</p>
+<h3 id="6-螺旋模型-Spiral-Model的特点：（⭐️⭐️⭐️）"><a href="#6-螺旋模型-Spiral-Model的特点：（⭐️⭐️⭐️）" class="headerlink" title="6. 螺旋模型 Spiral Model的特点：（⭐️⭐️⭐️）"></a>6. 螺旋模型 <strong>Spiral Model的特点：（⭐️⭐️⭐️）</strong></h3><p>一是采用<strong>循环</strong>的方式逐步加深<strong>系统定义和实现</strong>的深度，同时<strong>降低风险</strong>。</p>
+<p>二是确定一系列<strong>里程碑</strong>作为支撑点，确保利益相关者认为系统解决方案可行且令各方满意</p>
+<img src="C:\Users\Lumie\Pictures\Markdown\image-20230225194822937.png" srcset="/img/loading.gif" lazyload alt="image-20230225194822937" style="zoom:67%;" />
+
+<p>适合<strong>大型项目，风险较高的项目，需求不明确的项目(big,risky,unclear)<strong>，将</strong>原型设计的迭代性质与瀑布模型的受控和系统方面相结合</strong>。</p>
+<p>其他process models: 在软件交付时结束；</p>
+<p><strong>spiral model: 在整个软件的生命周期中都适用</strong></p>
+<h2 id="Chapter-5-敏捷开发-Agile-Development"><a href="#Chapter-5-敏捷开发-Agile-Development" class="headerlink" title="Chapter 5 **敏捷开发 **Agile Development"></a><strong>Chapter 5</strong> **敏捷开发 **Agile Development</h2><h3 id="1-敏捷开发强调：（⭐️⭐️⭐️）"><a href="#1-敏捷开发强调：（⭐️⭐️⭐️）" class="headerlink" title="1. 敏捷开发强调：（⭐️⭐️⭐️）"></a>1. 敏捷开发强调：（⭐️⭐️⭐️）</h3><ul>
+<li><p>注重<strong>”客户的满意度</strong>“和”<strong>尽早</strong>提交<strong>可增量</strong>的软件产品“（增量交付，开发过程存在迭代）</p>
+</li>
+<li><p><strong>快速</strong>交付，不看重中间产品</p>
+</li>
+<li><p><strong>小型</strong>，积极的项目团队，协调能力强，看中<strong>团队结构</strong>，协作态度</p>
+</li>
+<li><p>可用<strong>非正式</strong>的方法（e.g. 数据库设计没有写完整的设计文档，中间建模尽量简单）</p>
+</li>
+<li><p><strong>最小</strong>的work product（开发过程简单，会要求尽量减少work product且work product简单，不完全按照template）</p>
+</li>
+<li><p>整体发展<strong>简单</strong>（e.g. 封闭开发）</p>
+</li>
+<li><p>软件工程师和其他项目利益相关者（管理人员，客户，最终用户）在一个敏捷的团队，命运共同体，其中roles和responsibility<strong>随时调整</strong></p>
+</li>
+</ul>
+<h4 id="敏捷开发适应需求变更"><a href="#敏捷开发适应需求变更" class="headerlink" title="敏捷开发适应需求变更"></a><strong>敏捷开发适应需求变更</strong></h4><h3 id="2-Change-Cost图（⭐️）"><a href="#2-Change-Cost图（⭐️）" class="headerlink" title="2. Change Cost图（⭐️）"></a>2. Change Cost图（⭐️）</h3><img src="C:\Users\Lumie/Pictures/Markdown/image-20230226132733944.png" srcset="/img/loading.gif" lazyload alt="image-20230226132733944" style="zoom:67%;" />
+
+<h4 id="理解敏捷模型的曲线："><a href="#理解敏捷模型的曲线：" class="headerlink" title="理解敏捷模型的曲线："></a>理解敏捷模型的曲线：</h4><p>regression testing回归测试——变更多了后，回归测试成本越来越高，最终翘了上去</p>
+<h3 id="3-敏捷过程原则：（⭐️⭐️⭐️）"><a href="#3-敏捷过程原则：（⭐️⭐️⭐️）" class="headerlink" title="3.敏捷过程原则：（⭐️⭐️⭐️）"></a>3.<strong>敏捷过程原则：（⭐️⭐️⭐️）</strong></h3><ol>
+<li><p><strong>Highest</strong> 最高优先级：通过早期early和连续continuous交付有价值的软件来满足客户</p>
+</li>
+<li><p><strong>Change</strong> 鼓励需求改动，哪怕是开发过程晚期（好的改动可以提升顾客的竞争优势）</p>
+</li>
+<li><p><strong>Frequently</strong> 经常提供work product，最好有短的schedule</p>
+</li>
+<li><p><strong>Together</strong> 甲方和开发者daily紧密合作</p>
+</li>
+<li><p><strong>Motivated</strong> 和有动力的人开发，给他们好的环境和支持，信任他们</p>
+</li>
+<li><p><strong>F-to-F</strong> 面对面讨论，实时解决问题，这是最高效率的</p>
+</li>
+<li><p><strong>WorkingSoftware</strong> 进度的最好指标就是产出的可工作的软件</p>
+</li>
+<li><p><strong>Sustainable</strong> 敏捷过程保持稳定的开发过程，赞助人，开发者和用户应该maintain a constantpace indefinitely (不定期同步跟踪）</p>
+</li>
+<li><p><strong>Excellence</strong> 持续关注追求技术的改进和设计的优化</p>
+</li>
+<li><p><strong>Simplicity</strong> 文档尽量简单</p>
+</li>
+<li><p><strong>Self-organizing</strong> 一个self-organizing的team可以做出最好的架构、需求和设计</p>
+</li>
+<li><p><strong>Reflection</strong> 定期进行回顾</p>
+</li>
+</ol>
+<h3 id="4-描述极限编程（XP）的过程：（⭐️⭐️⭐️）"><a href="#4-描述极限编程（XP）的过程：（⭐️⭐️⭐️）" class="headerlink" title="4. 描述极限编程（XP）的过程：（⭐️⭐️⭐️）"></a>4. 描述极限编程（XP）的过程：（⭐️⭐️⭐️）</h3><img src="C:\Users\Lumie/Pictures/Markdown/image-20230226150332179.png" srcset="/img/loading.gif" lazyload alt="image-20230226150332179" style="zoom: 50%;" />
+
+<p><strong>Planning:  策划</strong></p>
+<ol>
+<li>客户设定一系列<strong>stories</strong>，故事的单位是<strong>use case</strong>，被放在<strong>索引卡</strong>上</li>
+<li>客户基于特征或功能的<strong>整体业务价值</strong>为story分配<strong>优先级</strong>，划分依据：</li>
+</ol>
+<p>​         业务上<strong>重要性</strong>(importance)</p>
+<p>​         此功能(story)是否有高<strong>风险</strong>(high risk)</p>
+<p>​         交付时间(<strong>deadline</strong>要求）</p>
+<p>​     3.XP团队<strong>评估</strong>每个故事，并为每个故事分配<strong>开发周</strong>，如果估计故事需要超过<strong>三个</strong>开发周(工作量太大），请客户<strong>拆分</strong>为较小的故事</p>
+<ol start="4">
+<li><p>一旦<strong>基本承诺</strong>定下，XP团队会将以三种方式之一开发story：</p>
+<p><strong>所有</strong>story将被立即实施（几周之内）</p>
+<p><strong>最高优先级</strong>的story将在计划中提前并首先实施</p>
+<p><strong>最高风险</strong>的story将在计划中提前并首先实施</p>
+</li>
+<li><p>在<strong>第一个</strong>project（software increment）<strong>发布</strong>后，团队计算目前完成的速率(<strong>project velocity</strong>)，即第一个release版本中<strong>部署</strong>user stories数量占总数量的比例。它可以用于评估：</p>
+<p>i. 估计后续发行版本的<strong>发布日期</strong>和开发<strong>进度安排</strong>schedule</p>
+<p>ii. 确定是否有<strong>过分承诺</strong>，如果有，则要修改发布内容或推迟交付日期</p>
+</li>
+<li><p><strong>迭代</strong></p>
+</li>
+</ol>
+<p><strong>Design：设计</strong></p>
+<ol>
+<li><p>鼓励使用<strong>CRC</strong>卡片</p>
+</li>
+<li><p>采用<strong>Spike</strong>解决方案：如果在进行某个功能设计时<strong>遇到困难</strong>，立即建立这部分设计的<strong>可执行原型</strong>并进行<strong>单独测试</strong>。</p>
+</li>
+</ol>
+<p><strong>Coding：编码</strong></p>
+<ol>
+<li>首先开发一系列<strong>unit test</strong>，该测试将测试<strong>当前版本</strong>中包含的<strong>每个</strong>story（软件增量software increment）</li>
+<li>进行Pair Programming <strong>结对编程</strong>，两个人共同为一个故事开发代码</li>
+<li>进行Continuous integration<strong>持续集成</strong>，将pair program结对编程小组的<strong>代码整合</strong>，提供“烟雾测试”环境</li>
+<li>Refactoring <strong>重构</strong>， 让代码规范化、标准化以进行<strong>复用</strong></li>
+</ol>
+<p><strong>Test：测试</strong></p>
+<ol>
+<li><strong>修改</strong>代码时使用<strong>回归测试</strong>策略</li>
+<li>将单元测试组织到<strong>通用测试集</strong>，使得媒体都可以进行集成和确认测试</li>
+<li>进行<strong>验收测试</strong>（客户测试），测试客户可见的整体系统特性和功能</li>
+</ol>
+<h3 id="5-Scrum流程：（⭐️⭐️⭐️）"><a href="#5-Scrum流程：（⭐️⭐️⭐️）" class="headerlink" title="5. Scrum流程：（⭐️⭐️⭐️）"></a>5. Scrum流程：（⭐️⭐️⭐️）</h3><p>scrum是一种敏捷开发过程模型。下面举例描述一下scrum开发全过程：</p>
+<p>1、<strong>首先确定Scrum角色</strong>。</p>
+<p>​		<strong>产品负责人</strong>（Product Owner）</p>
+<p>​		<strong>Scrum Master</strong>：将team leader和product owner紧密地工作在一起。</p>
+<p>​		<strong>团队</strong>（team）：人数一般在5-9个左右</p>
+<p>2、<strong>开发调研</strong>：我们⾸先要确定⼀个<strong>product Backlog</strong>(按优先顺序排列的⼀个产品需求列表)</p>
+<p>3、<strong>工作量估算</strong>：团队根据product backlog做<strong>⼯作量的估算</strong></p>
+<p>4、<strong>Sprint计划会议</strong>：通过Sprint 计划会议, 来从中<strong>挑选</strong>出⼀个Story作为本次迭代完成的⽬标，然后把这个Story进⾏<strong>细化</strong>，形成⼀个Sprint Backlog。团队从<strong>Sprint Backlog</strong>中<strong>挑选</strong>承诺完成的条目，并分解条目成为<strong>工作项</strong>，<strong>评估</strong>工作项工时（小时为单位）。过程中要进⾏<strong>每日站立会议</strong>，汇报昨天完成了什么，今天要做什么，遇到了哪些问题。做到<strong>每日集成</strong>，每天都可以有⼀个成功编译，并且可以演示的版本</p>
+<p>5、<strong>Sprint评审会议</strong>：当⼀个Story完成，业绩就是Sprint backlog完成，这时，要进⾏Sprint 评审会议，团队向 PO 及相关干系人演示产品增量收集意见，为下一个Sprint 做准备</p>
+<p>6、<strong>Sprint回顾会议</strong>：最后就是回顾会议，每个⼈总结并讨论改进，检查哪些方法是值得保留的，哪些是要废弃的。放⼊到下⼀次Sprint的产品需求中</p>
+<h3 id="6-DevOps流程：（⭐️⭐️）"><a href="#6-DevOps流程：（⭐️⭐️）" class="headerlink" title="6. DevOps流程：（⭐️⭐️）"></a>6. DevOps流程：（⭐️⭐️）</h3><h4 id="开测集部监"><a href="#开测集部监" class="headerlink" title="开测集部监"></a>开测集部监</h4><ol>
+<li>Continuous development： 持续开发</li>
+<li>Continuous testing：持续测试</li>
+<li>Continuous integration：持续集成</li>
+<li>Continuous deployment：持续部署</li>
+<li>Continuous monitoring：持续监控</li>
+</ol>
+<h2 id="Chapter-7-软件工程实践原则-Principlesthat-guide-practice"><a href="#Chapter-7-软件工程实践原则-Principlesthat-guide-practice" class="headerlink" title="Chapter 7 软件工程实践原则 Principlesthat guide practice"></a><strong>Chapter 7</strong> <strong>软件工程实践原则 Principlesthat guide practice</strong></h2><h3 id="1-代码进行重构的方法：（⭐️⭐️）"><a href="#1-代码进行重构的方法：（⭐️⭐️）" class="headerlink" title="1. 代码进行重构的方法：（⭐️⭐️）"></a><strong>1. 代码进行重构的方法：（⭐️⭐️）</strong></h3><p>​	1、<strong>重命名</strong>：对类，接口，方法，属性等重命名，以使得更易理解。</p>
+<p>​	2、<strong>抽取代码</strong>：将方法内一段代码抽取为另一个方法，以使得这段代码可以被其他方法调用。</p>
+<p>​	3、<strong>封装字段</strong>：将类的某个字段转换成属性，可以更加合理的控制字段的访问</p>
+<p>​	4、<strong>抽取接口</strong>：将类的某些属性、方法抽取组成个接口，将类自动实现该接口。</p>
+<p>​	5、提升方法内的<strong>局部变量</strong>变为方法的参数：这主要是是在写代码的过程中会使用到。</p>
+<p>​	6、<strong>删除参数</strong>：将方法的一个或多个参数删掉</p>
+<p>​	7、<strong>重排参数</strong>：将方法的参数顺序重新排列。</p>
+<h3 id="2-引导过程Process的原则（Principles）：（⭐️⭐️）"><a href="#2-引导过程Process的原则（Principles）：（⭐️⭐️）" class="headerlink" title="2. 引导过程Process的原则（Principles）：（⭐️⭐️）"></a>2. <strong>引导过程</strong>Process的原则（Principles）：（⭐️⭐️）</h3><ol>
+<li><p><strong>Agile</strong>过程要灵活agile(尽量用敏捷模型开发）</p>
+</li>
+<li><p><strong>Quality</strong>在每一步产生迭代work product时注重质量</p>
+</li>
+<li><p><strong>Adapt</strong>做好适配的准备</p>
+</li>
+<li><p><strong>Team</strong>建立高效团队</p>
+</li>
+<li><p><strong>Communication</strong>建立沟通和协调coordination机制</p>
+</li>
+<li><p><strong>Change</strong>管理变更</p>
+</li>
+<li><p><strong>Risk</strong>风险评估</p>
+</li>
+<li><p><strong>Value</strong>产品要有价值</p>
+</li>
+</ol>
+<h3 id="3-引导实践Practice的原则（Principles）：（⭐️）"><a href="#3-引导实践Practice的原则（Principles）：（⭐️）" class="headerlink" title="3. 引导实践Practice的原则（Principles）：（⭐️）"></a>3. <strong>引导实践</strong>Practice的原则（Principles）：（⭐️）</h3><ol>
+<li><strong>D&amp;C</strong>分而治之</li>
+<li><strong>Abstraction</strong>理解和进行分析抽象</li>
+<li><strong>Consistency</strong>前后一致尽量做到</li>
+<li><strong>Transfer</strong>注意信息的转换</li>
+<li><strong>Modularity</strong> 构建表现出有效模块化的软件(类就是模块化)，即类的定义</li>
+<li><strong>Pattern</strong>寻找模式</li>
+<li><strong>Perspective</strong> 当可能时，从许多不同的角度来看，代表问题及其解决方案</li>
+<li><strong>Maintain</strong> 版本控制，保证人员调整后能接上工作</li>
+</ol>
+<p>​     <strong>引导每个framework activity的原则：CPMCD</strong></p>
+<h2 id="Chapter-8-需求-Requirements"><a href="#Chapter-8-需求-Requirements" class="headerlink" title="Chapter 8 需求 Requirements"></a><strong>Chapter 8</strong> <strong>需求</strong> <strong>Requirements</strong></h2><h3 id="1-Requirement-Engineering（需求工程）的七大步骤：（⭐️⭐️⭐️）"><a href="#1-Requirement-Engineering（需求工程）的七大步骤：（⭐️⭐️⭐️）" class="headerlink" title="1. Requirement Engineering（需求工程）的七大步骤：（⭐️⭐️⭐️）"></a>1. Requirement Engineering（需求工程）的七大步骤：（⭐️⭐️⭐️）</h3><p>IEENSVM</p>
+<ol>
+<li><strong>Inception 初始化</strong>——项目启动阶段</li>
+<li><strong>elicitation 诱导</strong>——需求调研<ul>
+<li>确定商业目标establish business goals（要驱动甲方尽量不保留地表达他们的目标）。</li>
+<li>一旦捕获了目标，就应该建立优先级机制</li>
+<li>形成一套潜在的软件系统架构设计依据</li>
+</ul>
+</li>
+<li><strong>elaboration 阐述</strong>——细化进行建模</li>
+</ol>
+<ul>
+<li><p>进一步明确需求，开发一个细化的需求模型。</p>
+</li>
+<li><p>在这个基础上进行需求分析建模：解析每个用户场景以提取<strong>分析类</strong>，定义每个分析类的属性，并标识每个类所需的服务。识别类之间的关系和协作，并生成各种补充图。</p>
+</li>
+</ul>
+<ol start="4">
+<li><strong>negotiation 谈判</strong>——需求谈判</li>
+<li><strong>specification 规约</strong>——形成2个规约</li>
+</ol>
+<ul>
+<li><p>需求规约——文字描述，UseCase</p>
+</li>
+<li><p>需求分析规约——文字描述，功能建模，数据建模，行为建模</p>
+</li>
+</ul>
+<ol start="6">
+<li><strong>validation 验证</strong>——对<strong>规约</strong>进行评审（Formal Technical Review正规技术评审(见指南v1.0)）</li>
+<li><strong>management 管理</strong>——对<strong>需求</strong>进行版本控制和管理</li>
+</ol>
+<p>​    <strong>其产品包括需求规约和需求分析规约</strong></p>
+<h3 id="2-分析模型的组成元素：（⭐️⭐️⭐️）"><a href="#2-分析模型的组成元素：（⭐️⭐️⭐️）" class="headerlink" title="2. 分析模型的组成元素：（⭐️⭐️⭐️）"></a>2. 分析模型的组成元素：（⭐️⭐️⭐️）</h3><ol>
+<li><p>基于场景的元素：use case diagram ， activity diagram (功能建模）</p>
+</li>
+<li><p>基于类的元素：class diagram （数据建模）</p>
+</li>
+<li><p>行为模型： state diagram (sequence diagram)（行为建模）</p>
+</li>
+</ol>
+<h3 id="3-非功能需求包括：（⭐️⭐️）"><a href="#3-非功能需求包括：（⭐️⭐️）" class="headerlink" title="3. 非功能需求包括：（⭐️⭐️）"></a>3. 非功能需求包括：（⭐️⭐️）</h3><p><a target="_blank" rel="noopener" href="https://bbs.csdn.net/topics/280033078">非功能需求怎么写-CSDN社区</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/427254778">软件项目评估：十大常见非功能性需求描述案例整理 - 知乎 (zhihu.com)</a></p>
+<img src="C:\Users\Lumie/Pictures/Markdown/image-20230227110713069.png" srcset="/img/loading.gif" lazyload alt="image-20230227110713069" style="zoom: 67%;" />
+
+<h3 id="4-软件需求规约包括：（⭐️）"><a href="#4-软件需求规约包括：（⭐️）" class="headerlink" title="4. 软件需求规约包括：（⭐️）"></a>4. 软件需求规约包括：（⭐️）</h3><p>(a) Environment description and system objectives. 环境描述和系统目标。</p>
+<p>(b) Functionality.功能。</p>
+<p> (c) Non-functional requirements.非功能需求。</p>
+<p> (d) User interface requirements. 用户界面需求。</p>
+<p>(e) System architecture. 系统架构。</p>
+<p>(f) Data requirements. 数据需求。</p>
+<p>(g) Assumptions and dependencies.假设和依赖关系。</p>
+<p> (h) Constraints.限制条件。</p>
+<p> (i) Glossary.术语表。</p>
+<h2 id="Chapter-9-需求建模：基于场景的方法-Requirement-Modeling-Scenario-BasedMethods"><a href="#Chapter-9-需求建模：基于场景的方法-Requirement-Modeling-Scenario-BasedMethods" class="headerlink" title="Chapter 9 需求建模：基于场景的方法 Requirement Modeling:Scenario-BasedMethods"></a><strong>Chapter 9</strong> <strong>需求建模：基于场景的方法 <strong>Requirement Modeling:Scenario-Based</strong>Methods</strong></h2><h3 id="1-需求建模的3个目的：（⭐️）"><a href="#1-需求建模的3个目的：（⭐️）" class="headerlink" title="1.  需求建模的3个目的：（⭐️）"></a>1.  需求建模的3个目的：（⭐️）</h3><ol>
+<li><p>描述<strong>客户需要</strong>什么</p>
+</li>
+<li><p>为<strong>软件设计</strong>奠定基础（架构设计、组件设计）</p>
+</li>
+<li><p><strong>定义</strong>在软件完成后可以被确认的一组<strong>需求</strong></p>
+</li>
+</ol>
+<h3 id="2-举例说明领域建模：（⭐️⭐️⭐️）"><a href="#2-举例说明领域建模：（⭐️⭐️⭐️）" class="headerlink" title="2. 举例说明领域建模：（⭐️⭐️⭐️）"></a>2. 举例说明领域建模：（⭐️⭐️⭐️）</h3><img src="C:\Users\Lumie/Pictures/Markdown/image-20230301102524672.png" srcset="/img/loading.gif" lazyload alt="image-20230301102524672" style="zoom: 80%;" />
+
+<p><strong>领域分析目的(为什么要Domain Analysis）：创建或提取那些广泛适用的分析类和分析模式，以便于它们可以被复用。</strong></p>
+<ul>
+<li>⽐如我做⼀个进销存系统，⾸先需要学习领域知识</li>
+</ul>
+<p>​			从已经开发过的项⽬获取</p>
+<p>​			通过⽤户调研获取</p>
+<p>​			调研⽬前和将来的需求</p>
+<ul>
+<li>然后进⾏领域分析</li>
+</ul>
+<p>​			通过需求规约⾥⾯的⽂字描述，把潜在类提取出来.</p>
+<p>​			对于⼀些通⽤的业务类，定义标准的⽅法和属性，然后以后做其他类型的进销存系统可以复⽤</p>
+<ul>
+<li>然后进⾏类的功能建模</li>
+</ul>
+<p>​			功能建模要构建activity diagram，反映类的功能逻辑：⽐如有⼀个订单类，客户产⽣订单成功了，就往订单加物品，如果没有成功，就返回尝试产⽣⼀个新订单</p>
+<ul>
+<li>最后要选择⼀种建模语⾔进⾏建模，⽐如UML</li>
+</ul>
+<h3 id="3-软件需求工程分析模型的各个分析模型的内容和作用：（⭐️⭐️⭐️）"><a href="#3-软件需求工程分析模型的各个分析模型的内容和作用：（⭐️⭐️⭐️）" class="headerlink" title="3. 软件需求工程分析模型的各个分析模型的内容和作用：（⭐️⭐️⭐️）"></a>3. 软件需求工程分析模型的各个分析模型的内容和作用：（⭐️⭐️⭐️）</h3><p>关键词：用户、系统、数据、对象、外部</p>
+<img src="C:\Users\Lumie/Pictures/Markdown/image-20230227112731549.png" srcset="/img/loading.gif" lazyload alt="image-20230227112731549" style="zoom: 50%;" />
+
+<ul>
+<li><p>基于场景的模型包括用例、user stories和活动图等，描述了<strong>用户</strong>如何与系统<strong>交互</strong>（用例图），以及在使用软件时发生的<strong>活动序列</strong>（活动图）。</p>
+</li>
+<li><p>类模型包括类图、协作图等，为系统将操作的对象建模，描述了对象包含的<strong>属性</strong>、应用于对象的<strong>操作</strong>（方法）、对象之间的<strong>关系</strong>(一些层次结构)，以及类之间发生的<strong>协作</strong>（协作图）。</p>
+</li>
+<li><p>行为模型包括状态图、时序图等，描述了<strong>外部</strong>事件如何改变<strong>系统</strong>或<strong>内部类</strong>的<strong>状态</strong>（状态图）。</p>
+</li>
+<li><p>流模型包括DFSDs等，将系统以<strong>信息流转</strong>的形式表现出来，描述<strong>数据</strong>对象在<strong>流经</strong>各种<strong>系统功能</strong>时如何<strong>转换</strong>。</p>
+</li>
+</ul>
+<h2 id="Chapter-10-类建模-REQUIREMENTS-MODELING-CLASS-BASED-METHODS"><a href="#Chapter-10-类建模-REQUIREMENTS-MODELING-CLASS-BASED-METHODS" class="headerlink" title="Chapter 10 类建模 REQUIREMENTS MODELING: CLASS-BASED METHODS"></a>Chapter 10 类建模 REQUIREMENTS MODELING: CLASS-BASED METHODS</h2><h3 id="1-类图构建方法：（⭐️⭐️）"><a href="#1-类图构建方法：（⭐️⭐️）" class="headerlink" title="1. 类图构建方法：（⭐️⭐️）"></a>1. 类图构建方法：（⭐️⭐️）</h3><ol>
+<li><p>类——找到潜在的类（业务类）</p>
+<p>检查在<em>Chapter 9</em> 中的需求模型中的一部分<em>usage scenarios</em>；以<em>UseCase</em>为单位和依据，对对用例进行语法分析<em>grammatical parse(<em>每个</em>UseCase</em>检查有实义的名词或名词词组等*)*</p>
+</li>
+<li><p>属性和操作——每个UseCase在类定义下来后，初步定义类里面的属性和方法</p>
+</li>
+<li><p>CRC+聚合继承——建立CRC模型，构建聚合和继承关系</p>
+</li>
+<li><p>关联和依赖——构建类与类之间的关联关系、依赖关系</p>
+</li>
+</ol>
+<p>​		根据<em>UseCase</em>定义的类之间可能的关联（包括同一个<em>UseCase</em>中的类和不同<em>UseCase</em>中的类）</p>
+<ol start="5">
+<li>完整类图——构建完整的类图</li>
+</ol>
+<h3 id="2-潜在类的6个特征：（⭐️⭐️⭐️）"><a href="#2-潜在类的6个特征：（⭐️⭐️⭐️）" class="headerlink" title="2. 潜在类的6个特征：（⭐️⭐️⭐️）"></a>2. <strong>潜在类</strong>的6个特征：（⭐️⭐️⭐️）</h3><ol>
+<li><p><strong>Retained Info</strong> 潜在类拥有需要保存在数据库中的信息——持久信息 比如：学生有学号信息等</p>
+</li>
+<li><p><strong>Needed Service</strong> 潜在类中有很多方法服务——服务（方法）比如：学生需要获取成绩</p>
+</li>
+<li><p><strong>Multiple Attributes</strong> 潜在类应该有多个属性→低耦合——多属性 只有一个属性的潜在类往往并入到其他类中</p>
+</li>
+<li><p><strong>Common Attributes</strong> 潜在类有通用属性（泛化，父子关系，基础关系）——通用属性</p>
+</li>
+<li><p><strong>Common Operations</strong> 潜在类有通用方法——通用方法</p>
+</li>
+<li><p><strong>Essential Requirements</strong> 潜在类应该体现基本需求，外部实体、必须的生成和消费信息等几乎总是在需求模型中被定义为类(?)——需求相关</p>
+</li>
+</ol>
+<p>上面的6种特征要全部满足或几乎全部满足。不过提取这些类是主观的过程，之后的评估可能会导致类的增加减少</p>
+<h5 id="如何确定潜在类：对用例描述进行语法扫描，提取名词或名词词组以及动词，合并同义词、近义词后，考察上述六个特征，最终确定潜在类"><a href="#如何确定潜在类：对用例描述进行语法扫描，提取名词或名词词组以及动词，合并同义词、近义词后，考察上述六个特征，最终确定潜在类" class="headerlink" title="如何确定潜在类：对用例描述进行语法扫描，提取名词或名词词组以及动词，合并同义词、近义词后，考察上述六个特征，最终确定潜在类"></a>如何确定潜在类：对用例描述进行语法扫描，提取名词或名词词组以及动词，合并同义词、近义词后，考察上述六个特征，最终确定潜在类</h5><h3 id="3-类关系有：（⭐️⭐️⭐️）"><a href="#3-类关系有：（⭐️⭐️⭐️）" class="headerlink" title="3. 类关系有：（⭐️⭐️⭐️）"></a>3. 类关系有：（⭐️⭐️⭐️）</h3><p><strong>聚合：</strong>汽车与轮胎</p>
+<img src="C:\Users\Lumie/Pictures/Markdown/image-20230301163610639.png" srcset="/img/loading.gif" lazyload alt="image-20230301163610639" style="zoom: 50%;" />
+
+<p><strong>关联</strong>（类之间获取彼此的信息）：老师与学生</p>
+<p><strong>依赖：</strong>现代人与计算机，现代人中的方法用到了计算机这个类</p>
+<p><strong>泛化：</strong>鸟和动物</p>
+<p><strong>组合：</strong>公司和部门</p>
+<img src="C:\Users\Lumie/Pictures/Markdown/image-20230301163641648.png" srcset="/img/loading.gif" lazyload alt="image-20230301163641648" style="zoom:50%;" />
+
+<p>组合与聚合：</p>
+<p>聚合 部分可以离开整体存在</p>
+<p>组合 部分不能离开整体存在</p>
+<h2 id="Chapter-11-行为-模式和Web-x2F-Mobile应用-Behavior-Pattern-and-Web-x2F-Mobile-App"><a href="#Chapter-11-行为-模式和Web-x2F-Mobile应用-Behavior-Pattern-and-Web-x2F-Mobile-App" class="headerlink" title="Chapter 11 行为,模式和Web&#x2F;Mobile应用 Behavior, Pattern and Web&#x2F;Mobile App"></a><strong>Chapter 11</strong> 行为,模式和Web&#x2F;Mobile应用 Behavior, Pattern and Web&#x2F;Mobile App</h2><h3 id="1-行为建模的基本步骤：（⭐️）"><a href="#1-行为建模的基本步骤：（⭐️）" class="headerlink" title="1.  行为建模的基本步骤：（⭐️）"></a>1.  行为建模的基本步骤：（⭐️）</h3><ul>
+<li><p>评估所有用例以完全理解系统内交互的顺序</p>
+</li>
+<li><p>识别驱动交互序列的事件，并理解这些事件如何与特定对象关联</p>
+</li>
+<li><p>为每个用例创建一个序列</p>
+</li>
+<li><p>为系统或类构建状态图</p>
+</li>
+<li><p>回顾行为模型以验证准确性和一致性</p>
+</li>
+</ul>
+<h3 id="2-举例说明Web-x2F-Mobile应用中交互建模、功能建模、内容建模、导航建模之间的关系：（⭐️⭐️⭐️）"><a href="#2-举例说明Web-x2F-Mobile应用中交互建模、功能建模、内容建模、导航建模之间的关系：（⭐️⭐️⭐️）" class="headerlink" title="2. 举例说明Web&#x2F;Mobile应用中交互建模、功能建模、内容建模、导航建模之间的关系：（⭐️⭐️⭐️）"></a>2. 举例说明Web&#x2F;Mobile应用中交互建模、功能建模、内容建模、导航建模之间的关系：（⭐️⭐️⭐️）</h3><ul>
+<li><p><strong>内容建模</strong>，借助<strong>数据树</strong>确定界面中的<strong>内容对象</strong>，相应的<strong>控件布局</strong>，是界面设计的基础</p>
+</li>
+<li><p><strong>交互建模</strong>，以界面交互为导向，用界面驱动<strong>活动图</strong>的功能逻辑，借助活动图，利用内容模型构建的界面进行交互</p>
+</li>
+<li><p><strong>功能建模</strong>，借助<strong>活动图</strong>，在交互模型的基础上，为完成<strong>特定功能</strong>的界面进行<strong>细化</strong>，将用例的活动图改为界面来驱动</p>
+</li>
+<li><p><strong>导航建模</strong>，即构建前端界面的导航，它把内容建模中的<strong>内容对象</strong>放在⼀起，形成⼀个<strong>内容对象流</strong>，完成特定功能</p>
+</li>
+</ul>
+<h2 id="Chapter-12-设计概念-Design-Concepts"><a href="#Chapter-12-设计概念-Design-Concepts" class="headerlink" title="Chapter 12 设计概念 Design Concepts"></a><strong>Chapter 12</strong> <strong>设计概念</strong> <strong>Design Concepts</strong></h2><h3 id="1-举例说明软件建模活动从需求模型向设计模型的转换过程：（⭐️⭐️⭐️）"><a href="#1-举例说明软件建模活动从需求模型向设计模型的转换过程：（⭐️⭐️⭐️）" class="headerlink" title="1. 举例说明软件建模活动从需求模型向设计模型的转换过程：（⭐️⭐️⭐️）"></a>1. 举例说明软件建模活动从需求模型向设计模型的转换过程：（⭐️⭐️⭐️）</h3><img src="C:\Users\Lumie/Pictures/Markdown/image-20230227160838875.png" srcset="/img/loading.gif" lazyload alt="image-20230227160838875" style="zoom: 50%;" />
+
+<ol>
+<li><strong>数据设计、类设计</strong></li>
+</ol>
+<p>将类模型转化为<strong>设计类</strong>以及其他要求实现的<strong>数据结构</strong>，<strong><em>CRC</em>中的对象与关系</strong>、<strong>类属性</strong>以及<strong>其他表示法</strong>描述的数据内容为数据设计活动提供了基础。部分类设计可能与软件体系结构的设计一起进行。在设计每个软件组件时，会出现更详细的类设计。</p>
+<ol start="2">
+<li><strong>体系结构设计</strong></li>
+</ol>
+<p>定义软件的主要结构化元素、结构风格和模式之间的关系，表示一个基于计算机系统的框架，它以类图和类之间协作关系作为重要依据，设计时基于<strong>类图和CRC</strong>片，把功能相关的类构建为一个<strong>子系统</strong>，并明确子系统间的<strong>通信方式</strong>，进而增加<strong>接口类</strong>。</p>
+<ol start="3">
+<li><strong>接口设计</strong></li>
+</ol>
+<p>描述软件和<strong>使用人员</strong>之间、软件和<strong>协作系统</strong>之间如何通信。因此，场景和行为建模（用例图、状态图）提供了接口设计所需的许多信息，如参考用例图中用例与用户的<strong>交互</strong>、状态图中类<strong>状态切换</strong>时需要传递的信息。</p>
+<ol start="4">
+<li><strong>构件级设计</strong></li>
+</ol>
+<p>将软件体系机构设计的<strong>结构化元素</strong>变换为对软件构件的<strong>过程性描述</strong>。从基于类的模型和行为模型（时序图）中获得的信息可以作为组件设计的基础，如从类图中获取<strong>类内方法</strong>，以及从时序图中获取某类<strong>调用其他类的方法</strong>。</p>
+<h3 id="2-软件质量属性包括：（⭐️⭐️）"><a href="#2-软件质量属性包括：（⭐️⭐️）" class="headerlink" title="2. 软件质量属性包括：（⭐️⭐️）"></a>2. 软件质量属性包括：（⭐️⭐️）</h3><p>Furps</p>
+<ul>
+<li><p>Functionality <strong>功能性</strong>，评估程序的特性与功能、功能通用性generality与系统安全性性security</p>
+</li>
+<li><p>Usability <strong>可用性</strong>，评估整体美观性aesthetics、一致性consistency和文档等使用体验</p>
+</li>
+<li><p>Reliability <strong>可靠性</strong>，评估通过测量失败的频率和严重程度,输出结果的准确性accuracy,程序的可预测性predictability</p>
+</li>
+<li><p>Performance <strong>性能</strong>，衡量处理速度、响应时间、资源消耗,吞吐量和效率</p>
+</li>
+<li><p>Supportability <strong>可支持性</strong>，可维护性maintainability，包括了可扩展性、适应性和可服务性，还有可测试性testability，兼容性compatibility，可配置性</p>
+<p>configurability</p>
+</li>
+</ul>
+<h3 id="3-模块化和软件成本：（⭐️）"><a href="#3-模块化和软件成本：（⭐️）" class="headerlink" title="3. 模块化和软件成本：（⭐️）"></a>3. 模块化和软件成本：（⭐️）</h3><img src="C:\Users\Lumie/Pictures/Markdown/image-20230227162317431.png" srcset="/img/loading.gif" lazyload alt="image-20230227162317431" style="zoom:50%;" />
+
+<p>随着模块数量的增多，用于integrate的开销越大，而每个模块开发的成本平摊越少，两者加起来类似一个二次函数，这个二次函数有个最优区间，叫最小开销区间（M）</p>
+<p>Pi：某功能</p>
+<p>C：复杂度</p>
+<p>E：工作量</p>
+<p>一般对任务$P1$，$P2$，如果$C(P1)&gt;C(P2)$ ，那么$E(P1)&gt;E(P2)$</p>
+<p>另外有:</p>
+<p>$E(P1+P2)&gt;E(P1)+E(P2)$</p>
+<p>$C(P1+P2)&gt;C(P1)+C(P2)$</p>
+<p>分而治之在这里体现，合在一起做工作量更大，分而治之可以节约成本</p>
+<h3 id="4-设计类的种类：（⭐️⭐️⭐️）"><a href="#4-设计类的种类：（⭐️⭐️⭐️）" class="headerlink" title="4. 设计类的种类：（⭐️⭐️⭐️）"></a>4. 设计类的种类：（⭐️⭐️⭐️）</h3><ol>
+<li><p>User Interface classes 用户界面类（sequence diagram &amp; use case diagram)</p>
+</li>
+<li><p>Business domain classes 业务类（由分析类直接转过来，基本是一对一，可能有优化比如一个分析类分成2个类等）</p>
+</li>
+<li><p>Process classes&#x2F;Control classes 控制类（往往没有属性，只有方法）对系统的可维护性很重要</p>
+</li>
+<li><p>Persistent classes 持久类（用于数据持久化，比如被Hibernate持久化到数据库中的类，持久化类的实例对象将保存在数据库或文件中）</p>
+</li>
+<li><p>System classes 系统类（如Java的主类有main()方法）</p>
+</li>
+</ol>
+<h3 id="5-设计类的四个指标：（⭐️⭐️）"><a href="#5-设计类的四个指标：（⭐️⭐️）" class="headerlink" title="5. 设计类的四个指标：（⭐️⭐️）"></a>5. 设计类的四个指标：（⭐️⭐️）</h3><ol>
+<li><p>Complete and Sufficient 完整充分（属性方法的完整封装encapsulation）封装良好</p>
+</li>
+<li><p>Primitiveness 原始性（同样的功能和属性不能在2个或多个类中出现） 不重复，每个属性方法都是原始的</p>
+</li>
+<li><p>High Cohesion 高内聚（属性和方法<strong>与类本身相关</strong>）</p>
+</li>
+<li><p>Low Coupling 低耦合（<strong>交互接口</strong>要简单）</p>
+</li>
+</ol>
+<p>​		接口类的存在就是为了低耦合；一个类更多应该访问邻界类，尽量少访问其他package或subsystem；子系统中的一个类不需要知道其他类太多信息，最好通过内部		接口或外部接口这些控制接口类去访问得到</p>
+<h2 id="Chapter-13-概要设计-Architectural-Design"><a href="#Chapter-13-概要设计-Architectural-Design" class="headerlink" title="Chapter 13 概要设计 Architectural Design"></a><strong>Chapter 13</strong> <strong>概要设计</strong> Architectural Design</h2><h3 id="1-体系结构典中典的例子：（⭐️⭐️⭐️）"><a href="#1-体系结构典中典的例子：（⭐️⭐️⭐️）" class="headerlink" title="1. 体系结构典中典的例子：（⭐️⭐️⭐️）"></a>1. 体系结构典中典的例子：（⭐️⭐️⭐️）</h3><img src="C:\Users\Lumie/Pictures/Markdown/image-20230227172631963.png" srcset="/img/loading.gif" lazyload alt="image-20230227172631963" style="zoom: 50%;" />
+
+<h3 id="2-体系结构设计包括：（⭐️⭐️⭐️）"><a href="#2-体系结构设计包括：（⭐️⭐️⭐️）" class="headerlink" title="2. 体系结构设计包括：（⭐️⭐️⭐️）"></a>2. 体系结构设计包括：（⭐️⭐️⭐️）</h3><ol>
+<li><p>软件架构设计</p>
+</li>
+<li><p>数据&#x2F;数据库设计（以类图为依据，有时涉及数据字典设计，和接口紧密相关）</p>
+</li>
+<li><p>接口设计（内部接口（类内方法互相调用) ，类间，子系统间方法调用，外部接口，用户接口）</p>
+</li>
+</ol>
+<h3 id="3-系统上下文的建立：（⭐️⭐️⭐️）"><a href="#3-系统上下文的建立：（⭐️⭐️⭐️）" class="headerlink" title="3.系统上下文的建立：（⭐️⭐️⭐️）"></a>3.<strong>系统上下文的建立</strong>：（⭐️⭐️⭐️）</h3><img src="C:\Users\Lumie/Pictures/Markdown/image-20230227215523598.png" srcset="/img/loading.gif" lazyload alt="image-20230227215523598" style="zoom:50%;" />
+
+<p>在体系结构设计层，ACD图对软件与其外围实体的交互方式进行建模。</p>
+<ul>
+<li><p>上级系统：这些系统<strong>把</strong>目标系统作为某些高层处理方案的一部分。</p>
+</li>
+<li><p>下级系统：这些系统<strong>被</strong>目标系统使用，并为完成目标系统的功能提供必要的数据和处理。</p>
+</li>
+<li><p>同级系统：这些系统在<strong>对等</strong>的基础上<strong>相互作用</strong>（即信息或者由同级系统和目标系统产生，或者被同级系统或目标系统使用）</p>
+</li>
+<li><p>参与者：通过<strong>产生和消耗</strong>必要的信息，实现与目标系统<strong>交互</strong>的<strong>实体</strong></p>
+<p><img src="C:\Users\Lumie/Pictures/Markdown/image-20230301235838116.png" srcset="/img/loading.gif" lazyload alt="image-20230301235838116"></p>
+</li>
+</ul>
+<h3 id="4-举例说明ACD在体系结构设计中的作用：（⭐️⭐️）"><a href="#4-举例说明ACD在体系结构设计中的作用：（⭐️⭐️）" class="headerlink" title="4. 举例说明ACD在体系结构设计中的作用：（⭐️⭐️）"></a>4. 举例说明ACD在体系结构设计中的作用：（⭐️⭐️）</h3><ol>
+<li><p>提供系统需要如何与其他企业<strong>交互</strong>的<strong>组织视图</strong>，描述软件所在的<strong>业务生态系统</strong>。</p>
+</li>
+<li><p><strong>标识</strong>外部系统。</p>
+</li>
+<li><p>提供了业务<strong>上下文的分解</strong>，并提供了对业务上下文信息的<strong>可跟踪性</strong>。</p>
+</li>
+<li><p>帮助标识构建<strong>完整的解决方案</strong>所需的一些主要体系结构<strong>构件</strong>。</p>
+</li>
+<li><p><strong>信息流</strong>还表示对体系结构而言非常重要的活动，这些活动可以回溯到<strong>业务流程模型</strong>，而后者是表示<strong>系统需求</strong>的一个主要部分。</p>
+</li>
+</ol>
+<h2 id="Chapter-14-详细设计-Component-LevelDesign"><a href="#Chapter-14-详细设计-Component-LevelDesign" class="headerlink" title="Chapter 14 详细设计 Component-LevelDesign"></a><strong>Chapter 14</strong> <strong>详细设计</strong> Component-Level<strong>Design</strong></h2><h3 id="1-实施构件级设计的方法：（⭐️）"><a href="#1-实施构件级设计的方法：（⭐️）" class="headerlink" title="1. 实施构件级设计的方法：（⭐️）"></a>1. 实施构件级设计的方法：（⭐️）</h3><ol>
+<li><strong>标识</strong>所有问题域对应的设计类</li>
+<li><strong>确定</strong>所有与<strong>基础设施</strong>相对应的设计类</li>
+<li><strong>细化</strong>不需要作为<strong>复用</strong>构件的设计类</li>
+</ol>
+<p>​		a. 在类或构件协作时说明消息细节</p>
+<p>​		b. 为每个构件确定适当接口</p>
+<p>​		c. 细化属性，并根据定义实现属性所需要的数据类型和结构</p>
+<p>​		d. 详细描述每个操作的处理流</p>
+<ol start="4">
+<li>说明<strong>持久数据源</strong>并确定管理数据源所需要的类</li>
+<li>开发并且细化类或构件的<strong>行为表示</strong></li>
+<li>细化<strong>部署图</strong></li>
+<li>考虑构件级<strong>设计表示</strong>，并且时刻考虑其他<strong>可选方案</strong></li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="category-chain-item">学习记录</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">#软件工程</a>
+      
+        <a href="/tags/%E5%B7%A5%E7%A8%8B%E7%AE%A1%E7%90%86/">#工程管理</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>软工题解</div>
+      <div>http://example.com/2023/03/06/软工题解/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Lumie</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月6日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/04/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E9%80%9F%E9%80%9A%E7%89%88%EF%BC%89/" title="搭建博客（速通版）">
+                        <span class="hidden-mobile">搭建博客（速通版）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"xNDGbh6KUqRqnqfsxVZa88By-gzGzoHsz","appKey":"VaSYQWVEiLSqxFOsE93gR6J7","path":"window.location.pathname","placeholder":"期待您的锐评~","avatar":"identicon","meta":["nick","mail"],"requiredFields":["nick","mail"],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":false,"serverURLs":"https://xndgbh6k.lc-cn-n1-shared.com","emojiCDN":"https://bili-emoji.netlify.app/","emojiMaps":{"doge":"03ea345ce429b6581d7c28c33305c2b6.png","OK":"e0aa021e21dddbd6d8cecec71e9cf564.png","tv_doge":"4eff1b3335389dd09ff7c69517f2b509.png","tv_亲亲":"4fea3e2403675decd5da17ea17784f68.png","tv_偷笑":"c9a772772778f5e2ec164c29a61a9eb5.png","tv_再见":"3542c4670aad5a693ea398ecebc1153d.png","tv_冷漠":"b12a49f12c8f86ad68864410e9620f55.png","tv_发怒":"38c85ccf43a4601d86b7b00da1a22068.png","tv_可爱":"14c00346fff68205047a1b529ef95e59.png","tv_吐血":"48a162e62521090979472aa230d0b784.png","tv_呆":"30325743c8a0c5f19a0cafb3957e3cf3.png","tv_呕吐":"e41cfc697caadd77b7dd1dac4c060c6a.png","tv_困":"dbf2ae0c09708ff242090b07577de943.png","tv_坏笑":"3eec33df13571865476e7a30460ae9f9.png","tv_大佬":"e314f8367a221c8edc03060b655f859f.png","tv_大哭":"ede1659180b1a78910d51565950df893.png","tv_委屈":"3cb14e94fac0f4c993eb333e04cad01d.png","tv_害羞":"e568e6ad2b5143f25409f3e559a7cfff.png","tv_尴尬":"5af7407aca8fc41cbaaabdc79879c249.png","tv_微笑":"8375a890c9f3f1f40ee9a9de5257a0f0.png","tv_思考":"d1f74953fbc6b6d7ca6f96eb1675e1a1.png","tv_惊吓":"bc84a49558952ba388aa98006b16ca57.png","tv_打脸":"397d65c1395d79d4a703a953c7f6caee.png","tv_抓狂":"f86000e53faaa1184578a004307fe110.png","tv_抠鼻":"880a3b5b023b5027b72bac1783f51d6e.png","tv_斜眼笑":"ded4aee92e0f30b3eeb36a1e05a5d1f0.png","tv_无奈":"e87cdb2408e8040d0bc192cd5b24ea9a.png","tv_晕":"581ba4770ff48629ddbf6f6243255843.png","tv_流汗":"ddd12a769c25727929b12ff92b3c9d9d.png","tv_流泪":"ccf0903e32a8fd7f28e5b0d92253a512.png","tv_流鼻血":"361836c3c0cfdd8f5705dfc8c6b6488e.png","tv_点赞":"3ee847d3edeafc252d0794544f9992e4.png","tv_生气":"fe2a7b204c5a8020f83d942a70c9a0f6.png","tv_生病":"5e96847d33c455e5a0ab6712f64a0858.png","tv_疑问":"fdfd8ce477389814748484de4dd9cc9a.png","tv_白眼":"cf4a00990fb20135ffc65eeca265d794.png","tv_皱眉":"f1223580f477d8c97cdb9b0822d3b60e.png","tv_目瞪口呆":"493143090e9e38e268b3b111514d0c8b.png","tv_睡着":"f4af815fe92d682d3df27ae1b95d07e4.png","tv_笑哭":"a2d451b59201a82aa05e974039646d2c.png","tv_腼腆":"aff63ac8d7c0be5783e0a702d5188d87.png","tv_色":"5391e9cddd0b56bf0a5e113ee109b759.png","tv_调侃":"91fa1621c2280d85586a66c5838dec91.png","tv_调皮":"2c4bf726cdab685580696e66fc283018.png","tv_鄙视":"ef9e87e1368c419999dca8bee19e3657.png","tv_闭嘴":"121cb61f9686eb7a1ce0653369a287f6.png","tv_难过":"41dee0cdfb4823b9d72575fe66e0f29a.png","tv_馋":"16a551f55db0522450c7a5cdb58a2745.png","tv_鬼脸":"cb4c4c3d5c7e029990a10bf9f7a6759e.png","tv_黑人问号":"f96f00a2382dd34bc68710894a3e46da.png","tv_鼓掌":"8b2a90cfdc48fa5ddb7bd8f5876b3ad9.png","再见":"8e5c0a1e46703251c02613c1048177f1.png","冷":"74eaee9656d23f18bb33d2b88098a64a.png","初音未来_大笑":"1e3f26eaf50812c931699c5d0c5a6405.png","加油":"062286ae94fbad3cfee4bd71bf947079.png","原神_哇":"f4b4c770ffd27fa7767dbae241515881.png","原神_哼":"bd4db1c27e8c6be399132039e2f6fca0.png","原神_喝茶":"2037a4c00c04e084d364d54194392d1d.png","原神_嗯":"6381eda0d5ed6a7cb86e0186653d9676.png","原神_欸嘿":"617e49b7dda9d8b6369b173bcb79cc74.png","原神_生气":"af05133b30a5154feb7a3d313008bb5f.png","口罩":"6cd2f36be2b2f9bf938b829fc751e982.png","吃瓜":"455e2b33e157302615678229812d5009.png","吐":"37a03b5e5ec229e8b868693d89ed5b87.png","吓":"17a6c6e6971ed5e08c9f773a09c3aa27.png","呆":"4894c23dd5ef63f827c0c1339495e088.png","呲牙":"f70ae5045d4cc4958e660d3ff28c0d40.png","哈欠":"cf8b4e4df0ef3e6e2fc0409b80147509.png","哦呼":"6f93da6622b4f2e5c3b5a10e70b7cc2c.png","喜极而泣":"e01b6f9b9133c9fb68644a2a9d12708e.png","喜欢":"3d6c396cf4dea3ba2ddb255499dc356a.png","墨镜":"df2cf3c4640f3db4dffe408f7f26060e.png","大哭":"d0cfabad423efa8c95ceb9f98d8778ca.png","大笑":"4402e6e2322eb29cd52dcf9240af6ed6.png","奸笑":"ab5805c719476ccd364209b755dec633.png","妙啊":"ec697e020ed66efc2816895ac2b5a5e1.png","委屈":"af41e0fd8f967c8f968c5d7216725138.png","嫌弃":"485a3f823ee4f7b6e7db6620bfede57c.png","微笑":"5acfd68d016cc6141559976112b7beb4.png","思考":"21d68b2de0e91dfb14942ca8aea316fc.png","怪我咯":"0766960579a7cf430e2c77a4d52afbc0.png","惊喜":"ba8e1a9ae55fbd5390f4b7c994830737.png","惊讶":"e3b28512cdd930a916f970070e17c10f.png","打call":"d54bb8db985d9eeab6bcf6630a8e9a3a.png","抓狂":"a4de54142f04bdc45c79dc49850ebb6c.png","抠鼻":"3822354914484432273dafbdb18aa94d.png","抱拳":"94d3a21b006ff84f25a4bc45897f4f86.png","拥抱":"18cdedfccd6e4436f982895047dfaeb6.png","捂眼":"f324db992a5b35565a882aca247232fc.png","捂脸":"eb0caf12c6f8d145fc7ab35c96cec54d.png","撇嘴":"a669a1cfabc6dab5dd2a50b59786e2c9.png","支持":"262b0b07dfd0cad4cb8eb442fee44882.png","无语":"27df619585afad4c65eebe95ba98d085.png","星星眼":"e7733aecc308d2c18b7068d5b4cdb3b8.png","歪嘴":"5a135a627c7733c80368ac33c5df3371.png","滑稽":"bcd94fd3f6b6cfef934b944faf4f9382.png","灵魂出窍":"78ed423d2ec574de1b78b44c84964f24.png","点赞":"75f0fa966d8246d1ba25faa636a40753.png","热":"2044c27397909670f0d90b8b6b5c15c5.png","爱心":"5a2e579b2ef8ff3090980e6ef8f8604d.png","生气":"e8c6c4d90f60dc0074480dc9d83f1fc1.png","生病":"75d80e662baa92dd5400de5f31db16a5.png","疑惑":"ec573404da933630a6037e79f427f43b.png","疼":"47f18cd93a3d67082ab4028fb456cd22.png","笑":"1300f40cb6582e518c31c61f7c35c8b0.png","笑哭":"11d2b3795aa8bbc128137269ed565070.png","给心心":"4a3742927431d854b2657900650b0199.png","翻白眼":"e0a8eaa61f61b9cbf7428ea5d859a610.png","胜利":"bf7230c44b0ea4839ca59915de038bf8.png","脱单doge":"3a101c859028a2cb92189fc1b9c15522.png","脸红":"cc34c4b1d5c0314e7c27b064783765e8.png","藏狐":"54a1c77cf216d778c6bde5385106ead1.png","调皮":"9a87d094973ac78633dbb885e6d7bc16.png","跪了":"80e7fe98490ad7819e457ad68ba93dc1.png","辣眼睛":"da076b252779b6888eb13353baa3bdc8.png","酸了":"1c91ce1be1a714aaab88b50032af5e46.png","阴险":"f1f4185dc58bed6b9f6c11e3845252c4.png","难过":"aa267ae0097323d46a31a6f8be587425.png","鼓掌":"5e608d099e4dc9f59c5861ce58e37cfa.png"},"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/love.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxingxing.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxuehua.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/haru02.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
