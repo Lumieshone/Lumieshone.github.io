@@ -1,0 +1,909 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/malody.ico">
+  <link rel="icon" href="/img/malody.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Lumie">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="数据挖掘课程-hw1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据预处理与K-means聚类实现">
+<meta property="og:url" content="http://example.com/2023/03/23/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98-hw1/index.html">
+<meta property="og:site_name" content="Sekai">
+<meta property="og:description" content="数据挖掘课程-hw1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://moe.photo/images/2023/03/23/QQ20201215114628.jpg">
+<meta property="article:published_time" content="2023-03-23T02:49:39.000Z">
+<meta property="article:modified_time" content="2023-03-23T03:02:50.964Z">
+<meta property="article:author" content="Lumie">
+<meta property="article:tag" content="数据挖掘">
+<meta property="article:tag" content="聚类">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://moe.photo/images/2023/03/23/QQ20201215114628.jpg">
+  
+  
+  
+  <title>数据预处理与K-means聚类实现 - Sekai</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"o5HtRd3DI36coZtY1SB8AQIl-gzGzoHsz","app_key":"IbXBGiTa010i72QGgDrezegD","server_url":"https://o5htrd3d.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 75vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Sekai</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/star.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="数据预处理与K-means聚类实现"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-23 10:49" pubdate>
+          2023年3月23日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据预处理与K-means聚类实现</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Report-hw1-Data-Analysis-and-Mining"><a href="#Report-hw1-Data-Analysis-and-Mining" class="headerlink" title="Report-hw1-Data Analysis and Mining"></a>Report-hw1-Data Analysis and Mining</h1><h2 id="Task-1-Data-pre-processing"><a href="#Task-1-Data-pre-processing" class="headerlink" title="Task 1 Data pre-processing"></a><strong>Task 1 Data pre-processing</strong></h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><ul>
+<li>数据集来源：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/janiobachmann/bank-marketing-dataset">Bank Marketing Dataset</a></li>
+<li>数据集描述：这个数据集描述了某银行进行的最后一次营销活动，从而帮助该银行找到改进下一次营销活动的最佳策略，并确定有助于制定未来战略的模式。</li>
+<li>数据集特征：<ul>
+<li><p>该数据集共有17列，11162行，各列属性含义如下所示：</p>
+</li>
+<li><p>age 年龄</p>
+</li>
+<li><p>job 职业(admin,unemployed,student,retired,self-employed,housemaid,services,bluecollar,technician,management,entrepreneur,unknown)</p>
+</li>
+<li><p>marital 婚姻状况(single,married,divorced)</p>
+</li>
+<li><p>education 受教育水平(primary,secondary,tertiary,tertiary)</p>
+</li>
+<li><p>default 是否有违约记录(yes,no)</p>
+</li>
+<li><p>balance 账户平均余额</p>
+</li>
+<li><p>housing 住房贷款</p>
+</li>
+<li><p>loan 个人贷款</p>
+</li>
+<li><p>contact 与客户联系沟通方式(cellular,telephone,unknown)</p>
+</li>
+<li><p>day 最后一次联系的时间</p>
+</li>
+<li><p>month 最后一次联系的月份</p>
+</li>
+<li><p>duration 最后一次联系的交流时长</p>
+</li>
+<li><p>campaign 与客户交流的次数</p>
+</li>
+<li><p>pdays 最后一次联系客户过去多久</p>
+</li>
+<li><p>previos 与客户交流次数</p>
+</li>
+<li><p>poutcome 上一次活动的结果(success,failure,unknown)</p>
+</li>
+<li><p>deposit 是否有定期存款(yes,no)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h3><p>原数据集已被清洗的较为完整，所以该作业中人为添加了一些“脏数据”，包括缺失值，异常值等，如下图所示：</p>
+<p>缺失值：</p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=OWM5MjA3ZWVhMjhkM2VmMDEyYWNlODUzYzNmNGRkMmJfcnhMVTRmVTFyQ0hlc0NiV01yRkxVOUVzb3RXdHVaRjhfVG9rZW46Ym94Y24zRGN0Z2JMWWJGb1FBRHlWaHY0TExoXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>异常值：</p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MjU3NWJlMWRhNzc4NTJkMzgyMGQ0Nzg0YTYwMjU5MTNfZ3VmbWJRR3BlRXVXNEZVeW93MGhHVU15Mm5ESkw4TDRfVG9rZW46Ym94Y25Vek41TTBhTUQyYW1lb1lERE03OHRmXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=N2FkODUzZTliMWU1MWZkZWJjZWE5MjhhMGU3ZGYxMjVfTXpNMzBDNWhvRHJLUDFMejVJbTNjRFV2ZmVkakVuMnJfVG9rZW46Ym94Y25mOVdwWHVQZlk4R1A3UjRKNkNVdlRBXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MTA2MTc5YmY2NWY0NmQ3YmUxM2I3Njg3YTYyYWFjYzlfU3dtTlF4ZGFhYXVocDdiRDN5NkpqYUlTZzdXVVJZSzZfVG9rZW46Ym94Y25SYzFVNWlJSlBqM21DVzg2R3pVOTVlXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h4 id="异常值处理"><a href="#异常值处理" class="headerlink" title="异常值处理"></a>异常值处理</h4><p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MTAzNDBmNWZmMTBlMWIyYTM1NTNhYjcyYTU1M2YwMzZfR0VSQ3M3R21ZckxmTDFjUWNoY0ZDSW1aSEhTQUg3Qm5fVG9rZW46Ym94Y250MktxenpNemVvbUxCcmVSOWZzeGtoXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ol>
+<li>首先，我们认为age也就是年龄的正常范围应该在1-100，所以先将这些正常范围的age筛出</li>
+<li>对筛出来的age取均值（b.mean()）</li>
+<li>遍历数据集，将越界的age改为均值</li>
+<li>接下来处理balance列的异常值，由于之前把几个原本的数据改为了字符串，导致了全列数据被类型转换为了字符串，所以检测异常值只需要看每个数据第一位是否是数字即可，若是，则填充为int值0，若不是，则类型转换为int</li>
+</ol>
+<h4 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h4><p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NTQyZjdhNGM2MzlhOWFiMzE0MGZiYTg0OGY2MzI2ZmFfZzdPVlBaNmcyODZVU0pKRU1ZQ0JPWU1WN29FeUFLVGpfVG9rZW46Ym94Y25RWmtNdU50Zzd2Z2lYT21iMHdQYUdiXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>缺失值处理较为简单，采用均值填充法，直接用fillna方法将均值填充进去即可</p>
+<h4 id="数据过滤和选择"><a href="#数据过滤和选择" class="headerlink" title="数据过滤和选择"></a>数据过滤和选择</h4><p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MWUzZjBjZmY5ODZhNzRmNGJmMTY1NjE4ZjA2ZTQ5MDhfWWU4dFR2MUNTajlRQU05SldNa2FtUHVlWWNpZGR2REVfVG9rZW46Ym94Y25LTjdidnp2MlduTHhMZU5zVVdTOFBkXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MWFmNGU1MTZkOGRhNGFiZmUxOTg0ODE2MDM1NWUxZTdfMHZNSkpzSE5wWFNMQkVKSHR2N0tWRlZkbUEzajJYaEdfVG9rZW46Ym94Y25uZjh0ZGs2ZVB6cXg3d2g3M2FzN1NiXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>由于聚类目的是确定优先联系进行营销的客户组别，所以我们只需要那些非管理人员（客户）、有存款、没有负债的数据，基于此，我们进行数据过滤操作；除此之外，我们只需要选择比较核心的数据特征进行聚类即可，一方面便于标准化，另一方面其余列属性的值种类太少，不便于聚类</p>
+<h4 id="数据标准化"><a href="#数据标准化" class="headerlink" title="数据标准化"></a>数据标准化</h4><p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=YTRhMDhiMjU1MTBhZTA0ZDRmYWUzNjYwZjM3YWNkYzNfMzlCb3A5ckxTSnpXNGQ5SXZxVWRqZDFHS2VXSE4weTVfVG9rZW46Ym94Y240VFI5T0hVZUN5SnVQS3B6TW9pMU9oXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>数据标准化操作是将数据按比例缩放，使之落入一个小的特定区间。其中最典型的就是数据的归一化处理，即将数据统一映射到[0,1]区间上。</p>
+<p>这里选用的标准化方法是<strong>z-score</strong>标准化，这种方法给予原始数据的均值（mean）和标准差（standard deviation）进行数据的标准化。经过处理的数据符合标准正态分布，即均值为0，标准差为1，其转化函数为：</p>
+<p>x* &#x3D; (x - μ ) &#x2F; σ</p>
+<p>其中μ为所有样本数据的均值，σ为所有样本数据的标准差。标准化后的变量值围绕0上下波动，大于0说明高于平均水平，小于0说明低于平均水平。</p>
+<p>这里我们将数据类型为字符串的poutcome和job两列数据转化为数字索引，便于标准化。</p>
+<p>本作业中处理后的数据形式如下所示：</p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTllODgwNTUxMTg0OTQ4MGJjMDE2YTZlNTI0MDEwNDRfSFdJVUZJVlFJdXJIWWVEQ09aU0VPVTBRQVFnVnNLMjJfVG9rZW46Ym94Y25CVUpxTXVYd2Vwc3JBSnJSRXp4RGlHXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="Task-2-Clustering-algorithms"><a href="#Task-2-Clustering-algorithms" class="headerlink" title="Task 2 Clustering algorithms"></a><strong>Task 2</strong> <strong>Clustering</strong> <strong>algorithms</strong></h2><h3 id="Kmeans聚类算法的实现"><a href="#Kmeans聚类算法的实现" class="headerlink" title="Kmeans聚类算法的实现"></a>Kmeans聚类算法的实现</h3><p>实现流程如下：</p>
+<ol>
+<li>在数据集中随机选取k个数据，作为初始质心；</li>
+</ol>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MWIzMWE0NTYyOWM5MGNlMjQ0N2EzMjJlOGE2OTM4MjZfOWFISzgwM3JFbEtMRlBBaFpyQjdOVXV4dm1nSmdnVEFfVG9rZW46Ym94Y25IWHpOR3I4N2NsRmFrRXBQMHhuS3dnXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ol>
+<li>计算数据集中每个样本到每个质心的距离，把样本划分到距离最小的质心所属的类别；</li>
+</ol>
+<p>计算欧氏距离的函数：即x1与x2平方和的平方根</p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NGI0MDRiMDk2MjIxZDg1OGM4NDJjYWVjN2M4MDM4YWFfRFNVZ1RoNWkwTm9FNTVOTEFBMUpyWUo4WGJLdVZRZ05fVG9rZW46Ym94Y25rY0o5MEZVV0lxTlB5R05NMWFpdEdnXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>计算每个样本到质心的距离，并把样本划分到距离最小的质心所属的类别：这里采用字典作为数据结构，通过键值对的形式为样本划类</p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ZmEyMjA2ZmZkMTZlOWU2NmU3NmJmY2E3YmIyNmU3YjFfUjdOTUZEQVN0YjFoblhWUTltSmY4OW80YWVvUlZqU25fVG9rZW46Ym94Y25HRlZsSnBpT1oySTF2YUxRRFV5T0JlXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ol>
+<li>根据聚类结果，重新计算质心，当本次计算的质心与上一次质心完全一样（或者收敛）时，停止迭代；</li>
+</ol>
+<p>否则更新质心，继续执行步骤2、3、4。</p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MzdhOTI2MTRmNWU5OWRiZDg5NTE3NDU0Y2QxNWMzNjhfU0hpTnFLNUdwNFA5WFlMN3o4Zm04bVVCVnJCblV2cUpfVG9rZW46Ym94Y25mMm1GUzVMWVNjRVRjbjlKS0RTRDhjXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ol>
+<li>最后产生聚类结果y_preds:</li>
+</ol>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ODUyZGYyMjgwZmI4NGI4Zjg4NTc1N2YyN2RlZWZiNDdfdVliYjdGa05veTZRTkI1NTVRczRvZW1Xc3lEc21DNVdfVG9rZW46Ym94Y24xOWRjQ2piRWIxZWVpVzZoc2NnR3BoXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="算法实现的困难"><a href="#算法实现的困难" class="headerlink" title="算法实现的困难"></a>算法实现的困难</h3><ol>
+<li>K值的选取不好把握</li>
+<li>采用迭代方法，得到的结果只是局部最优。</li>
+<li>把样本划分到距离最小的质心所属的类别这一步的数据结构选取上遇到了困难，一开始没有想到用字典来实现</li>
+<li>停止迭代的标志一开始难以确定</li>
+</ol>
+<h3 id="算法优化"><a href="#算法优化" class="headerlink" title="算法优化"></a>算法优化</h3><h4 id="Kmeans-优化："><a href="#Kmeans-优化：" class="headerlink" title="Kmeans++优化："></a>Kmeans++优化：</h4><p>经过实验，发现Kmeans跑出来的聚类结果不稳定，原因是它随机选取k个数据，导致结果无法收敛。</p>
+<p>因为随机选取，可能会使选取的几个数据点都非常靠近，不仅导致算法收敛很慢，还会导致结果只收敛到局部最小值。</p>
+<p>所以我们使用Kmeans++的方法初始化质心进行优化，其实现流程如下：</p>
+<ol>
+<li>从输入的数据点集合中随机选择一个点作为第一个聚类中心；</li>
+</ol>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=OGJlNWVmODc2MzM2YjI1NzRiZDYxNmYwZTNhNzYyNmFfa0E5dHNKazNDY0FUbXViZzd0QUhLdzdRbnZRNkhQYnhfVG9rZW46Ym94Y25Ua3NucHVBTk1QT1RSR3V1b2pNN3ljXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ol>
+<li>对于数据集中的每一个点xi，计算它与已选择的聚类中心中最近聚类中心的距离D(x)；</li>
+</ol>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=YTliNGZjNTEyMDcyZGE4YjM4MDlhYjJhMzBjZGVhMjZfN3hvUUJPZzlYSm55STB4RVNwdmQ0eFMyQ2FqRno5aUlfVG9rZW46Ym94Y25ONjJ1VXI2S2VLdFMwdlVMNGVCZm5iXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ol>
+<li>选择一个新的数据点作为新的聚类中心，选择的原则是：D(x)较大的点，被选取作为聚类中心的概率较大；</li>
+</ol>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ODkyMjRkZDc2YzA2N2UyMDhmNTk4NjJjNDBmYmQyM2NfMDZFSTUzUFZERnlCMTBLT2tlb3AwdHpuSVdUM29nZkZfVG9rZW46Ym94Y25BMU1Xa24wY0JRZGxsN1VBZUJSbWFkXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ol>
+<li>重复b和c直到选择出k个聚类质心；</li>
+</ol>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MmU4MzhmZjc4ODlkMjMwMTMxNjdjNzg5NDRiNDk1ZDVfRUFLY3NRbTdoMm15VVFxNzE4S1B4VVp1ME5zYXc2eW9fVG9rZW46Ym94Y244QTRMdmxQcWVNUFFMQzB4YWUxY3VnXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ol>
+<li>利用这k个质心来作为初始化质心去运行标准的K-Means算法；</li>
+</ol>
+<h4 id="n-init二次优化"><a href="#n-init二次优化" class="headerlink" title="n_init二次优化:"></a>n_init二次优化:</h4><p>该优化即算法执行n_init次，最终结果取最优的一次（所有样本点到所属的聚类质心的距离之和最小，即为最优）</p>
+<p>数学表现如下：</p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MTAxYWEyYTAxZDFiMWRkMDcwMzZjZTQzYzJmN2M2MzZfNVJkcXRueHczcTVvMEd5dktRM3NRazV6dkQ4VWVWTFhfVG9rZW46Ym94Y25HanRQb1RhREFLdE9LSVo1Qk1PTFNqXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>在Kmeans++方法选取质心的基础上，再添加参数n_init来优化聚类的准确性和稳定性，为此我们定义函数select_optimal：</p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=Y2E4NjYwMjAyMDEwMjI1ZWVlZGQzNTFhZTUyMDBkYzlfRHBNSW11ejNhOHBZbmpVM2xRakdUWVJ6dlVOd1lzaTlfVG9rZW46Ym94Y25NSDZNWFdNRWVWNGJLM1NFZGJSUGlkXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>该函数找到n_init次运行中，J最小时，对应的聚类质心，即为最优解。</p>
+<h4 id="k值选取方法优化："><a href="#k值选取方法优化：" class="headerlink" title="k值选取方法优化："></a>k值选取方法优化：</h4><p>传统的k值选取方法使用肘部图法，我们这里采用从簇内的稠密程度和簇间的离散程度来评估聚类的效果。常见的</p>
+<p>方法有轮廓系数Silhouette Coefficient和Calinski-Harabasz Index。</p>
+<p>这里我们使用sklearn中已封装好的sklearn.metrics.calinski_harabasz_score方法来选取k值</p>
+<p>它的得分越高，聚类效果越好，得分最高时，就是最佳的k值。</p>
+<p>具体过程如下：</p>
+<p>k&#x3D;5：</p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MGM4NTE3Mjk3NDA4ZTI5YWVmMzZjMDQ5NGYwMzQ0NGRfOVlXeDhiSUZoVGx1MWZvcVZ0MW1aeGY5WU92ald0QnJfVG9rZW46Ym94Y25WNGlLOTBVTUhtNUlRUzdJUDJWM2JoXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>k&#x3D;6：</p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MzIwMzVlNTFmZTBlNjc0ODdjM2M1YWY0MjVkYTIxNDFfdVdVZHJrbEs4OWRQcUwyZEg3NWlUN3M4REpsU0VuenhfVG9rZW46Ym94Y25QbDdPcG5vbGwyRlNFQjJ3VFlGMVViXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>k&#x3D;7：</p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTE2NjU2M2M3MDU2NjhmNjRjMzczYzQxMWQzNWI3YTdfQm9CYmJITnBmZmV2TVk0V0FwN0JoRkVYWmZHcnNtZ0NfVG9rZW46Ym94Y24xUzRIenFaeEVvcE5IbjlueFhiMFRlXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>可以看到，K&#x3D;6的时候，得分最高，6就是我们要找的k值。</p>
+<h3 id="实验结果及比较分析"><a href="#实验结果及比较分析" class="headerlink" title="实验结果及比较分析"></a>实验结果及比较分析</h3><h4 id="结果展现绘图"><a href="#结果展现绘图" class="headerlink" title="结果展现绘图"></a>结果展现绘图</h4><p>结果展现形式：散点图</p>
+<p>由于我们的数据是6维的，要绘制散点图需要进行降维，这里我们采用PCA法（主成分分析）降到二维：</p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTUwY2YyNjFjOWZhYThlYmU1MGQzMTIxNjY4ZTE3ODRfdW9xWDJYcFQ3RXEyM1RLV004R0hhTXlibFZZVDVGT0NfVG9rZW46Ym94Y25FeDNENzRQdTJxVUtZbWg2MGkzenFlXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h4 id="传统Kmeans聚类结果"><a href="#传统Kmeans聚类结果" class="headerlink" title="传统Kmeans聚类结果"></a>传统Kmeans聚类结果</h4><p>在自主实现的Kmeans类中，我们指定init参数为random即可实现传统Kmenas聚类</p>
+<p>第一次聚类：</p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ODVmYWYwZGM4MDNkYWYwODk1ZjM2YTkxNmQyYWUyMjhfZ29VZnVsNFhQZFVIb20zekw5YzVNQ3RBMmhrMDl3U3BfVG9rZW46Ym94Y25CNXhyTDhXTzB5WEpiTjBRWW9BWm1oXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NzZkOWNlMTllZmNiODkwNjYwM2Q0ZWE0ODE2MmU2MTdfSWpSWlZFVlNKa1V0NFJIMFNDT3VRdDdPVENyNFFEbVNfVG9rZW46Ym94Y25xelVjajN5eEtlVTRjeDVvYmVMNWZjXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>第二次聚类：</p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MGRlNWQzOTA3MTU0MTllNGIwMDgzYzUzYTNhNzNmZGJfNUpzdVhkdld5Y1lYWExjeThDc2RpUnVzNm81VEZiOE1fVG9rZW46Ym94Y25LMnhYdE5HZzRFcnRpVUNYOTNJMTliXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=M2EzNzVlZTA5NWJhYTY0M2JhYmNmMWMwZDNhNDUyNzBfa3VMRmtGVDFaRHlBeVJocEk2NmZEOTZ3dGRnb1lGN1FfVG9rZW46Ym94Y25oaHBDZ1o5M3dQUWlkUnNjaWRmdWpmXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>第三次聚类</p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=YjIwMDc2MjY2YjhkZTg0ZmQ3YjAxZTcxYTZhMTM4ZmJfRWpSTHRXSGNZMXF1ekZsU3dhUm1jOWQycjIxWEU5R3VfVG9rZW46Ym94Y253ZHRJY3Q4QWZwUXdWZUF1Q05vaHhiXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=Njg2YWIwM2Q0MDQ2YzFiYTEzYmU1ODEwODgwZjA2NGJfNzAzZVVnbFZHZENRcGVIWVVWZzA2TTRNRElXZUNSR0hfVG9rZW46Ym94Y25HMHNva1dlOG16bk1CWjlRMFk4cWVoXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>从calinski_harabasz_score得分和散点图可以看出，每次聚类的效果都不一致，这说明传统Kmeans的聚类很不稳定</p>
+<h4 id="优化算法聚类结果"><a href="#优化算法聚类结果" class="headerlink" title="优化算法聚类结果"></a>优化算法聚类结果</h4><p>在自主实现的Kmeans类中，我们指定init参数为Kmeans++即可实现传统Kmenas聚类</p>
+<p>第一次聚类：</p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NzVjNTM5NjM0N2E1YzkzYTg1YTZlNjJhMjE2MWU0MTNfY05vZnp6WVNQazFlbVFYUndxWGI3VHlRNERxUDFaRlZfVG9rZW46Ym94Y25yVWZZM0pmSVJmeldkQXVuNUJua01iXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MGRkMGZjOTNkNDg1YWM5OGI1NzIzZGM0MTNjMzAzMTZfVm56Wkk2YkloS1pTcG5oblVma0FNN0RGNG1lTDR6dk1fVG9rZW46Ym94Y25rNm5HWnJYbzdsSmxMdmlGZ21FVjVjXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>第二次聚类</p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=Nzc3MjM0M2Y4ODliMWI4NzMxYjhmYmM2MjRmODhmOTNfVTY5bGVQaHEyWWhMZllUQW91RllLdWJ0eDFDQ25wTVRfVG9rZW46Ym94Y255bFNuY2IxZWdEMDZiajFFd3lzQ2JoXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NzRhYmEwODBhZGEwNjNkMTJhNjVjMTYyY2YxMWU5OWJfTnZMRDdQa3h4dmJBOTEyOXBXRW1obDd5bHZ5Zk5LSGRfVG9rZW46Ym94Y25oTzd4Q29GNlVxQ2JsclNJbVpndzZkXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>第三次聚类</p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NjEwYzAyZGVkMmQ1MzI4MTY4MjJjNThhMGNhMTg3ZmRfZGJKeDQ2aDdTWVhhZjdNZk85ZzVuUWJ4SEExME1mY2dfVG9rZW46Ym94Y25GUnJha3hLeTA2RlNPSGlVa01zTThlXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=OGNmZmRlMmUwZDAxZDk4ZDNmNGI1NjUxYmFkNDg4MGJfYmM2ZXdtcWd1djk5TzVlcG1CQ3NvZEd6cjNDM2VZUE5fVG9rZW46Ym94Y25mTjI0T0s1SUFKRE1SOU05bjRWYzdlXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>不难看出，相比于传统Kmeans方法，我们的优化算法聚类效果稳定的多，且从calinski_harabasz_score得分可以看出，优化算法的平均聚类效果更好。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="category-chain-item">学习记录</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/">#数据挖掘</a>
+      
+        <a href="/tags/%E8%81%9A%E7%B1%BB/">#聚类</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>数据预处理与K-means聚类实现</div>
+      <div>http://example.com/2023/03/23/数据挖掘-hw1/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Lumie</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月23日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/06/%E8%BD%AF%E5%B7%A5%E9%A2%98%E8%A7%A3/" title="软工题解">
+                        <span class="hidden-mobile">软工题解</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"xNDGbh6KUqRqnqfsxVZa88By-gzGzoHsz","appKey":"VaSYQWVEiLSqxFOsE93gR6J7","path":"window.location.pathname","placeholder":"期待您的锐评~","avatar":"identicon","meta":["nick","mail"],"requiredFields":["nick","mail"],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":false,"serverURLs":"https://xndgbh6k.lc-cn-n1-shared.com","emojiCDN":"https://bili-emoji.netlify.app/","emojiMaps":{"doge":"03ea345ce429b6581d7c28c33305c2b6.png","OK":"e0aa021e21dddbd6d8cecec71e9cf564.png","tv_doge":"4eff1b3335389dd09ff7c69517f2b509.png","tv_亲亲":"4fea3e2403675decd5da17ea17784f68.png","tv_偷笑":"c9a772772778f5e2ec164c29a61a9eb5.png","tv_再见":"3542c4670aad5a693ea398ecebc1153d.png","tv_冷漠":"b12a49f12c8f86ad68864410e9620f55.png","tv_发怒":"38c85ccf43a4601d86b7b00da1a22068.png","tv_可爱":"14c00346fff68205047a1b529ef95e59.png","tv_吐血":"48a162e62521090979472aa230d0b784.png","tv_呆":"30325743c8a0c5f19a0cafb3957e3cf3.png","tv_呕吐":"e41cfc697caadd77b7dd1dac4c060c6a.png","tv_困":"dbf2ae0c09708ff242090b07577de943.png","tv_坏笑":"3eec33df13571865476e7a30460ae9f9.png","tv_大佬":"e314f8367a221c8edc03060b655f859f.png","tv_大哭":"ede1659180b1a78910d51565950df893.png","tv_委屈":"3cb14e94fac0f4c993eb333e04cad01d.png","tv_害羞":"e568e6ad2b5143f25409f3e559a7cfff.png","tv_尴尬":"5af7407aca8fc41cbaaabdc79879c249.png","tv_微笑":"8375a890c9f3f1f40ee9a9de5257a0f0.png","tv_思考":"d1f74953fbc6b6d7ca6f96eb1675e1a1.png","tv_惊吓":"bc84a49558952ba388aa98006b16ca57.png","tv_打脸":"397d65c1395d79d4a703a953c7f6caee.png","tv_抓狂":"f86000e53faaa1184578a004307fe110.png","tv_抠鼻":"880a3b5b023b5027b72bac1783f51d6e.png","tv_斜眼笑":"ded4aee92e0f30b3eeb36a1e05a5d1f0.png","tv_无奈":"e87cdb2408e8040d0bc192cd5b24ea9a.png","tv_晕":"581ba4770ff48629ddbf6f6243255843.png","tv_流汗":"ddd12a769c25727929b12ff92b3c9d9d.png","tv_流泪":"ccf0903e32a8fd7f28e5b0d92253a512.png","tv_流鼻血":"361836c3c0cfdd8f5705dfc8c6b6488e.png","tv_点赞":"3ee847d3edeafc252d0794544f9992e4.png","tv_生气":"fe2a7b204c5a8020f83d942a70c9a0f6.png","tv_生病":"5e96847d33c455e5a0ab6712f64a0858.png","tv_疑问":"fdfd8ce477389814748484de4dd9cc9a.png","tv_白眼":"cf4a00990fb20135ffc65eeca265d794.png","tv_皱眉":"f1223580f477d8c97cdb9b0822d3b60e.png","tv_目瞪口呆":"493143090e9e38e268b3b111514d0c8b.png","tv_睡着":"f4af815fe92d682d3df27ae1b95d07e4.png","tv_笑哭":"a2d451b59201a82aa05e974039646d2c.png","tv_腼腆":"aff63ac8d7c0be5783e0a702d5188d87.png","tv_色":"5391e9cddd0b56bf0a5e113ee109b759.png","tv_调侃":"91fa1621c2280d85586a66c5838dec91.png","tv_调皮":"2c4bf726cdab685580696e66fc283018.png","tv_鄙视":"ef9e87e1368c419999dca8bee19e3657.png","tv_闭嘴":"121cb61f9686eb7a1ce0653369a287f6.png","tv_难过":"41dee0cdfb4823b9d72575fe66e0f29a.png","tv_馋":"16a551f55db0522450c7a5cdb58a2745.png","tv_鬼脸":"cb4c4c3d5c7e029990a10bf9f7a6759e.png","tv_黑人问号":"f96f00a2382dd34bc68710894a3e46da.png","tv_鼓掌":"8b2a90cfdc48fa5ddb7bd8f5876b3ad9.png","再见":"8e5c0a1e46703251c02613c1048177f1.png","冷":"74eaee9656d23f18bb33d2b88098a64a.png","初音未来_大笑":"1e3f26eaf50812c931699c5d0c5a6405.png","加油":"062286ae94fbad3cfee4bd71bf947079.png","原神_哇":"f4b4c770ffd27fa7767dbae241515881.png","原神_哼":"bd4db1c27e8c6be399132039e2f6fca0.png","原神_喝茶":"2037a4c00c04e084d364d54194392d1d.png","原神_嗯":"6381eda0d5ed6a7cb86e0186653d9676.png","原神_欸嘿":"617e49b7dda9d8b6369b173bcb79cc74.png","原神_生气":"af05133b30a5154feb7a3d313008bb5f.png","口罩":"6cd2f36be2b2f9bf938b829fc751e982.png","吃瓜":"455e2b33e157302615678229812d5009.png","吐":"37a03b5e5ec229e8b868693d89ed5b87.png","吓":"17a6c6e6971ed5e08c9f773a09c3aa27.png","呆":"4894c23dd5ef63f827c0c1339495e088.png","呲牙":"f70ae5045d4cc4958e660d3ff28c0d40.png","哈欠":"cf8b4e4df0ef3e6e2fc0409b80147509.png","哦呼":"6f93da6622b4f2e5c3b5a10e70b7cc2c.png","喜极而泣":"e01b6f9b9133c9fb68644a2a9d12708e.png","喜欢":"3d6c396cf4dea3ba2ddb255499dc356a.png","墨镜":"df2cf3c4640f3db4dffe408f7f26060e.png","大哭":"d0cfabad423efa8c95ceb9f98d8778ca.png","大笑":"4402e6e2322eb29cd52dcf9240af6ed6.png","奸笑":"ab5805c719476ccd364209b755dec633.png","妙啊":"ec697e020ed66efc2816895ac2b5a5e1.png","委屈":"af41e0fd8f967c8f968c5d7216725138.png","嫌弃":"485a3f823ee4f7b6e7db6620bfede57c.png","微笑":"5acfd68d016cc6141559976112b7beb4.png","思考":"21d68b2de0e91dfb14942ca8aea316fc.png","怪我咯":"0766960579a7cf430e2c77a4d52afbc0.png","惊喜":"ba8e1a9ae55fbd5390f4b7c994830737.png","惊讶":"e3b28512cdd930a916f970070e17c10f.png","打call":"d54bb8db985d9eeab6bcf6630a8e9a3a.png","抓狂":"a4de54142f04bdc45c79dc49850ebb6c.png","抠鼻":"3822354914484432273dafbdb18aa94d.png","抱拳":"94d3a21b006ff84f25a4bc45897f4f86.png","拥抱":"18cdedfccd6e4436f982895047dfaeb6.png","捂眼":"f324db992a5b35565a882aca247232fc.png","捂脸":"eb0caf12c6f8d145fc7ab35c96cec54d.png","撇嘴":"a669a1cfabc6dab5dd2a50b59786e2c9.png","支持":"262b0b07dfd0cad4cb8eb442fee44882.png","无语":"27df619585afad4c65eebe95ba98d085.png","星星眼":"e7733aecc308d2c18b7068d5b4cdb3b8.png","歪嘴":"5a135a627c7733c80368ac33c5df3371.png","滑稽":"bcd94fd3f6b6cfef934b944faf4f9382.png","灵魂出窍":"78ed423d2ec574de1b78b44c84964f24.png","点赞":"75f0fa966d8246d1ba25faa636a40753.png","热":"2044c27397909670f0d90b8b6b5c15c5.png","爱心":"5a2e579b2ef8ff3090980e6ef8f8604d.png","生气":"e8c6c4d90f60dc0074480dc9d83f1fc1.png","生病":"75d80e662baa92dd5400de5f31db16a5.png","疑惑":"ec573404da933630a6037e79f427f43b.png","疼":"47f18cd93a3d67082ab4028fb456cd22.png","笑":"1300f40cb6582e518c31c61f7c35c8b0.png","笑哭":"11d2b3795aa8bbc128137269ed565070.png","给心心":"4a3742927431d854b2657900650b0199.png","翻白眼":"e0a8eaa61f61b9cbf7428ea5d859a610.png","胜利":"bf7230c44b0ea4839ca59915de038bf8.png","脱单doge":"3a101c859028a2cb92189fc1b9c15522.png","脸红":"cc34c4b1d5c0314e7c27b064783765e8.png","藏狐":"54a1c77cf216d778c6bde5385106ead1.png","调皮":"9a87d094973ac78633dbb885e6d7bc16.png","跪了":"80e7fe98490ad7819e457ad68ba93dc1.png","辣眼睛":"da076b252779b6888eb13353baa3bdc8.png","酸了":"1c91ce1be1a714aaab88b50032af5e46.png","阴险":"f1f4185dc58bed6b9f6c11e3845252c4.png","难过":"aa267ae0097323d46a31a6f8be587425.png","鼓掌":"5e608d099e4dc9f59c5861ce58e37cfa.png"},"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/love.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxingxing.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxuehua.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/haru02.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
