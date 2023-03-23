@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://moe.photo/images/2023/03/23/QQ20201215114628.jpg">
 <meta property="article:published_time" content="2023-03-23T02:49:39.000Z">
-<meta property="article:modified_time" content="2023-03-23T03:27:47.522Z">
+<meta property="article:modified_time" content="2023-03-23T03:30:33.975Z">
 <meta property="article:author" content="Lumie">
 <meta property="article:tag" content="数据挖掘">
 <meta property="article:tag" content="聚类">
@@ -392,14 +392,14 @@
 <ol start="2">
 <li>计算数据集中每个样本到每个质心的距离，把样本划分到距离最小的质心所属的类别；</li>
 </ol>
-<p>计算欧氏距离的函数：即x1与x2平方和的平方根</p>
+<p>​		计算欧氏距离的函数：即x1与x2平方和的平方根</p>
 <p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NGI0MDRiMDk2MjIxZDg1OGM4NDJjYWVjN2M4MDM4YWFfRFNVZ1RoNWkwTm9FNTVOTEFBMUpyWUo4WGJLdVZRZ05fVG9rZW46Ym94Y25rY0o5MEZVV0lxTlB5R05NMWFpdEdnXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>计算每个样本到质心的距离，并把样本划分到距离最小的质心所属的类别：这里采用字典作为数据结构，通过键值对的形式为样本划类</p>
+<p>​		计算每个样本到质心的距离，并把样本划分到距离最小的质心所属的类别：这里采用字典作为数据结构，通过键值对的形式为样本划类</p>
 <p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ZmEyMjA2ZmZkMTZlOWU2NmU3NmJmY2E3YmIyNmU3YjFfUjdOTUZEQVN0YjFoblhWUTltSmY4OW80YWVvUlZqU25fVG9rZW46Ym94Y25HRlZsSnBpT1oySTF2YUxRRFV5T0JlXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
 <ol start="3">
 <li>根据聚类结果，重新计算质心，当本次计算的质心与上一次质心完全一样（或者收敛）时，停止迭代；</li>
 </ol>
-<p>否则更新质心，继续执行步骤1、2、3。</p>
+<p>​		否则更新质心，继续执行步骤1、2、3。</p>
 <p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MzdhOTI2MTRmNWU5OWRiZDg5NTE3NDU0Y2QxNWMzNjhfU0hpTnFLNUdwNFA5WFlMN3o4Zm04bVVCVnJCblV2cUpfVG9rZW46Ym94Y25mMm1GUzVMWVNjRVRjbjlKS0RTRDhjXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
 <ol start="4">
 <li>最后产生聚类结果y_preds:</li>
