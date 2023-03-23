@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://moe.photo/images/2023/03/23/QQ20201215114628.jpg">
 <meta property="article:published_time" content="2023-03-23T02:49:39.000Z">
-<meta property="article:modified_time" content="2023-03-23T03:02:50.964Z">
+<meta property="article:modified_time" content="2023-03-23T03:24:21.198Z">
 <meta property="article:author" content="Lumie">
 <meta property="article:tag" content="数据挖掘">
 <meta property="article:tag" content="聚类">
@@ -418,19 +418,19 @@
 <li>从输入的数据点集合中随机选择一个点作为第一个聚类中心；</li>
 </ol>
 <p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=OGJlNWVmODc2MzM2YjI1NzRiZDYxNmYwZTNhNzYyNmFfa0E5dHNKazNDY0FUbXViZzd0QUhLdzdRbnZRNkhQYnhfVG9rZW46Ym94Y25Ua3NucHVBTk1QT1RSR3V1b2pNN3ljXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<ol>
+<ol start="2">
 <li>对于数据集中的每一个点xi，计算它与已选择的聚类中心中最近聚类中心的距离D(x)；</li>
 </ol>
 <p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=YTliNGZjNTEyMDcyZGE4YjM4MDlhYjJhMzBjZGVhMjZfN3hvUUJPZzlYSm55STB4RVNwdmQ0eFMyQ2FqRno5aUlfVG9rZW46Ym94Y25ONjJ1VXI2S2VLdFMwdlVMNGVCZm5iXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<ol>
+<ol start="3">
 <li>选择一个新的数据点作为新的聚类中心，选择的原则是：D(x)较大的点，被选取作为聚类中心的概率较大；</li>
 </ol>
 <p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ODkyMjRkZDc2YzA2N2UyMDhmNTk4NjJjNDBmYmQyM2NfMDZFSTUzUFZERnlCMTBLT2tlb3AwdHpuSVdUM29nZkZfVG9rZW46Ym94Y25BMU1Xa24wY0JRZGxsN1VBZUJSbWFkXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<ol>
-<li>重复b和c直到选择出k个聚类质心；</li>
+<ol start="4">
+<li>重复2和3直到选择出k个聚类质心；</li>
 </ol>
 <p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MmU4MzhmZjc4ODlkMjMwMTMxNjdjNzg5NDRiNDk1ZDVfRUFLY3NRbTdoMm15VVFxNzE4S1B4VVp1ME5zYXc2eW9fVG9rZW46Ym94Y244QTRMdmxQcWVNUFFMQzB4YWUxY3VnXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<ol>
+<ol start="5">
 <li>利用这k个质心来作为初始化质心去运行标准的K-Means算法；</li>
 </ol>
 <h4 id="n-init二次优化"><a href="#n-init二次优化" class="headerlink" title="n_init二次优化:"></a>n_init二次优化:</h4><p>该优化即算法执行n_init次，最终结果取最优的一次（所有样本点到所属的聚类质心的距离之和最小，即为最优）</p>
@@ -454,7 +454,7 @@
 <h3 id="实验结果及比较分析"><a href="#实验结果及比较分析" class="headerlink" title="实验结果及比较分析"></a>实验结果及比较分析</h3><h4 id="结果展现绘图"><a href="#结果展现绘图" class="headerlink" title="结果展现绘图"></a>结果展现绘图</h4><p>结果展现形式：散点图</p>
 <p>由于我们的数据是6维的，要绘制散点图需要进行降维，这里我们采用PCA法（主成分分析）降到二维：</p>
 <p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTUwY2YyNjFjOWZhYThlYmU1MGQzMTIxNjY4ZTE3ODRfdW9xWDJYcFQ3RXEyM1RLV004R0hhTXlibFZZVDVGT0NfVG9rZW46Ym94Y25FeDNENzRQdTJxVUtZbWg2MGkzenFlXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<h4 id="传统Kmeans聚类结果"><a href="#传统Kmeans聚类结果" class="headerlink" title="传统Kmeans聚类结果"></a>传统Kmeans聚类结果</h4><p>在自主实现的Kmeans类中，我们指定init参数为random即可实现传统Kmenas聚类</p>
+<h4 id="传统Kmeans聚类结果"><a href="#传统Kmeans聚类结果" class="headerlink" title="传统Kmeans聚类结果"></a>传统Kmeans聚类结果</h4><p>在自主实现的Kmeans类中，我们指定init参数为random即可实现传统Kmeans聚类</p>
 <p>第一次聚类：</p>
 <p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ODVmYWYwZGM4MDNkYWYwODk1ZjM2YTkxNmQyYWUyMjhfZ29VZnVsNFhQZFVIb20zekw5YzVNQ3RBMmhrMDl3U3BfVG9rZW46Ym94Y25CNXhyTDhXTzB5WEpiTjBRWW9BWm1oXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NzZkOWNlMTllZmNiODkwNjYwM2Q0ZWE0ODE2MmU2MTdfSWpSWlZFVlNKa1V0NFJIMFNDT3VRdDdPVENyNFFEbVNfVG9rZW46Ym94Y25xelVjajN5eEtlVTRjeDVvYmVMNWZjXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
