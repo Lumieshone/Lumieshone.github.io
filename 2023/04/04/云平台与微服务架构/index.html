@@ -16,25 +16,26 @@
   <meta name="author" content="Lumie">
   <meta name="keywords" content="">
   
-    <meta name="description" content="数据挖掘课程-hw1">
+    <meta name="description" content="聊聊热门滑梯">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据预处理与K-means聚类实现">
-<meta property="og:url" content="http://example.com/2023/03/23/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98-hw1/index.html">
+<meta property="og:title" content="云平台与微服务架构">
+<meta property="og:url" content="http://example.com/2023/04/04/%E4%BA%91%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/index.html">
 <meta property="og:site_name" content="Sekai">
-<meta property="og:description" content="数据挖掘课程-hw1">
+<meta property="og:description" content="聊聊热门滑梯">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://moe.photo/images/2023/03/23/QQ20201215114628.jpg">
-<meta property="article:published_time" content="2023-03-23T02:49:39.000Z">
-<meta property="article:modified_time" content="2023-03-23T03:30:33.975Z">
+<meta property="og:image" content="https://moe.photo/images/2023/04/04/Sayo.png">
+<meta property="article:published_time" content="2023-04-04T03:31:22.000Z">
+<meta property="article:modified_time" content="2023-04-04T08:13:22.948Z">
 <meta property="article:author" content="Lumie">
-<meta property="article:tag" content="数据挖掘">
-<meta property="article:tag" content="聚类">
+<meta property="article:tag" content="软件工程">
+<meta property="article:tag" content="云平台">
+<meta property="article:tag" content="微服务">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://moe.photo/images/2023/03/23/QQ20201215114628.jpg">
+<meta name="twitter:image" content="https://moe.photo/images/2023/04/04/Sayo.png">
   
   
   
-  <title>数据预处理与K-means聚类实现 - Sekai</title>
+  <title>云平台与微服务架构 - Sekai</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -229,7 +230,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="数据预处理与K-means聚类实现"></span>
+            <span id="subtitle" data-typed-text="云平台与微服务架构"></span>
           
         </div>
 
@@ -240,8 +241,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-23 10:49" pubdate>
-          2023年3月23日 上午
+        <time datetime="2023-04-04 11:31" pubdate>
+          2023年4月4日 中午
         </time>
       </span>
     
@@ -252,7 +253,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.9k 字
+          5.5k 字
         
       </span>
     
@@ -263,7 +264,7 @@
         
         
         
-          25 分钟
+          47 分钟
         
       </span>
     
@@ -309,173 +310,156 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">数据预处理与K-means聚类实现</h1>
+            <h1 style="display: none">云平台与微服务架构</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Report-hw1-Data-Analysis-and-Mining"><a href="#Report-hw1-Data-Analysis-and-Mining" class="headerlink" title="Report-hw1-Data Analysis and Mining"></a>Report-hw1-Data Analysis and Mining</h1><h2 id="Task-1-Data-pre-processing"><a href="#Task-1-Data-pre-processing" class="headerlink" title="Task 1 Data pre-processing"></a><strong>Task 1 Data pre-processing</strong></h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><ul>
-<li>数据集来源：<a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets/janiobachmann/bank-marketing-dataset">Bank Marketing Dataset</a></li>
-<li>数据集描述：这个数据集描述了某银行进行的最后一次营销活动，从而帮助该银行找到改进下一次营销活动的最佳策略，并确定有助于制定未来战略的模式。</li>
-<li>数据集特征：<ul>
-<li><p>该数据集共有17列，11162行，各列属性含义如下所示：</p>
+                <h1 id="云平台与微服务架构"><a href="#云平台与微服务架构" class="headerlink" title="云平台与微服务架构"></a>云平台与微服务架构</h1><h2 id="云平台"><a href="#云平台" class="headerlink" title="云平台"></a>云平台</h2><h3 id="对云计算的理解"><a href="#对云计算的理解" class="headerlink" title="对云计算的理解"></a>对云计算的理解</h3><p>云计算通俗点讲就是把以前需要本地处理器计算的任务交到了远程服务器上去做。</p>
+<p>例如你现在要计算出明天的天气预报,所有数据都准备好了,你用自己家的电脑计算,发现自己的电脑计算能力太差,想算出明天的天气预报得1年,那这样就不好了,计算也没价值了。</p>
+<p>但是你又不能专门为计算明天的天气预报去买一台强力服务器去计算,为了降低成本,你就要去使用云计算了,你只需要把计算天气的公式和数据发送到云服务器上,云服务器的计算能力比你的个人家用电脑强了几千倍(因为云服务器是一个服务器群,由很多计算能力强大的服务器组成的),二十分钟就算好了明天的天气预报,并且把结果给你返回到你的电脑上了,你只需要按照计算的次数或者是服务器的资源使用的多少去支付你需要支付的费用.肯定比你买服务器合适多了.</p>
+<p>以前需要自己来打井解决吃水问题，现在可以由自来水公司统一提供，现在云计算的云端相当于自来水公司，只不过它不是解决水资源供给问题，而是解决了<strong>计算资源</strong>和<strong>存储资源</strong>的<strong>统一、按需、可伸缩</strong>的供给。</p>
+<p>一个机房<strong>空闲的资源</strong>出租给他人使用，使得他人可以在短期具备<strong>同时使用多个计算机用于同一任务</strong>的可能性，同时还具有更好的性价比。就相当于，平常自己买电脑等于是淘宝，云计算是可以五天无理由的团购。</p>
+<p>原来是把一个任务交给一台电脑来完成，小任务用小电脑，大任务就得换大电脑。</p>
+<p>现在是把一个任务交给一堆电脑一起来完成，这堆电脑加起来工作得就像一个超级大的电脑一样。<strong>如果把每一台电脑比作一滴水，那么一起工作的一堆电脑就像是一片云。</strong>如何让一堆电脑工作得像一台大电脑一样，而且能按需要随时添加新电脑进去来改变大电脑的能力，这就是云计算需要解决的问题。</p>
+<p>可以把计算扩充一下。比如说存储。假设很多人想要不定时地看同一部视频。正常来说，都要保存在每个人本地的硬盘上，才能满足每个人不定时的观看。如果借助网络，只要保存在一个服务器上，有人想要看去下载即可，就是共享存储。</p>
+<p>再把云的概念扩展一点，比如生活中的交通。很多人想要从A到B地，每个人如果都需要单独坐小汽车去的话，资源就很浪费，如果共享一辆汽车，就是云交通，资源就会节省很多。云计算的狭义个人理解是指计算能力的共享，通过第三方，使得计算能力统一放在一个地方。</p>
+<h3 id="云计算概念"><a href="#云计算概念" class="headerlink" title="云计算概念"></a>云计算概念</h3><p>云计算是通过 Internet <strong>云服务平台</strong>按需提供<strong>计算</strong>能力、数据库<strong>存储</strong>、<strong>应用</strong>程序和其他 IT 资源，采用<strong>按需支付（使用量）</strong>定价模式。</p>
+<h3 id="云平台概念"><a href="#云平台概念" class="headerlink" title="云平台概念"></a>云平台概念</h3><p>云计算平台也称为云平台，是指基于硬件资源和软件资源的服务，提供计算、网络和存储能力。云平台可以集中对存储、处理、传输等各个环节进行处理，而且速度非常快，调用云服务等资源也更加方便快捷。就拿百度云来说吧，用户可以将相关的信息存储到云平台当中，不管是传输还是处理，都可以通过平台来搞定，还可以通过平台来调用云服务，享受到更便捷的扩展性服务。</p>
+<p>云平台，简单来理解的话就是提供数据、存储数据的一个空间，这个空间非常大，而且它的存储量也是非常大，另外，它还必须具备非常快的运转速度。像百度云是以数据存储为主的云平台，而阿里云是提供弹性计算及信息存储等基础设施服务的云平台。</p>
+<p>云计算平台可以划分为3类：</p>
+<ul>
+<li><p>以数据存储为主的存储型云平台</p>
 </li>
-<li><p>age 年龄</p>
+<li><p>以数据处理为主的计算型云平台</p>
 </li>
-<li><p>job 职业(admin,unemployed,student,retired,self-employed,housemaid,services,bluecollar,technician,management,entrepreneur,unknown)</p>
-</li>
-<li><p>marital 婚姻状况(single,married,divorced)</p>
-</li>
-<li><p>education 受教育水平(primary,secondary,tertiary,tertiary)</p>
-</li>
-<li><p>default 是否有违约记录(yes,no)</p>
-</li>
-<li><p>balance 账户平均余额</p>
-</li>
-<li><p>housing 住房贷款</p>
-</li>
-<li><p>loan 个人贷款</p>
-</li>
-<li><p>contact 与客户联系沟通方式(cellular,telephone,unknown)</p>
-</li>
-<li><p>day 最后一次联系的时间</p>
-</li>
-<li><p>month 最后一次联系的月份</p>
-</li>
-<li><p>duration 最后一次联系的交流时长</p>
-</li>
-<li><p>campaign 与客户交流的次数</p>
-</li>
-<li><p>pdays 最后一次联系客户过去多久</p>
-</li>
-<li><p>previos 与客户交流次数</p>
-</li>
-<li><p>poutcome 上一次活动的结果(success,failure,unknown)</p>
-</li>
-<li><p>deposit 是否有定期存款(yes,no)</p>
+<li><p>计算和数据存储处理兼顾的综合云计算平台</p>
 </li>
 </ul>
-</li>
+<h3 id="云平台的优势"><a href="#云平台的优势" class="headerlink" title="云平台的优势"></a>云平台的优势</h3><ul>
+<li><strong>稳定性相对很好</strong></li>
 </ul>
-<h3 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h3><p>原数据集已被清洗的较为完整，所以该作业中人为添加了一些“脏数据”，包括缺失值，异常值等，如下图所示：</p>
-<p>缺失值：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=OWM5MjA3ZWVhMjhkM2VmMDEyYWNlODUzYzNmNGRkMmJfcnhMVTRmVTFyQ0hlc0NiV01yRkxVOUVzb3RXdHVaRjhfVG9rZW46Ym94Y24zRGN0Z2JMWWJGb1FBRHlWaHY0TExoXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>异常值：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MjU3NWJlMWRhNzc4NTJkMzgyMGQ0Nzg0YTYwMjU5MTNfZ3VmbWJRR3BlRXVXNEZVeW93MGhHVU15Mm5ESkw4TDRfVG9rZW46Ym94Y25Vek41TTBhTUQyYW1lb1lERE03OHRmXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=N2FkODUzZTliMWU1MWZkZWJjZWE5MjhhMGU3ZGYxMjVfTXpNMzBDNWhvRHJLUDFMejVJbTNjRFV2ZmVkakVuMnJfVG9rZW46Ym94Y25mOVdwWHVQZlk4R1A3UjRKNkNVdlRBXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MTA2MTc5YmY2NWY0NmQ3YmUxM2I3Njg3YTYyYWFjYzlfU3dtTlF4ZGFhYXVocDdiRDN5NkpqYUlTZzdXVVJZSzZfVG9rZW46Ym94Y25SYzFVNWlJSlBqM21DVzg2R3pVOTVlXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<h4 id="异常值处理"><a href="#异常值处理" class="headerlink" title="异常值处理"></a>异常值处理</h4><p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MTAzNDBmNWZmMTBlMWIyYTM1NTNhYjcyYTU1M2YwMzZfR0VSQ3M3R21ZckxmTDFjUWNoY0ZDSW1aSEhTQUg3Qm5fVG9rZW46Ym94Y250MktxenpNemVvbUxCcmVSOWZzeGtoXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<ol>
-<li>首先，我们认为age也就是年龄的正常范围应该在1-100，所以先将这些正常范围的age筛出</li>
-<li>对筛出来的age取均值（b.mean()）</li>
-<li>遍历数据集，将越界的age改为均值</li>
-<li>接下来处理balance列的异常值，由于之前把几个原本的数据改为了字符串，导致了全列数据被类型转换为了字符串，所以检测异常值只需要看每个数据第一位是否是数字即可，若是，则填充为int值0，若不是，则类型转换为int</li>
-</ol>
-<h4 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h4><p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NTQyZjdhNGM2MzlhOWFiMzE0MGZiYTg0OGY2MzI2ZmFfZzdPVlBaNmcyODZVU0pKRU1ZQ0JPWU1WN29FeUFLVGpfVG9rZW46Ym94Y25RWmtNdU50Zzd2Z2lYT21iMHdQYUdiXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>缺失值处理较为简单，采用均值填充法，直接用fillna方法将均值填充进去即可</p>
-<h4 id="数据过滤和选择"><a href="#数据过滤和选择" class="headerlink" title="数据过滤和选择"></a>数据过滤和选择</h4><p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MWUzZjBjZmY5ODZhNzRmNGJmMTY1NjE4ZjA2ZTQ5MDhfWWU4dFR2MUNTajlRQU05SldNa2FtUHVlWWNpZGR2REVfVG9rZW46Ym94Y25LTjdidnp2MlduTHhMZU5zVVdTOFBkXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MWFmNGU1MTZkOGRhNGFiZmUxOTg0ODE2MDM1NWUxZTdfMHZNSkpzSE5wWFNMQkVKSHR2N0tWRlZkbUEzajJYaEdfVG9rZW46Ym94Y25uZjh0ZGs2ZVB6cXg3d2g3M2FzN1NiXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>由于聚类目的是确定优先联系进行营销的客户组别，所以我们只需要那些非管理人员（客户）、有存款、没有负债的数据，基于此，我们进行数据过滤操作；除此之外，我们只需要选择比较核心的数据特征进行聚类即可，一方面便于标准化，另一方面其余列属性的值种类太少，不便于聚类</p>
-<h4 id="数据标准化"><a href="#数据标准化" class="headerlink" title="数据标准化"></a>数据标准化</h4><p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=YTRhMDhiMjU1MTBhZTA0ZDRmYWUzNjYwZjM3YWNkYzNfMzlCb3A5ckxTSnpXNGQ5SXZxVWRqZDFHS2VXSE4weTVfVG9rZW46Ym94Y240VFI5T0hVZUN5SnVQS3B6TW9pMU9oXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>数据标准化操作是将数据按比例缩放，使之落入一个小的特定区间。其中最典型的就是数据的归一化处理，即将数据统一映射到[0,1]区间上。</p>
-<p>这里选用的标准化方法是<strong>z-score</strong>标准化，这种方法给予原始数据的均值（mean）和标准差（standard deviation）进行数据的标准化。经过处理的数据符合标准正态分布，即均值为0，标准差为1，其转化函数为：</p>
-<p>x* &#x3D; (x - μ ) &#x2F; σ</p>
-<p>其中μ为所有样本数据的均值，σ为所有样本数据的标准差。标准化后的变量值围绕0上下波动，大于0说明高于平均水平，小于0说明低于平均水平。</p>
-<p>这里我们将数据类型为字符串的poutcome和job两列数据转化为数字索引，便于标准化。</p>
-<p>本作业中处理后的数据形式如下所示：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTllODgwNTUxMTg0OTQ4MGJjMDE2YTZlNTI0MDEwNDRfSFdJVUZJVlFJdXJIWWVEQ09aU0VPVTBRQVFnVnNLMjJfVG9rZW46Ym94Y25CVUpxTXVYd2Vwc3JBSnJSRXp4RGlHXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<h2 id="Task-2-Clustering-algorithms"><a href="#Task-2-Clustering-algorithms" class="headerlink" title="Task 2 Clustering algorithms"></a><strong>Task 2</strong> <strong>Clustering</strong> <strong>algorithms</strong></h2><h3 id="Kmeans聚类算法的实现"><a href="#Kmeans聚类算法的实现" class="headerlink" title="Kmeans聚类算法的实现"></a>Kmeans聚类算法的实现</h3><p>实现流程如下：</p>
-<ol>
-<li>在数据集中随机选取k个数据，作为初始质心；</li>
-</ol>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MWIzMWE0NTYyOWM5MGNlMjQ0N2EzMjJlOGE2OTM4MjZfOWFISzgwM3JFbEtMRlBBaFpyQjdOVXV4dm1nSmdnVEFfVG9rZW46Ym94Y25IWHpOR3I4N2NsRmFrRXBQMHhuS3dnXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<ol start="2">
-<li>计算数据集中每个样本到每个质心的距离，把样本划分到距离最小的质心所属的类别；</li>
-</ol>
-<p>​		计算欧氏距离的函数：即x1与x2平方和的平方根</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NGI0MDRiMDk2MjIxZDg1OGM4NDJjYWVjN2M4MDM4YWFfRFNVZ1RoNWkwTm9FNTVOTEFBMUpyWUo4WGJLdVZRZ05fVG9rZW46Ym94Y25rY0o5MEZVV0lxTlB5R05NMWFpdEdnXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>​		计算每个样本到质心的距离，并把样本划分到距离最小的质心所属的类别：这里采用字典作为数据结构，通过键值对的形式为样本划类</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ZmEyMjA2ZmZkMTZlOWU2NmU3NmJmY2E3YmIyNmU3YjFfUjdOTUZEQVN0YjFoblhWUTltSmY4OW80YWVvUlZqU25fVG9rZW46Ym94Y25HRlZsSnBpT1oySTF2YUxRRFV5T0JlXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<ol start="3">
-<li>根据聚类结果，重新计算质心，当本次计算的质心与上一次质心完全一样（或者收敛）时，停止迭代；</li>
-</ol>
-<p>​		否则更新质心，继续执行步骤1、2、3。</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MzdhOTI2MTRmNWU5OWRiZDg5NTE3NDU0Y2QxNWMzNjhfU0hpTnFLNUdwNFA5WFlMN3o4Zm04bVVCVnJCblV2cUpfVG9rZW46Ym94Y25mMm1GUzVMWVNjRVRjbjlKS0RTRDhjXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<ol start="4">
-<li>最后产生聚类结果y_preds:</li>
-</ol>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ODUyZGYyMjgwZmI4NGI4Zjg4NTc1N2YyN2RlZWZiNDdfdVliYjdGa05veTZRTkI1NTVRczRvZW1Xc3lEc21DNVdfVG9rZW46Ym94Y24xOWRjQ2piRWIxZWVpVzZoc2NnR3BoXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<h3 id="算法实现的困难"><a href="#算法实现的困难" class="headerlink" title="算法实现的困难"></a>算法实现的困难</h3><ol>
-<li>K值的选取不好把握</li>
-<li>采用迭代方法，得到的结果只是局部最优。</li>
-<li>把样本划分到距离最小的质心所属的类别这一步的数据结构选取上遇到了困难，一开始没有想到用字典来实现</li>
-<li>停止迭代的标志一开始难以确定</li>
-</ol>
-<h3 id="算法优化"><a href="#算法优化" class="headerlink" title="算法优化"></a>算法优化</h3><h4 id="Kmeans-优化："><a href="#Kmeans-优化：" class="headerlink" title="Kmeans++优化："></a>Kmeans++优化：</h4><p>经过实验，发现Kmeans跑出来的聚类结果不稳定，原因是它随机选取k个数据，导致结果无法收敛。</p>
-<p>因为随机选取，可能会使选取的几个数据点都非常靠近，不仅导致算法收敛很慢，还会导致结果只收敛到局部最小值。</p>
-<p>所以我们使用Kmeans++的方法初始化质心进行优化，其实现流程如下：</p>
-<ol>
-<li>从输入的数据点集合中随机选择一个点作为第一个聚类中心；</li>
-</ol>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=OGJlNWVmODc2MzM2YjI1NzRiZDYxNmYwZTNhNzYyNmFfa0E5dHNKazNDY0FUbXViZzd0QUhLdzdRbnZRNkhQYnhfVG9rZW46Ym94Y25Ua3NucHVBTk1QT1RSR3V1b2pNN3ljXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<ol start="2">
-<li>对于数据集中的每一个点xi，计算它与已选择的聚类中心中最近聚类中心的距离D(x)；</li>
-</ol>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=YTliNGZjNTEyMDcyZGE4YjM4MDlhYjJhMzBjZGVhMjZfN3hvUUJPZzlYSm55STB4RVNwdmQ0eFMyQ2FqRno5aUlfVG9rZW46Ym94Y25ONjJ1VXI2S2VLdFMwdlVMNGVCZm5iXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<ol start="3">
-<li>选择一个新的数据点作为新的聚类中心，选择的原则是：D(x)较大的点，被选取作为聚类中心的概率较大；</li>
-</ol>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ODkyMjRkZDc2YzA2N2UyMDhmNTk4NjJjNDBmYmQyM2NfMDZFSTUzUFZERnlCMTBLT2tlb3AwdHpuSVdUM29nZkZfVG9rZW46Ym94Y25BMU1Xa24wY0JRZGxsN1VBZUJSbWFkXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<ol start="4">
-<li>重复2和3直到选择出k个聚类质心；</li>
-</ol>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MmU4MzhmZjc4ODlkMjMwMTMxNjdjNzg5NDRiNDk1ZDVfRUFLY3NRbTdoMm15VVFxNzE4S1B4VVp1ME5zYXc2eW9fVG9rZW46Ym94Y244QTRMdmxQcWVNUFFMQzB4YWUxY3VnXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<ol start="5">
-<li>利用这k个质心来作为初始化质心去运行标准的K-Means算法；</li>
-</ol>
-<h4 id="n-init二次优化"><a href="#n-init二次优化" class="headerlink" title="n_init二次优化:"></a>n_init二次优化:</h4><p>该优化即算法执行n_init次，最终结果取最优的一次（所有样本点到所属的聚类质心的距离之和最小，即为最优）</p>
-<p>数学表现如下：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MTAxYWEyYTAxZDFiMWRkMDcwMzZjZTQzYzJmN2M2MzZfNVJkcXRueHczcTVvMEd5dktRM3NRazV6dkQ4VWVWTFhfVG9rZW46Ym94Y25HanRQb1RhREFLdE9LSVo1Qk1PTFNqXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>在Kmeans++方法选取质心的基础上，再添加参数n_init来优化聚类的准确性和稳定性，为此我们定义函数select_optimal：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=Y2E4NjYwMjAyMDEwMjI1ZWVlZGQzNTFhZTUyMDBkYzlfRHBNSW11ejNhOHBZbmpVM2xRakdUWVJ6dlVOd1lzaTlfVG9rZW46Ym94Y25NSDZNWFdNRWVWNGJLM1NFZGJSUGlkXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>该函数找到n_init次运行中，J最小时，对应的聚类质心，即为最优解。</p>
-<h4 id="k值选取方法优化："><a href="#k值选取方法优化：" class="headerlink" title="k值选取方法优化："></a>k值选取方法优化：</h4><p>传统的k值选取方法使用肘部图法，我们这里采用从簇内的稠密程度和簇间的离散程度来评估聚类的效果。常见的</p>
-<p>方法有轮廓系数Silhouette Coefficient和Calinski-Harabasz Index。</p>
-<p>这里我们使用sklearn中已封装好的sklearn.metrics.calinski_harabasz_score方法来选取k值</p>
-<p>它的得分越高，聚类效果越好，得分最高时，就是最佳的k值。</p>
-<p>具体过程如下：</p>
-<p>k&#x3D;5：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MGM4NTE3Mjk3NDA4ZTI5YWVmMzZjMDQ5NGYwMzQ0NGRfOVlXeDhiSUZoVGx1MWZvcVZ0MW1aeGY5WU92ald0QnJfVG9rZW46Ym94Y25WNGlLOTBVTUhtNUlRUzdJUDJWM2JoXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>k&#x3D;6：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MzIwMzVlNTFmZTBlNjc0ODdjM2M1YWY0MjVkYTIxNDFfdVdVZHJrbEs4OWRQcUwyZEg3NWlUN3M4REpsU0VuenhfVG9rZW46Ym94Y25QbDdPcG5vbGwyRlNFQjJ3VFlGMVViXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>k&#x3D;7：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTE2NjU2M2M3MDU2NjhmNjRjMzczYzQxMWQzNWI3YTdfQm9CYmJITnBmZmV2TVk0V0FwN0JoRkVYWmZHcnNtZ0NfVG9rZW46Ym94Y24xUzRIenFaeEVvcE5IbjlueFhiMFRlXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>可以看到，K&#x3D;6的时候，得分最高，6就是我们要找的k值。</p>
-<h3 id="实验结果及比较分析"><a href="#实验结果及比较分析" class="headerlink" title="实验结果及比较分析"></a>实验结果及比较分析</h3><h4 id="结果展现绘图"><a href="#结果展现绘图" class="headerlink" title="结果展现绘图"></a>结果展现绘图</h4><p>结果展现形式：散点图</p>
-<p>由于我们的数据是6维的，要绘制散点图需要进行降维，这里我们采用PCA法（主成分分析）降到二维：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTUwY2YyNjFjOWZhYThlYmU1MGQzMTIxNjY4ZTE3ODRfdW9xWDJYcFQ3RXEyM1RLV004R0hhTXlibFZZVDVGT0NfVG9rZW46Ym94Y25FeDNENzRQdTJxVUtZbWg2MGkzenFlXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<h4 id="传统Kmeans聚类结果"><a href="#传统Kmeans聚类结果" class="headerlink" title="传统Kmeans聚类结果"></a>传统Kmeans聚类结果</h4><p>在自主实现的Kmeans类中，我们指定init参数为random即可实现传统Kmeans聚类</p>
-<p>第一次聚类：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ODVmYWYwZGM4MDNkYWYwODk1ZjM2YTkxNmQyYWUyMjhfZ29VZnVsNFhQZFVIb20zekw5YzVNQ3RBMmhrMDl3U3BfVG9rZW46Ym94Y25CNXhyTDhXTzB5WEpiTjBRWW9BWm1oXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NzZkOWNlMTllZmNiODkwNjYwM2Q0ZWE0ODE2MmU2MTdfSWpSWlZFVlNKa1V0NFJIMFNDT3VRdDdPVENyNFFEbVNfVG9rZW46Ym94Y25xelVjajN5eEtlVTRjeDVvYmVMNWZjXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>第二次聚类：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MGRlNWQzOTA3MTU0MTllNGIwMDgzYzUzYTNhNzNmZGJfNUpzdVhkdld5Y1lYWExjeThDc2RpUnVzNm81VEZiOE1fVG9rZW46Ym94Y25LMnhYdE5HZzRFcnRpVUNYOTNJMTliXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=M2EzNzVlZTA5NWJhYTY0M2JhYmNmMWMwZDNhNDUyNzBfa3VMRmtGVDFaRHlBeVJocEk2NmZEOTZ3dGRnb1lGN1FfVG9rZW46Ym94Y25oaHBDZ1o5M3dQUWlkUnNjaWRmdWpmXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>第三次聚类</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=YjIwMDc2MjY2YjhkZTg0ZmQ3YjAxZTcxYTZhMTM4ZmJfRWpSTHRXSGNZMXF1ekZsU3dhUm1jOWQycjIxWEU5R3VfVG9rZW46Ym94Y253ZHRJY3Q4QWZwUXdWZUF1Q05vaHhiXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=Njg2YWIwM2Q0MDQ2YzFiYTEzYmU1ODEwODgwZjA2NGJfNzAzZVVnbFZHZENRcGVIWVVWZzA2TTRNRElXZUNSR0hfVG9rZW46Ym94Y25HMHNva1dlOG16bk1CWjlRMFk4cWVoXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>从calinski_harabasz_score得分和散点图可以看出，每次聚类的效果都不一致，这说明传统Kmeans的聚类很不稳定</p>
-<h4 id="优化算法聚类结果"><a href="#优化算法聚类结果" class="headerlink" title="优化算法聚类结果"></a>优化算法聚类结果</h4><p>在自主实现的Kmeans类中，我们指定init参数为Kmeans++即可实现传统Kmenas聚类</p>
-<p>第一次聚类：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NzVjNTM5NjM0N2E1YzkzYTg1YTZlNjJhMjE2MWU0MTNfY05vZnp6WVNQazFlbVFYUndxWGI3VHlRNERxUDFaRlZfVG9rZW46Ym94Y25yVWZZM0pmSVJmeldkQXVuNUJua01iXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MGRkMGZjOTNkNDg1YWM5OGI1NzIzZGM0MTNjMzAzMTZfVm56Wkk2YkloS1pTcG5oblVma0FNN0RGNG1lTDR6dk1fVG9rZW46Ym94Y25rNm5HWnJYbzdsSmxMdmlGZ21FVjVjXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>第二次聚类</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=Nzc3MjM0M2Y4ODliMWI4NzMxYjhmYmM2MjRmODhmOTNfVTY5bGVQaHEyWWhMZllUQW91RllLdWJ0eDFDQ25wTVRfVG9rZW46Ym94Y255bFNuY2IxZWdEMDZiajFFd3lzQ2JoXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NzRhYmEwODBhZGEwNjNkMTJhNjVjMTYyY2YxMWU5OWJfTnZMRDdQa3h4dmJBOTEyOXBXRW1obDd5bHZ5Zk5LSGRfVG9rZW46Ym94Y25oTzd4Q29GNlVxQ2JsclNJbVpndzZkXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>第三次聚类</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NjEwYzAyZGVkMmQ1MzI4MTY4MjJjNThhMGNhMTg3ZmRfZGJKeDQ2aDdTWVhhZjdNZk85ZzVuUWJ4SEExME1mY2dfVG9rZW46Ym94Y25GUnJha3hLeTA2RlNPSGlVa01zTThlXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=OGNmZmRlMmUwZDAxZDk4ZDNmNGI1NjUxYmFkNDg4MGJfYmM2ZXdtcWd1djk5TzVlcG1CQ3NvZEd6cjNDM2VZUE5fVG9rZW46Ym94Y25mTjI0T0s1SUFKRE1SOU05bjRWYzdlXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>不难看出，相比于传统Kmeans方法，我们的优化算法聚类效果稳定的多，且从calinski_harabasz_score得分可以看出，优化算法的平均聚类效果更好。</p>
+<p>​		云平台的应用影响着网站的使用，所以云平台的稳定性对于网站来说很重要。我们平时常见的虚拟主机都是多个网站共享一台主机，如果其中的一个网站受到攻击，		那么就会影响到其他的网站，这样空间的稳定性就会大大降低。</p>
+<ul>
+<li><strong>更安全可靠</strong></li>
+</ul>
+<p>​		服务器的安全对于用户来说是非常重要的，因为一旦服务器出现故障，网站就不能进行正常的运营，给企业带来的损失将会是不可估量的，所以用户最害怕服务器出		现故障。但是云平台一般不会出现这种情况的，就算是网站的运营出现了问题，云平台也会自动转移到其他的机器上。</p>
+<ul>
+<li><strong>无限的容量</strong></li>
+</ul>
+<p>​		云平台是全网服务，几乎综合了全球终端的“云”提供的容量，不再局限于一台或者几台服务器之间，所以在某种程度上可以说云计算的存贮是永无止境的。</p>
+<ul>
+<li><strong>具有扩展性</strong></li>
+</ul>
+<p>​		对于一些中小型的企业来说，随着业务的不断扩大，可能后期需要对服务器进行扩容和升级等操作。而云平台具有一定的扩展性，可以满足企业的后期扩张升级，在		后期就不需要对软硬件进行相应的升级操作。</p>
+<ul>
+<li><strong>存储更方便</strong></li>
+</ul>
+<p>​		数据是一个企业的核心内容，所以平时一定要对数据做好备份工作。云平台有一个数据备份功能，就算是硬件出现了问题，数据也不会受到影响或者是出现丢失的情		况。只需要后期的正常维护和运维就行了，而且这个是服务商在维护的，可以为企业节省很多的人力。</p>
+<ul>
+<li><strong>更容易的协作与共享</strong></li>
+</ul>
+<p>​		极高的速度与无限的容量使异国异地的企业开展协作经营成为可能，在云计算平台下的不同企业可以实现线上办公、同步作业，一个企业发出的最新数据可使“云”的		其他企业同步看到并采用，由此实现了资源共享。</p>
+<ul>
+<li><strong>高速</strong></li>
+</ul>
+<p>​		相较于任何一个独自存在的企业数据中心，足以覆盖全球的云计算所提供的高速运算和同步服务是这些独力支援的企业所无法比拟的。</p>
+<h3 id="云平台架构"><a href="#云平台架构" class="headerlink" title="云平台架构"></a>云平台架构</h3><p><strong>资源层或基础设施层（IaaS, Infrastructure as a Service）</strong></p>
+<p>由服务器集群组成。传统服务器要想提供高质量服务，需要性能特别好的服务器（内存高，CPU快，磁盘空间大等），价格昂贵。而服务器集群可以使用以前性能不太好的服务器，利用分布式处理技术，依然可以提供可靠服务，节省费用。</p>
+<p>例：Oracle、VMware、阿里云</p>
+<p><strong>虚拟机层</strong></p>
+<p>有了物理机集群后，我们需要在物理机上建立虚拟机。建立虚拟机的目的是为了<strong>最小化资源成本</strong>（最大化资源利用率）。试想一下某台物理机有128G内存，当某段时间连续有小任务量的应用需要处理时，物理机的内存利用率会很低，所以为最大化资源利用率，可以在物理机上独立开辟几个虚拟机，每台虚拟机相当于一个小型服务器，依然可以处理应用请求。</p>
+<p><strong>中间件层或平台层（PaaS, Platform as a Service)</strong></p>
+<p>是云平台的核心层，主要功能为：对虚拟机池资源状态进行监测、预警、优化决策。</p>
+<ul>
+<li><strong>资源监测</strong>：实时监测当前各台虚拟机CPU、内存等使用情况，当然也监测用户应用请求，以便根据应用规模大小进行决策。</li>
+<li><strong>预警</strong>：防患于未然，根据当前虚拟机资源使用情况预测下一秒用户请求量，以便做出相应资源调整，防止宕机。比如CPU使用率上限为70%，所以当预测下一秒达到该触发点时，应有相应响应。</li>
+<li><strong>优化决策</strong>：预警之后，虚拟机要进行资源调度(迁移或伸缩)，采用何种调度策略，才能保证服务和资源利用率是研究重点。由于该层需要对应用进行响应处理，所以需要在虚拟机上搭建操作系统，文件存储系统，以及服务器，当然还有负载均衡系统，如，Nginx（engine x），其实现中间件层功能，相当于网络中的路由器不处理数据，只进行数据转发，数据处理交由虚拟机上的tomcat服务器执行。</li>
+</ul>
+<p>例：新浪SAE、谷歌GAE(Google app engine)、百度云开发引擎</p>
+<p><strong>应用层或软件服务层（SaaS，Software as a Service）</strong></p>
+<p>给用户提供可视化界面。</p>
+<p>应用若为存储：如百度云会给用户提供交互界面，建立文件夹，进行数据存储，在线播放视频等界面，供用户选择操作。</p>
+<p>应用若为租用服务器：界面应该有租用的服务器资源状态。</p>
+<p>例：微软Office、谷歌Apps</p>
+<h3 id="云计算中弹性与可扩展性的区别"><a href="#云计算中弹性与可扩展性的区别" class="headerlink" title="云计算中弹性与可扩展性的区别"></a>云计算中弹性与可扩展性的区别</h3><p>可扩展性：只要相应增加资源容量，就可以处理增加的工作负载。</p>
+<p>弹性：强调启用和停用庞大的资源容量这一概念。</p>
+<h2 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h2><h3 id="什么是微服务"><a href="#什么是微服务" class="headerlink" title="什么是微服务"></a>什么是微服务</h3><p>微服务架构是一种架构模式或者说是一种架构风格，它提倡将<strong>单一应用程序</strong>划分成<strong>一组小的服务</strong>，每个服务运行在<strong>自己的独立进程</strong>中，服务之间互相协调、互相配合，为用户提供最终价值。 服务之间采用<strong>轻量级</strong>的通信机制互相沟通（通常是基于HTTP的RESTful API）。每个服务都围绕着具体业务进行构建，并且<strong>能够被独立地部署</strong>到生产环境、类生产环境等。可以使用不同的语言来编写服务，也可以使用不同的数据存储。</p>
+<p>主要思想：去耦合</p>
+<p>在 intellij idea 工具里面就是用 maven 开发的一个个独立的 module，具体就是使用 springboot 开发的一个小的模块，处理单一专业的业务逻辑，一个模块只做一个事情。</p>
+<h3 id="微服务的优缺点"><a href="#微服务的优缺点" class="headerlink" title="微服务的优缺点"></a>微服务的优缺点</h3><p><strong>优点：</strong></p>
+<ul>
+<li>独立开发</li>
+<li>独立部署</li>
+<li>故障隔离：系统一项服务不起作用，不会影响系统运行</li>
+<li>混合技术堆栈：可以使用不同语言技术构建同一应用程序的不同服务</li>
+<li>团队规模降低</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>开发人员要处理分布式系统的复杂性</li>
+<li>多服务运维难度：随着服务的增加，运维的压力也在增大</li>
+<li>系统部署依赖</li>
+<li>服务间通信成本</li>
+<li>数据一致性</li>
+<li>系统集成测试</li>
+<li>性能监控</li>
+</ul>
+<h3 id="微服务之间的独立通讯"><a href="#微服务之间的独立通讯" class="headerlink" title="微服务之间的独立通讯"></a>微服务之间的独立通讯</h3><h4 id="远程过程调用（同步通信）"><a href="#远程过程调用（同步通信）" class="headerlink" title="远程过程调用（同步通信）"></a>远程过程调用（同步通信）</h4><p>直接通过远程过程调用来访问别的service。</p>
+<p>示例：dubbo 通过 RPC 远程过程调用、springcloud 通过 REST 接口 json 调用 </p>
+<p>优点：简单，常见。因为没有中间件代理，系统更简单</p>
+<p>缺点：只支持请求&#x2F;响应的模式，不支持别的，比如通知、请求&#x2F;异步响应、发布&#x2F;订阅、发布&#x2F;异步响应，降低了可用性，因为客户端和服务端在请求过程中必须都是可用的</p>
+<h4 id="消息队列（异步通信）"><a href="#消息队列（异步通信）" class="headerlink" title="消息队列（异步通信）"></a>消息队列（异步通信）</h4><p>使用异步消息来做服务间通信。服务间通过消息管道来交换消息，从而通信。</p>
+<p>示例：Kafka、RabbitMQ、ActiveMQ</p>
+<p>优点:把客户端和服务端解耦，更松耦合 提高可用性，因为消息中间件缓存了消息，直到消费者可以消费，支持很多通信机制比如通知、请求&#x2F;异步响应、发布&#x2F;订阅、发布&#x2F;异步响应</p>
+<p>缺点:消息中间件有额外的复杂性</p>
+<h3 id="分布式系统面临的问题"><a href="#分布式系统面临的问题" class="headerlink" title="分布式系统面临的问题"></a>分布式系统面临的问题</h3><p>复杂分布式体系结构中的应用程序有数十个依赖关系，每个依赖关系在某些时候将不可避免地失败。</p>
+<p><strong>服务雪崩</strong></p>
+<p>多个微服务之间调用的时候，假设微服务A调用微服务B和微服务C，微服务B和微服务C又调用其它的微服务，这就是所谓的“扇出”。如果扇出的链路上某个微服务的调用响应时间过长或者不可用，对微服务A的调用就会占用越来越多的系统资源，进而引起系统崩溃，所谓的“雪崩效应”.</p>
+<p><strong>对于高流量的应用来说，单一的后端依赖可能会导致所有服务器上的所有资源都在几秒钟内饱和。</strong>比失败更糟糕的是，这些应用程序还可能导致服务之间的延迟增加，备份队列，线程和其他系统资源紧张，导致整个系统发生更多的级联故障。这些都表示需要对故障和延迟进行隔离和管理，以便单个依赖关系的失败，不能取消整个应用程序或系统。</p>
+<h3 id="服务依赖保护的解决方案："><a href="#服务依赖保护的解决方案：" class="headerlink" title="服务依赖保护的解决方案："></a>服务依赖保护的解决方案：</h3><p>① <strong>熔断模式：</strong>这种模式主要是参考电路熔断，如果一条线路电压过高，保险丝会熔断，防止火灾。放到我们的系统中，如果某个目标服务调用慢或者有大量超时，此时，熔断该服务的调用，对于后续调用请求，不在继续调用目标服务，直接返回，快速释放资源。如果目标服务情况好转则恢复调用。</p>
+<p>② <strong>隔离模式：</strong>这种模式就像对系统请求按类型划分成一个个小岛的一样，当某个小岛被火少光了，不会影响到其他的小岛。例如可以对不同类型的请求使用线程池来资源隔离，每种类型的请求互不影响，如果一种类型的请求线程资源耗尽，则对后续的该类型请求直接返回，不再调用后续资源。这种模式使用场景非常多，例如将一个服务拆开，对于重要的服务使用单独服务器来部署，再或者公司最近推广的多中心。</p>
+<p>③ <strong>限流模式：</strong>上述的熔断模式和隔离模式都属于出错后的容错处理机制，而限流模式则可以称为预防模式。限流模式主要是提前对各个类型的请求设置最高的QPS阈值，若高于设置的阈值则对该请求直接返回，不再调用后续资源。这种模式不能解决服务依赖的问题，只能解决系统整体资源分配问题，因为没有被限流的请求依然有可能造成雪崩效应。</p>
+<h3 id="什么是服务熔断，什么是服务降级"><a href="#什么是服务熔断，什么是服务降级" class="headerlink" title="什么是服务熔断，什么是服务降级"></a>什么是服务熔断，什么是服务降级</h3><p><strong>服务熔断</strong></p>
+<p>熔断机制是应对雪崩效应的一种微服务链路保护机制。</p>
+<p>当扇出链路的某个微服务不可用或者响应时间太长时，会进行服务的降级，进而熔断该节点微服务的调用，快速返回”错误”的响应信息。当检测到该节点微服务调用响应正常后恢复调用链路。在SpringCloud框架里熔断机制通过Hystrix实现。Hystrix会监控微服务间调用的状况，当失败的调用到一定阈值，缺省是5秒内20次调用失败就会启动熔断机制。熔断机制的注解是@HystrixCommand。</p>
+<p><strong>Hystrix服务降级</strong></p>
+<p>其实就是线程池中单个线程故障处理，防止单个线程请求时间太长，导致资源长期被占有而得不到释放，从而导致线程池被快速占用完，导致服务崩溃。</p>
+<p><strong>Hystrix能解决如下问题：</strong></p>
+<p>① 请求超时降级，线程资源不足降级，降级之后可以返回自定义数据</p>
+<p>② 线程池隔离降级，分布式服务可以针对不同的服务使用不同的线程池，从而互不影响</p>
+<p>③ 自动触发降级与恢复</p>
+<p>④ 实现请求缓存和请求合并</p>
+<h3 id="微服务技术栈"><a href="#微服务技术栈" class="headerlink" title="微服务技术栈"></a>微服务技术栈</h3><p><strong>服务开发</strong></p>
+<p>Springboot、Spring、SpringMVC</p>
+<p><strong>服务配置与管理</strong></p>
+<p>Netflix公司的Archaius、阿里的Diamond等</p>
+<p><strong>服务注册与发现</strong></p>
+<p>Eureka、Consul、Zookeeper等</p>
+<p><strong>服务调用</strong></p>
+<p>Rest、RPC、gRPC</p>
+<p><strong>服务熔断器</strong></p>
+<p>Hystrix、Envoy等</p>
+<p><strong>负载均衡</strong></p>
+<p>Ribbon、Nginx等</p>
+<p><strong>服务接口调用(客户端调用服务的简化工具)</strong></p>
+<p>Feign等</p>
+<p><strong>消息队列</strong></p>
+<p>Kafka、RabbitMQ、ActiveMQ等</p>
+<p><strong>服务配置中心管理</strong></p>
+<p>SpringCloudConfig、Chef等</p>
+<p><strong>服务路由（API网关）</strong></p>
+<p>Zuul等</p>
+<p><strong>服务监控</strong></p>
+<p>Zabbix、Nagios、Metrics、Spectator等</p>
+<p><strong>全链路追踪</strong></p>
+<p>Zipkin，Brave、Dapper等</p>
+<p><strong>服务部署</strong></p>
+<p>Docker、OpenStack、Kubernetes等</p>
+<p><strong>数据流操作开发包</strong></p>
+<p>SpringCloud Stream（封装与Redis,Rabbit、Kafka等发送接收消息）</p>
+<p><strong>事件消息总线</strong></p>
+<p>Spring Cloud Bus</p>
 
                 
               </div>
@@ -509,9 +493,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/">#数据挖掘</a>
+        <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">#软件工程</a>
       
-        <a href="/tags/%E8%81%9A%E7%B1%BB/">#聚类</a>
+        <a href="/tags/%E4%BA%91%E5%B9%B3%E5%8F%B0/">#云平台</a>
+      
+        <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">#微服务</a>
       
     </div>
   
@@ -523,8 +509,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>数据预处理与K-means聚类实现</div>
-      <div>http://example.com/2023/03/23/数据挖掘-hw1/</div>
+      <div>云平台与微服务架构</div>
+      <div>http://example.com/2023/04/04/云平台与微服务架构/</div>
     </div>
     <div class="license-meta">
       
@@ -536,7 +522,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年3月23日</div>
+          <div>2023年4月4日</div>
         </div>
       
       
@@ -568,18 +554,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/04/%E4%BA%91%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/" title="云平台与微服务架构">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">云平台与微服务架构</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/06/%E8%BD%AF%E5%B7%A5%E9%A2%98%E8%A7%A3/" title="软工题解">
-                        <span class="hidden-mobile">软工题解</span>
+                      <a href="/2023/03/23/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98-hw1/" title="数据预处理与K-means聚类实现">
+                        <span class="hidden-mobile">数据预处理与K-means聚类实现</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
