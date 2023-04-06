@@ -1,0 +1,911 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/malody.ico">
+  <link rel="icon" href="/img/malody.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Lumie">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="关于数据库的一些基础知识总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库漫谈">
+<meta property="og:url" content="http://example.com/2023/04/06/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%BC%AB%E8%B0%88/index.html">
+<meta property="og:site_name" content="Sekai">
+<meta property="og:description" content="关于数据库的一些基础知识总结">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://moe.photo/images/2023/04/06/8e96f5479a51e5e5db13f1ddfc317b831.png">
+<meta property="article:published_time" content="2023-04-06T13:17:25.000Z">
+<meta property="article:modified_time" content="2023-04-06T13:22:12.083Z">
+<meta property="article:author" content="Lumie">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="数据仓库">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://moe.photo/images/2023/04/06/8e96f5479a51e5e5db13f1ddfc317b831.png">
+  
+  
+  
+  <title>数据库漫谈 - Sekai</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"o5HtRd3DI36coZtY1SB8AQIl-gzGzoHsz","app_key":"IbXBGiTa010i72QGgDrezegD","server_url":"https://o5htrd3d.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 75vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Sekai</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/star.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="数据库漫谈"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-06 21:17" pubdate>
+          2023年4月6日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          49 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据库漫谈</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="常见的关系型数据库和非关系型数据及其区别"><a href="#常见的关系型数据库和非关系型数据及其区别" class="headerlink" title="常见的关系型数据库和非关系型数据及其区别"></a>常见的关系型数据库和非关系型数据及其区别</h1><h2 id="关系型数据库"><a href="#关系型数据库" class="headerlink" title="关系型数据库"></a>关系型数据库</h2><p>关系型数据库最典型的数据结构是表，由二维表及其之间的联系所组成的一个数据组织</p>
+<p><strong>优点：</strong></p>
+<ol>
+<li>易于维护：都是使用表结构，格式一致；</li>
+<li>使用方便：SQL语言通用，可用于复杂查询；</li>
+<li>复杂操作：支持SQL，可用于一个表以及多个表之间非常复杂的查询。</li>
+</ol>
+<p><strong>缺点：</strong></p>
+<ol>
+<li>读写性能比较差，尤其是海量数据的高效率读写；</li>
+<li>固定的表结构，灵活度稍欠；</li>
+<li>高并发读写需求，传统关系型数据库来说，硬盘I&#x2F;O是一个很大的瓶颈。</li>
+</ol>
+<h2 id="非关系型数据库"><a href="#非关系型数据库" class="headerlink" title="非关系型数据库"></a><strong>非关系型数据库</strong></h2><p>非关系型数据库严格上不是一种数据库，应该是一种数据结构化存储方法的集合，可以是文档或者键值对等。</p>
+<p><strong>优点：</strong></p>
+<ol>
+<li>格式灵活：存储数据的格式可以是key,value形式、文档形式、图片形式等等，文档形式、图片形式等等，使用灵活，应用场景广泛，而关系型数据库则只支持基础类型。</li>
+<li>速度快：nosql可以使用硬盘或者随机存储器作为载体，而关系型数据库只能使用硬盘；</li>
+<li>高扩展性；</li>
+<li>成本低：nosql数据库部署简单，基本都是开源软件。</li>
+</ol>
+<p><strong>缺点：</strong></p>
+<ol>
+<li>不提供sql支持，学习和使用成本较高；</li>
+<li>无事务处理；</li>
+<li>数据结构相对复杂，复杂查询方面稍欠。</li>
+</ol>
+<h2 id="非关系型数据库的分类和比较："><a href="#非关系型数据库的分类和比较：" class="headerlink" title="非关系型数据库的分类和比较："></a>非关系型数据库的分类和比较：</h2><ol>
+<li>文档型</li>
+<li>key-value型(Hive)</li>
+<li>列式数据库</li>
+<li>图形数据库(Neo4j)</li>
+</ol>
+<h1 id="SQL之五种JOIN连接及各类型JOIN解析—部分连接优化"><a href="#SQL之五种JOIN连接及各类型JOIN解析—部分连接优化" class="headerlink" title="SQL之五种JOIN连接及各类型JOIN解析—部分连接优化"></a>SQL之五种JOIN连接及各类型JOIN解析—部分连接优化</h1><h2 id="JOIN连接之内连接-INNER-JOIN"><a href="#JOIN连接之内连接-INNER-JOIN" class="headerlink" title="JOIN连接之内连接(INNER JOIN)"></a><strong>JOIN连接之内连接(INNER JOIN)</strong></h2><p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NjA0MjUxM2Q2YjA4MzllYzZhNjQzYTQ4MjkyYjFmOWNfWFQxbzNtdVl2NHJBRFg4a3B2bnVmcDJubjg4RzhZd2RfVG9rZW46Ym94Y251RjNScmNmSnk1MW00bmZJZVZ0bmdiXzE2ODA3ODcwMjA6MTY4MDc5MDYyMF9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<ul>
+<li>INNER JOIN内连接也叫显性内连接,展示的是两表之间的交集，即获取的是符合查询条件的信息</li>
+<li>隐形内连接：where连接</li>
+</ul>
+<h2 id="JOIN连接之左连接-x2F-左外连接-LEFT-JOIN-x2F-LEFT-OUTER-JOIN"><a href="#JOIN连接之左连接-x2F-左外连接-LEFT-JOIN-x2F-LEFT-OUTER-JOIN" class="headerlink" title="JOIN连接之左连接&#x2F;左外连接(LEFT JOIN&#x2F;LEFT OUTER JOIN)"></a><strong>JOIN连接之左连接&#x2F;左外连接(LEFT JOIN&#x2F;LEFT OUTER JOIN)</strong></h2><p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=YjE3NWJkZGVlNGFjODkyYzhmNDkwOTJhNWE4NzNlNmRfQWJnV0VCVzlmaTFtMHFTUzhnOGMzdW9VaFgwR0hOMUZfVG9rZW46Ym94Y252TGJ4Ulh2OEwyYVRHRjUwNGhzeDljXzE2ODA3ODcwMjA6MTY4MDc5MDYyMF9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>左连接是以LEFT JOIN为基准进行查询，左连接查询的就是左表的全部信息和符合查询条件的信息两部分。</p>
+<p>如果左表展示出来的全部信息，右表没有相对应的信息，则右表记录为null。</p>
+<h2 id="JOIN连接之右连接-x2F-右外连接-RIGHT-JOIN-x2F-RIGHT-OUTER-JOIN"><a href="#JOIN连接之右连接-x2F-右外连接-RIGHT-JOIN-x2F-RIGHT-OUTER-JOIN" class="headerlink" title="JOIN连接之右连接&#x2F;右外连接(RIGHT JOIN&#x2F;RIGHT OUTER JOIN)"></a><strong>JOIN连接之右连接&#x2F;右外连接(RIGHT JOIN&#x2F;RIGHT OUTER JOIN)</strong></h2><p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ODRmOTVhY2ExMzRlYTYwYmUzMGYwZjk2YjA4NDI3OGZfdjV3MEhHS3M5TURaRGhNclVtRVRLR0dVamtmMHNYSWZfVG9rZW46Ym94Y25OUW9aOTNxaFFrZkI5Z2Z1UnM0TGhkXzE2ODA3ODcwMjA6MTY4MDc5MDYyMF9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>右连接与左连接正好相反，以RIGHT JOIN为基准，展示的信息是RIGHT JOIN右边右表的全部信息加上左右两边符合关联查询条件的。 如果右表展示出来的全部信息，左表没有相对应的信息，则左表记录为null。</p>
+<h2 id="JOIN连接之全连接-FULL-JOIN"><a href="#JOIN连接之全连接-FULL-JOIN" class="headerlink" title="JOIN连接之全连接(FULL JOIN)"></a><strong>JOIN连接之全连接(FULL JOIN)</strong></h2><p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=OTE3NTQ1ODY2NjAwMTRiNTZiOWIyMDUyZWM5NmUxOGRfSXR5MHU3eG5xbWowSU1HNTN6VHJiMVNWRWd5TGxXREpfVG9rZW46Ym94Y25tamtSdmEzbE9LckI4VmpORmRYcHNkXzE2ODA3ODcwMjA6MTY4MDc5MDYyMF9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>Full outer join展示的是a表和b表的全部信息(a和b的并集)。但需要注意的是，对于没有匹配的记录(即a.id和b.id没有一一对应的)，则会以null作为值。可以使用IFNULL判断。</p>
+<h2 id="JOIN连接之交叉连接-笛卡尔积-CROSS-JOIN"><a href="#JOIN连接之交叉连接-笛卡尔积-CROSS-JOIN" class="headerlink" title="JOIN连接之交叉连接(笛卡尔积)(CROSS JOIN)"></a><strong>JOIN连接之交叉连接(笛卡尔积)(CROSS JOIN)</strong></h2><p>不带where条件子句，它返回的是被连接的两个表的笛卡尔积，返回结果的行数等于两个表行数的乘积</p>
+<p>如果带where，返回或显示的是匹配条件成立的行</p>
+<h1 id="数据库索引"><a href="#数据库索引" class="headerlink" title="数据库索引"></a>数据库索引</h1><h2 id="索引的作用和缺点"><a href="#索引的作用和缺点" class="headerlink" title="索引的作用和缺点"></a>索引的作用和缺点</h2><h3 id="作用：（IO、唯一、分组排序）"><a href="#作用：（IO、唯一、分组排序）" class="headerlink" title="作用：（IO、唯一、分组排序）"></a>作用：（IO、唯一、分组排序）</h3><ol>
+<li>提高数据检索效率，减少IO成本</li>
+<li>通过创建唯一性索引，可以保持数据库表中每一行数据的唯一性</li>
+<li>减少查询中分组和排序的时间</li>
+</ol>
+<h3 id="缺点：（时空占用、增删改）"><a href="#缺点：（时空占用、增删改）" class="headerlink" title="缺点：（时空占用、增删改）"></a>缺点：（时空占用、增删改）</h3><ol>
+<li>创建索引和维护索引要耗费时间，而且时间随着数据量的增加而增大</li>
+<li>索引需要占用物理空间，如果要建立聚簇索引，所需要的空间会更大</li>
+<li>在对表中的数据进行增删改时需要耗费较多的时间，因为索引也要动态地维护</li>
+</ol>
+<h2 id="索引的使用场景"><a href="#索引的使用场景" class="headerlink" title="索引的使用场景"></a>索引的使用场景</h2><h3 id="应创建索引的场景"><a href="#应创建索引的场景" class="headerlink" title="应创建索引的场景"></a><strong>应创建索引的场景</strong></h3><ol>
+<li>经常<strong>需要搜索</strong>的列上</li>
+<li>作为<strong>主键</strong>的列上</li>
+<li>经常用在<strong>连接</strong>的列上，这些列主要是一些<strong>外键</strong>，可以加快连接的速度</li>
+<li>经常需要<strong>根据范围</strong>进行搜索的列上</li>
+<li>经常需要<strong>分组排序</strong>的列上</li>
+<li>经常使用在<strong>where</strong>子句上面的列上</li>
+</ol>
+<h3 id="不应该创建索引的场景"><a href="#不应该创建索引的场景" class="headerlink" title="不应该创建索引的场景"></a><strong>不应该创建索引的场景</strong></h3><ol>
+<li>查询中<strong>很少用到</strong>的列</li>
+<li>对于那些具有<strong>很少数据值</strong>的列，比如数据表中的<strong>性别列</strong>，bit数据类型的列（就两种值）</li>
+<li>对于那些定义为<strong>text，image</strong>的列，因为这些列的<strong>数据量相当大</strong></li>
+<li>当<strong>对修改性能的要求远远大于搜索性能</strong>时，因为当增加索引时，会提高搜索性能，但是会降低修改性能</li>
+</ol>
+<h2 id="索引的分类与说明"><a href="#索引的分类与说明" class="headerlink" title="索引的分类与说明"></a>索引的分类与说明</h2><p><strong>主键索引</strong> 设定为主键后数据库会<strong>自动</strong>建立索引，innodb为聚簇索引</p>
+<p><strong>单列索引</strong> 一个索引只包含单个列，一个表可以有多个单列索引</p>
+<p><strong>唯一索引</strong> 索引列的值必须唯一，但允许有空值</p>
+<p><strong>复合索引</strong> 一个索引包含多个列，在数据库操作期间，复合索引比单值索引所需要的开销更小（对于相同的多个列建索引） 如果一个表中的数据在查询时有多个字段总是同时出现则这些字段就可以作为复合索引，形成索引覆盖可以提高查询的效率， 复合索引遵从<strong>最左前缀原则</strong></p>
+<p><strong>聚集索引</strong> 指索引项的排序方式和表中数据记录排序方式一致的索引。它会根据聚集索引键的顺序来存储表中的数据，即对表的数据按索引键的顺序进行排序，然后重新存储到磁盘上。因为数据在物理存放只能有一种排列方式，所以一个表只能有一个聚集索引。</p>
+<p><strong>非聚集索引</strong></p>
+<p>与聚集索引相反，索引顺序与物理存储顺序不一致。 非聚集索引的使用场合为： 查询所获数据量较少时； 某字段中的数据的唯一性比较高时；</p>
+<p>非聚集索引必须是稠密索引</p>
+<p><strong>稠密索引</strong> 在稠密索引中，文件中的每个搜索码值都对应一个索引值，也就是说，稠密索引为数据记录文件的每一条记录都设一个键-指针对。</p>
+<p><strong>稀疏索引</strong> 在稀疏索引中，只为搜索码的某些值建立索引项，也就是说，稀疏索引为数据记录文件的每个存储块设一个键-指针对，存储块意味着块内存存储单元连续</p>
+<h1 id="数据库的锁"><a href="#数据库的锁" class="headerlink" title="数据库的锁"></a>数据库的锁</h1><h2 id="锁的分类"><a href="#锁的分类" class="headerlink" title="锁的分类"></a>锁的分类</h2><h3 id="按数据操作的类型分类"><a href="#按数据操作的类型分类" class="headerlink" title="按数据操作的类型分类"></a>按数据操作的类型分类</h3><ul>
+<li><strong>读锁</strong>（共享锁，Share Lock）：针对同一份数据，<strong>多个读操作可以同时进行</strong>而不会互相影响。若事务T对数据对象A加上读锁，则事务T只能读A；<strong>其他事务只能再对A加读锁，而不能加写锁，直到事务T释放A上的读锁</strong>。这就保证了其他事务可以读A，但在事务T释放A上的读锁之前不能对A做任何修改。</li>
+<li><strong>写锁</strong>（排它锁，Exclusive Lock）：<strong>写锁只可以加一个</strong>，当前写操作没有完成前，它会阻断其他写锁和读锁。若事务T对数据对象A加上写锁，则<strong>只允许事务T读取和修改A，其它任何事务都不能再对A加任何类型的锁，直到T释放A上的锁</strong>。它防止任何其它事务获取资源上的锁，直到在事务的末尾将资源上的原始锁释放为止。在<strong>增删改操作(INSERT、UPDATE 或 DELETE)过程中始终应用排它锁</strong>。</li>
+</ul>
+<h3 id="按数据操作的颗粒度分类"><a href="#按数据操作的颗粒度分类" class="headerlink" title="按数据操作的颗粒度分类"></a>按数据操作的颗粒度分类</h3><ul>
+<li><strong>表锁</strong>：MySQL中锁定粒度最大的一种锁，表示对当前操作的<strong>整张表</strong>加锁，它实现简单，资源消耗较少。表级锁定分为表共享读锁（共享锁）与表独占写锁（排他锁）。</li>
+</ul>
+<p>​     	特点：表锁<strong>开销小，加锁快，无死锁</strong>，锁定粒度大，<strong>发生锁冲突的概率最高，并发最低</strong></p>
+<ul>
+<li><strong>行锁</strong>：MySQL中锁定粒度最细的一种锁，表示只针对<strong>当前操作的行</strong>进行加锁。行级锁能大大减少数据库操作的冲突。行级锁分为共享锁和排他锁。InnoDB与MyISAM的最大不同有两点：一是<strong>支持事务</strong>;二是<strong>采用了行级锁</strong>。</li>
+</ul>
+<p>​     	特点：行锁<strong>开销大，加锁慢；会出现死锁</strong>；锁定粒度最小，<strong>发生锁冲突的概率最低，并发度也最高</strong>。</p>
+<ul>
+<li><strong>页锁</strong>：页锁是MySQL中锁定粒度介于行级锁和表级锁中间的一种锁。表级锁速度快，但冲突多，行级冲突少，但速度慢。所以取了折衷的页级，一次锁定<strong>相邻</strong>的一组记录。</li>
+</ul>
+<p>​     	特点：开销和加锁时间介于表锁和行锁之间：<strong>会出现死锁</strong>；锁定粒度介于表锁和行锁之间，并发度一般。</p>
+<h2 id="死锁和避免死锁"><a href="#死锁和避免死锁" class="headerlink" title="死锁和避免死锁"></a>死锁和避免死锁</h2><h3 id="产生死锁的必要条件"><a href="#产生死锁的必要条件" class="headerlink" title="产生死锁的必要条件"></a>产生死锁的必要条件</h3><ol>
+<li>互斥条件：一个资源只能被一个线程占有，当这个资源被占用后其他线程就只能等待。</li>
+<li>请求和保持条件：当进程因请求资源而阻塞时，对已获得的资源保持不放。</li>
+<li>不剥夺条件：当一个线程不主动释放资源时，此资源一直被拥有线程占有。</li>
+<li>循环等待条件：在发生死锁时，必然存在一个进程–资源的环形链。</li>
+</ol>
+<h3 id="如何解决死锁问题"><a href="#如何解决死锁问题" class="headerlink" title="如何解决死锁问题"></a>如何解决死锁问题</h3><h4 id="预防死锁"><a href="#预防死锁" class="headerlink" title="预防死锁"></a>预防死锁</h4><p><strong>资源一次性分配</strong>：一次性分配所有资源，这样就不会再有请求了：（破坏请求条件）</p>
+<p><strong>可剥夺资源</strong>：即当某进程获得了部分资源，但得不到其它资源，则释放已占有的资源（破坏不可剥夺条件）</p>
+<p><strong>资源有序分配法</strong>：系统给每类资源赋予一个编号，每一个进程按编号递增的顺序请求资源，释放则相反（破坏环路等待条件）</p>
+<h4 id="避免死锁"><a href="#避免死锁" class="headerlink" title="避免死锁"></a>避免死锁</h4><p>银行家算法</p>
+<h4 id="检测死锁"><a href="#检测死锁" class="headerlink" title="检测死锁"></a>检测死锁</h4><ol>
+<li>首先为每个进程和每个资源指定一个唯一的号码；</li>
+<li>然后建立资源分配表和进程等待表。</li>
+</ol>
+<h4 id="解除死锁"><a href="#解除死锁" class="headerlink" title="解除死锁"></a>解除死锁</h4><p>当发现有进程死锁后，便应立即把它从死锁状态中解脱出来，常采用的方法有：</p>
+<p><strong>剥夺资源</strong>：从其它进程剥夺足够数量的资源给死锁进程，以解除死锁状态；</p>
+<p><strong>撤消进程</strong>：可以直接撤消死锁进程或撤消代价最小的进程，直至有足够的资源可用、死锁状态消除为止；所谓代价是指优先级、运行代价、进程的重要性和价值等。</p>
+<h3 id="数据库的避免死锁"><a href="#数据库的避免死锁" class="headerlink" title="数据库的避免死锁"></a>数据库的避免死锁</h3><ul>
+<li>通过表级锁来减少死锁产生的概率。对于非常容易产生死锁的业务部分，可以尝试使用升级锁定颗粒度，通过表级锁定来减少死锁产生的概率</li>
+<li>多个程序尽量约定以相同的顺序访问表。如果不同程序会并发存取多个表，尽量约定以相同的顺序访问表，可以大大降低死锁的产生概率。（资源有序分配法）</li>
+<li>同一个事务尽可能做到一次锁定所需要的所有资源，这样可以减少死锁产生概率（资源一次性分配）</li>
+</ul>
+<h2 id="乐观锁与悲观锁"><a href="#乐观锁与悲观锁" class="headerlink" title="乐观锁与悲观锁"></a>乐观锁与悲观锁</h2><p><strong>悲观锁与乐观锁是根据操作时是否锁住资源来判别的</strong>。悲观锁获取到锁时，必须要锁住资源；乐观锁则不会。</p>
+<h3 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h3><p>悲观锁之所以悲观，那是因为它觉得如果不锁住这个资源，别的线程就会来争抢，造成数据结果错误，所以悲观锁为了确保结果的正确性，会在<strong>每次获取并修改数据时，都把数据锁住，让其他线程无法访问该数据</strong>，这样就可以确保数据内容万无一失，从这点看悲观锁特别稳。</p>
+<p>像 Java 中<code>synchronized</code>和<code>ReentrantLock</code>等独占锁就是悲观锁思想的实现。</p>
+<p><strong>悲观锁通常多用于写多比较多的情况下（多写场景），避免频繁失败和重试影响性能。</strong></p>
+<h3 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h3><p>乐观锁顾名思义，比较乐观。相比于悲观锁，它是<strong>不锁住资源</strong>的，因为它觉得自己在操作资源时并不会有其他线程干扰。因此，为了保障数据的正确性，它在操作之前，会<strong>先判断在自己操作期间，其他线程是否有操作</strong>。如果没有，直接操作；如果有，则根据业务选择报错或者重试。</p>
+<p>乐观锁的这把锁，其实就是依赖的 CAS （compare and swap：比较并交换）算法或版本号机制。所以，<strong>它在操作资源之前并不需要获得锁，直接读取资源到自己的工作内存内操作。</strong></p>
+<p><strong>乐观锁通常多于写比较少的情况下（多读场景），避免频繁加锁影响性能，大大提升了系统的吞吐量</strong></p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=YzY4MmNjZDQ2ZThlMTA4MDdlOTkzYjk4OWI5YmRlZTlfc3lnRk85WkFuU0F1NFoyMFR6R2V3VUoyTEhvYVc3OXFfVG9rZW46Ym94Y240dlViZEdBZFFQVDdrWlI1SlhvODN2XzE2ODA3ODcwMjA6MTY4MDc5MDYyMF9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=YjcyNTExNTI1NjRjOWZmYjI3OWI5N2UyMTBlMWQyYTFfSUVPdDBwTjBDc2lEa2dVWElrOWk2VmVwZVlQWUZCZFRfVG9rZW46Ym94Y24wc3JVT3pGOGFXbmo1Zk5CSElwZURjXzE2ODA3ODcwMjA6MTY4MDc5MDYyMF9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NjBkYTliNGQyYTVhY2VjZWFjOGM4YTgwNzkzOTgxMzFfeW1BQzNYekN4VzM4S2NETWNxZmtvR3lHdUdMRzVyQ2tfVG9rZW46Ym94Y25WVFN5bUd4bktOeVlGcGNOSWV4dlJjXzE2ODA3ODcwMjA6MTY4MDc5MDYyMF9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="数据库的乐观锁和悲观锁"><a href="#数据库的乐观锁和悲观锁" class="headerlink" title="数据库的乐观锁和悲观锁"></a>数据库的乐观锁和悲观锁</h3><ul>
+<li><p><strong>悲观锁</strong>：假定会发生并发冲突，屏蔽一切可能违反数据完整性的操作。在查询完数据的时候就把事务锁起来，直到提交事务。</p>
+<pre><code class="hljs">   实现方式：使用数据库中的锁机制
+</code></pre>
+</li>
+<li><p><strong>乐观锁</strong>：假设不会发生并发冲突，只在事务提交时检查是否违反数据完整性。乐观锁并不会使用数据库提供的锁机制。一般的实现乐观锁的方式就是记录数据版本。</p>
+</li>
+</ul>
+<p>​     	实现方式：一般会使用版本号机制或CAS算法实现。</p>
+<h1 id="数据库优化"><a href="#数据库优化" class="headerlink" title="数据库优化"></a>数据库优化</h1><h2 id="选取最适用的字段属性"><a href="#选取最适用的字段属性" class="headerlink" title="选取最适用的字段属性"></a>选取最适用的字段属性</h2><ul>
+<li>在创建表的时候，为了获得更好的性能，我们可以将表中字段的宽度设得尽可能小。</li>
+<li>尽量把字段设置为NOT NULL，这样在将来执行查询的时候，数据库不用去比较NULL值。</li>
+</ul>
+<p>例如，在定义邮政编码这个字段时，如果将其设置为CHAR(255),显然给数据库增加了不必要的空间，甚至使用VARCHAR这种类型也是多余的，因为CHAR(6)就可以很好的完成任务了。同样的，如果可以的话，我们应该使用MEDIUMINT而不是BIGIN来定义整型字段。对于某些文本字段，例如“省份”或者“性别”，我们可以将它们定义为ENUM类型。</p>
+<h2 id="使用连接（JOIN）来代替子查询-Sub-Queries"><a href="#使用连接（JOIN）来代替子查询-Sub-Queries" class="headerlink" title="使用连接（JOIN）来代替子查询(Sub-Queries)"></a>使用连接（JOIN）来代替子查询(Sub-Queries)</h2><p>连接（JOIN）之所以更有效率一些，是因为MySQL不需要在内存中创建临时表来完成这个逻辑上的需要两个步骤的查询工作。</p>
+<h2 id="使用联合-UNION-来代替手动创建的临时表"><a href="#使用联合-UNION-来代替手动创建的临时表" class="headerlink" title="使用联合(UNION)来代替手动创建的临时表"></a>使用联合(UNION)来代替手动创建的临时表</h2><p>union可以把需要使用临时表的两条或更多的select查询合并的一个查询中。在客户端的查询会话结束的时候，临时表会被自动删除，从而保证数据库整齐、高效。</p>
+<h2 id="使用事务"><a href="#使用事务" class="headerlink" title="使用事务"></a>使用事务</h2><p>要把某个数据同时插入两个相关联的表中，可能会出现这样的情况：第一个表中成功更新后，数据库突然出现意外状况，造成第二个表中的操作没有完成，这样，就会造成数据的不完整，甚至会破坏数据库中的数据。</p>
+<p>要避免这种情况，就应该使用事务，它的作用是：要么语句块中每条语句都操作成功，要么都失败。换句话说，就是可以保持数据库中数据的一致性和完整性。</p>
+<p>事务以BEGIN关键字开始，COMMIT关键字结束。在这之间的一条SQL操作失败，那么，ROLLBACK命令就可以把数据库恢复到BEGIN开始之前的状态。</p>
+<p>事务的另一个重要作用是当多个用户同时使用相同的数据源时，它可以利用锁定数据库的方法来为用户提供一种安全的访问方式，这样可以保证用户的操作不被其它的用户所干扰。（锁库）</p>
+<h2 id="改变锁的粒度"><a href="#改变锁的粒度" class="headerlink" title="改变锁的粒度"></a>改变锁的粒度</h2><p>尽管事务是维护数据库完整性的一个非常好的方法，但却因为它的独占性，有时会影响数据库的性能，尤其是在很大的应用系统中。由于在事务执行的过程中，数据库将会被锁定，因此其它的用户请求只能暂时等待直到该事务结束。如果一个数据库系统只有少数几个用户来使用，事务造成的影响不会成为一个太大的问题；但假设有成千上万的用户同时访问一个数据库系统，例如访问一个电子商务网站，就会产生比较严重的响应延迟。</p>
+<p>有些情况下我们可以通过锁表或锁行的方法来获得更好的性能。</p>
+<h2 id="使用外键"><a href="#使用外键" class="headerlink" title="使用外键"></a>使用外键</h2><p>锁定表的方法可以维护数据的完整性，但是它却不能保证数据的关联性。这个时候我们就可以使用外键。</p>
+<h2 id="使用索引"><a href="#使用索引" class="headerlink" title="使用索引"></a>使用索引</h2><p>索引是提高数据库性能的常用方法，它可以令数据库服务器以比没有索引快得多的速度检索特定的行，尤其是在查询语句当中包含有MAX(),MIN()和ORDERBY这些命令的时候，性能提高更为明显。</p>
+<p>一般说来，索引应建立在那些将用于JOIN,WHERE判断和ORDERBY排序的字段上。尽量不要对数据库中某个含有大量重复的值的字段建立索引。对于一个ENUM类型的字段来说，出现大量重复值是很有可能的情况，在这样的字段上建立索引将不会有什么帮助；相反，还有可能降低数据库的性能。</p>
+<h2 id="优化查询语句"><a href="#优化查询语句" class="headerlink" title="优化查询语句"></a>优化查询语句</h2><ul>
+<li>最好是在相同类型的字段间进行比较的操作</li>
+<li>在建有索引的字段上尽量不要使用函数进行操作。</li>
+<li>应该注意避免在查询中让MySQL进行自动类型转换，因为转换过程也会使索引变得不起作用。</li>
+</ul>
+<h2 id="为数据库分配更多内存"><a href="#为数据库分配更多内存" class="headerlink" title="为数据库分配更多内存"></a>为数据库分配更多内存</h2><p>数据库一般部署在云服务器上，为数据库分配更大内存应对较大数据操作量的场景</p>
+<h2 id="文件格式优化（分布式数据库）"><a href="#文件格式优化（分布式数据库）" class="headerlink" title="文件格式优化（分布式数据库）"></a>文件格式优化（分布式数据库）</h2><p>如：Hive的⽂件存储格式包括以下⼏类：TEXTFILE、SEQUENCEFILE、RCFILE、ORCFILE。其中TEXTFILE为默认格式，建表时不指定则默认为这个格式，导⼊数据时会直接把数据⽂件拷⻉到hdfs（Haddop文件系统）上不进⾏处理。部分较⼤数据源的存储格式可以由TEXTFILE变为ORCFILE。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="category-chain-item">学习记录</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">#数据库</a>
+      
+        <a href="/tags/MySQL/">#MySQL</a>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/">#数据仓库</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>数据库漫谈</div>
+      <div>http://example.com/2023/04/06/数据库漫谈/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Lumie</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年4月6日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/04/%E4%BA%91%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/" title="云平台与微服务架构">
+                        <span class="hidden-mobile">云平台与微服务架构</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"xNDGbh6KUqRqnqfsxVZa88By-gzGzoHsz","appKey":"VaSYQWVEiLSqxFOsE93gR6J7","path":"window.location.pathname","placeholder":"期待您的锐评~","avatar":"identicon","meta":["nick","mail"],"requiredFields":["nick","mail"],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":false,"serverURLs":"https://xndgbh6k.lc-cn-n1-shared.com","emojiCDN":"https://bili-emoji.netlify.app/","emojiMaps":{"doge":"03ea345ce429b6581d7c28c33305c2b6.png","OK":"e0aa021e21dddbd6d8cecec71e9cf564.png","tv_doge":"4eff1b3335389dd09ff7c69517f2b509.png","tv_亲亲":"4fea3e2403675decd5da17ea17784f68.png","tv_偷笑":"c9a772772778f5e2ec164c29a61a9eb5.png","tv_再见":"3542c4670aad5a693ea398ecebc1153d.png","tv_冷漠":"b12a49f12c8f86ad68864410e9620f55.png","tv_发怒":"38c85ccf43a4601d86b7b00da1a22068.png","tv_可爱":"14c00346fff68205047a1b529ef95e59.png","tv_吐血":"48a162e62521090979472aa230d0b784.png","tv_呆":"30325743c8a0c5f19a0cafb3957e3cf3.png","tv_呕吐":"e41cfc697caadd77b7dd1dac4c060c6a.png","tv_困":"dbf2ae0c09708ff242090b07577de943.png","tv_坏笑":"3eec33df13571865476e7a30460ae9f9.png","tv_大佬":"e314f8367a221c8edc03060b655f859f.png","tv_大哭":"ede1659180b1a78910d51565950df893.png","tv_委屈":"3cb14e94fac0f4c993eb333e04cad01d.png","tv_害羞":"e568e6ad2b5143f25409f3e559a7cfff.png","tv_尴尬":"5af7407aca8fc41cbaaabdc79879c249.png","tv_微笑":"8375a890c9f3f1f40ee9a9de5257a0f0.png","tv_思考":"d1f74953fbc6b6d7ca6f96eb1675e1a1.png","tv_惊吓":"bc84a49558952ba388aa98006b16ca57.png","tv_打脸":"397d65c1395d79d4a703a953c7f6caee.png","tv_抓狂":"f86000e53faaa1184578a004307fe110.png","tv_抠鼻":"880a3b5b023b5027b72bac1783f51d6e.png","tv_斜眼笑":"ded4aee92e0f30b3eeb36a1e05a5d1f0.png","tv_无奈":"e87cdb2408e8040d0bc192cd5b24ea9a.png","tv_晕":"581ba4770ff48629ddbf6f6243255843.png","tv_流汗":"ddd12a769c25727929b12ff92b3c9d9d.png","tv_流泪":"ccf0903e32a8fd7f28e5b0d92253a512.png","tv_流鼻血":"361836c3c0cfdd8f5705dfc8c6b6488e.png","tv_点赞":"3ee847d3edeafc252d0794544f9992e4.png","tv_生气":"fe2a7b204c5a8020f83d942a70c9a0f6.png","tv_生病":"5e96847d33c455e5a0ab6712f64a0858.png","tv_疑问":"fdfd8ce477389814748484de4dd9cc9a.png","tv_白眼":"cf4a00990fb20135ffc65eeca265d794.png","tv_皱眉":"f1223580f477d8c97cdb9b0822d3b60e.png","tv_目瞪口呆":"493143090e9e38e268b3b111514d0c8b.png","tv_睡着":"f4af815fe92d682d3df27ae1b95d07e4.png","tv_笑哭":"a2d451b59201a82aa05e974039646d2c.png","tv_腼腆":"aff63ac8d7c0be5783e0a702d5188d87.png","tv_色":"5391e9cddd0b56bf0a5e113ee109b759.png","tv_调侃":"91fa1621c2280d85586a66c5838dec91.png","tv_调皮":"2c4bf726cdab685580696e66fc283018.png","tv_鄙视":"ef9e87e1368c419999dca8bee19e3657.png","tv_闭嘴":"121cb61f9686eb7a1ce0653369a287f6.png","tv_难过":"41dee0cdfb4823b9d72575fe66e0f29a.png","tv_馋":"16a551f55db0522450c7a5cdb58a2745.png","tv_鬼脸":"cb4c4c3d5c7e029990a10bf9f7a6759e.png","tv_黑人问号":"f96f00a2382dd34bc68710894a3e46da.png","tv_鼓掌":"8b2a90cfdc48fa5ddb7bd8f5876b3ad9.png","再见":"8e5c0a1e46703251c02613c1048177f1.png","冷":"74eaee9656d23f18bb33d2b88098a64a.png","初音未来_大笑":"1e3f26eaf50812c931699c5d0c5a6405.png","加油":"062286ae94fbad3cfee4bd71bf947079.png","原神_哇":"f4b4c770ffd27fa7767dbae241515881.png","原神_哼":"bd4db1c27e8c6be399132039e2f6fca0.png","原神_喝茶":"2037a4c00c04e084d364d54194392d1d.png","原神_嗯":"6381eda0d5ed6a7cb86e0186653d9676.png","原神_欸嘿":"617e49b7dda9d8b6369b173bcb79cc74.png","原神_生气":"af05133b30a5154feb7a3d313008bb5f.png","口罩":"6cd2f36be2b2f9bf938b829fc751e982.png","吃瓜":"455e2b33e157302615678229812d5009.png","吐":"37a03b5e5ec229e8b868693d89ed5b87.png","吓":"17a6c6e6971ed5e08c9f773a09c3aa27.png","呆":"4894c23dd5ef63f827c0c1339495e088.png","呲牙":"f70ae5045d4cc4958e660d3ff28c0d40.png","哈欠":"cf8b4e4df0ef3e6e2fc0409b80147509.png","哦呼":"6f93da6622b4f2e5c3b5a10e70b7cc2c.png","喜极而泣":"e01b6f9b9133c9fb68644a2a9d12708e.png","喜欢":"3d6c396cf4dea3ba2ddb255499dc356a.png","墨镜":"df2cf3c4640f3db4dffe408f7f26060e.png","大哭":"d0cfabad423efa8c95ceb9f98d8778ca.png","大笑":"4402e6e2322eb29cd52dcf9240af6ed6.png","奸笑":"ab5805c719476ccd364209b755dec633.png","妙啊":"ec697e020ed66efc2816895ac2b5a5e1.png","委屈":"af41e0fd8f967c8f968c5d7216725138.png","嫌弃":"485a3f823ee4f7b6e7db6620bfede57c.png","微笑":"5acfd68d016cc6141559976112b7beb4.png","思考":"21d68b2de0e91dfb14942ca8aea316fc.png","怪我咯":"0766960579a7cf430e2c77a4d52afbc0.png","惊喜":"ba8e1a9ae55fbd5390f4b7c994830737.png","惊讶":"e3b28512cdd930a916f970070e17c10f.png","打call":"d54bb8db985d9eeab6bcf6630a8e9a3a.png","抓狂":"a4de54142f04bdc45c79dc49850ebb6c.png","抠鼻":"3822354914484432273dafbdb18aa94d.png","抱拳":"94d3a21b006ff84f25a4bc45897f4f86.png","拥抱":"18cdedfccd6e4436f982895047dfaeb6.png","捂眼":"f324db992a5b35565a882aca247232fc.png","捂脸":"eb0caf12c6f8d145fc7ab35c96cec54d.png","撇嘴":"a669a1cfabc6dab5dd2a50b59786e2c9.png","支持":"262b0b07dfd0cad4cb8eb442fee44882.png","无语":"27df619585afad4c65eebe95ba98d085.png","星星眼":"e7733aecc308d2c18b7068d5b4cdb3b8.png","歪嘴":"5a135a627c7733c80368ac33c5df3371.png","滑稽":"bcd94fd3f6b6cfef934b944faf4f9382.png","灵魂出窍":"78ed423d2ec574de1b78b44c84964f24.png","点赞":"75f0fa966d8246d1ba25faa636a40753.png","热":"2044c27397909670f0d90b8b6b5c15c5.png","爱心":"5a2e579b2ef8ff3090980e6ef8f8604d.png","生气":"e8c6c4d90f60dc0074480dc9d83f1fc1.png","生病":"75d80e662baa92dd5400de5f31db16a5.png","疑惑":"ec573404da933630a6037e79f427f43b.png","疼":"47f18cd93a3d67082ab4028fb456cd22.png","笑":"1300f40cb6582e518c31c61f7c35c8b0.png","笑哭":"11d2b3795aa8bbc128137269ed565070.png","给心心":"4a3742927431d854b2657900650b0199.png","翻白眼":"e0a8eaa61f61b9cbf7428ea5d859a610.png","胜利":"bf7230c44b0ea4839ca59915de038bf8.png","脱单doge":"3a101c859028a2cb92189fc1b9c15522.png","脸红":"cc34c4b1d5c0314e7c27b064783765e8.png","藏狐":"54a1c77cf216d778c6bde5385106ead1.png","调皮":"9a87d094973ac78633dbb885e6d7bc16.png","跪了":"80e7fe98490ad7819e457ad68ba93dc1.png","辣眼睛":"da076b252779b6888eb13353baa3bdc8.png","酸了":"1c91ce1be1a714aaab88b50032af5e46.png","阴险":"f1f4185dc58bed6b9f6c11e3845252c4.png","难过":"aa267ae0097323d46a31a6f8be587425.png","鼓掌":"5e608d099e4dc9f59c5861ce58e37cfa.png"},"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiantiao.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/love.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxingxing.js"></script>
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxuehua.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/haru02.model.json"},"display":{"position":"left","width":200,"height":400},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
