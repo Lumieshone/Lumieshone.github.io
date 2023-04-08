@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://moe.photo/images/2023/03/23/QQ20201215114628.jpg">
 <meta property="article:published_time" content="2023-03-23T02:49:39.000Z">
-<meta property="article:modified_time" content="2023-03-23T03:30:33.975Z">
+<meta property="article:modified_time" content="2023-04-08T08:40:30.951Z">
 <meta property="article:author" content="Lumie">
 <meta property="article:tag" content="数据挖掘">
 <meta property="article:tag" content="聚类">
@@ -359,52 +359,67 @@
 </ul>
 <h3 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h3><p>原数据集已被清洗的较为完整，所以该作业中人为添加了一些“脏数据”，包括缺失值，异常值等，如下图所示：</p>
 <p>缺失值：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=OWM5MjA3ZWVhMjhkM2VmMDEyYWNlODUzYzNmNGRkMmJfcnhMVTRmVTFyQ0hlc0NiV01yRkxVOUVzb3RXdHVaRjhfVG9rZW46Ym94Y24zRGN0Z2JMWWJGb1FBRHlWaHY0TExoXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://moe.photo/images/2023/04/08/1.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:80%;" />
+
 <p>异常值：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MjU3NWJlMWRhNzc4NTJkMzgyMGQ0Nzg0YTYwMjU5MTNfZ3VmbWJRR3BlRXVXNEZVeW93MGhHVU15Mm5ESkw4TDRfVG9rZW46Ym94Y25Vek41TTBhTUQyYW1lb1lERE03OHRmXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=N2FkODUzZTliMWU1MWZkZWJjZWE5MjhhMGU3ZGYxMjVfTXpNMzBDNWhvRHJLUDFMejVJbTNjRFV2ZmVkakVuMnJfVG9rZW46Ym94Y25mOVdwWHVQZlk4R1A3UjRKNkNVdlRBXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MTA2MTc5YmY2NWY0NmQ3YmUxM2I3Njg3YTYyYWFjYzlfU3dtTlF4ZGFhYXVocDdiRDN5NkpqYUlTZzdXVVJZSzZfVG9rZW46Ym94Y25SYzFVNWlJSlBqM21DVzg2R3pVOTVlXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<h4 id="异常值处理"><a href="#异常值处理" class="headerlink" title="异常值处理"></a>异常值处理</h4><p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MTAzNDBmNWZmMTBlMWIyYTM1NTNhYjcyYTU1M2YwMzZfR0VSQ3M3R21ZckxmTDFjUWNoY0ZDSW1aSEhTQUg3Qm5fVG9rZW46Ym94Y250MktxenpNemVvbUxCcmVSOWZzeGtoXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://moe.photo/images/2023/04/08/2.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:80%;" />
+
+<img src="https://moe.photo/images/2023/04/08/3.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:80%;" />
+
+<img src="https://moe.photo/images/2023/04/08/4.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:80%;" />
+
+<h4 id="异常值处理"><a href="#异常值处理" class="headerlink" title="异常值处理"></a>异常值处理</h4><img src="https://moe.photo/images/2023/04/08/5.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:80%;" />
+
 <ol>
 <li>首先，我们认为age也就是年龄的正常范围应该在1-100，所以先将这些正常范围的age筛出</li>
 <li>对筛出来的age取均值（b.mean()）</li>
 <li>遍历数据集，将越界的age改为均值</li>
 <li>接下来处理balance列的异常值，由于之前把几个原本的数据改为了字符串，导致了全列数据被类型转换为了字符串，所以检测异常值只需要看每个数据第一位是否是数字即可，若是，则填充为int值0，若不是，则类型转换为int</li>
 </ol>
-<h4 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h4><p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NTQyZjdhNGM2MzlhOWFiMzE0MGZiYTg0OGY2MzI2ZmFfZzdPVlBaNmcyODZVU0pKRU1ZQ0JPWU1WN29FeUFLVGpfVG9rZW46Ym94Y25RWmtNdU50Zzd2Z2lYT21iMHdQYUdiXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h4 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h4><img src="https://moe.photo/images/2023/04/08/6.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:80%;" />
+
 <p>缺失值处理较为简单，采用均值填充法，直接用fillna方法将均值填充进去即可</p>
-<h4 id="数据过滤和选择"><a href="#数据过滤和选择" class="headerlink" title="数据过滤和选择"></a>数据过滤和选择</h4><p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MWUzZjBjZmY5ODZhNzRmNGJmMTY1NjE4ZjA2ZTQ5MDhfWWU4dFR2MUNTajlRQU05SldNa2FtUHVlWWNpZGR2REVfVG9rZW46Ym94Y25LTjdidnp2MlduTHhMZU5zVVdTOFBkXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MWFmNGU1MTZkOGRhNGFiZmUxOTg0ODE2MDM1NWUxZTdfMHZNSkpzSE5wWFNMQkVKSHR2N0tWRlZkbUEzajJYaEdfVG9rZW46Ym94Y25uZjh0ZGs2ZVB6cXg3d2g3M2FzN1NiXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h4 id="数据过滤和选择"><a href="#数据过滤和选择" class="headerlink" title="数据过滤和选择"></a>数据过滤和选择</h4><img src="https://moe.photo/images/2023/04/08/7.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:80%;" />
+
+<img src="https://moe.photo/images/2023/04/08/8.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:80%;" />
+
 <p>由于聚类目的是确定优先联系进行营销的客户组别，所以我们只需要那些非管理人员（客户）、有存款、没有负债的数据，基于此，我们进行数据过滤操作；除此之外，我们只需要选择比较核心的数据特征进行聚类即可，一方面便于标准化，另一方面其余列属性的值种类太少，不便于聚类</p>
-<h4 id="数据标准化"><a href="#数据标准化" class="headerlink" title="数据标准化"></a>数据标准化</h4><p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=YTRhMDhiMjU1MTBhZTA0ZDRmYWUzNjYwZjM3YWNkYzNfMzlCb3A5ckxTSnpXNGQ5SXZxVWRqZDFHS2VXSE4weTVfVG9rZW46Ym94Y240VFI5T0hVZUN5SnVQS3B6TW9pMU9oXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h4 id="数据标准化"><a href="#数据标准化" class="headerlink" title="数据标准化"></a>数据标准化</h4><img src="https://moe.photo/images/2023/04/08/9.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:80%;" />
+
 <p>数据标准化操作是将数据按比例缩放，使之落入一个小的特定区间。其中最典型的就是数据的归一化处理，即将数据统一映射到[0,1]区间上。</p>
 <p>这里选用的标准化方法是<strong>z-score</strong>标准化，这种方法给予原始数据的均值（mean）和标准差（standard deviation）进行数据的标准化。经过处理的数据符合标准正态分布，即均值为0，标准差为1，其转化函数为：</p>
 <p>x* &#x3D; (x - μ ) &#x2F; σ</p>
 <p>其中μ为所有样本数据的均值，σ为所有样本数据的标准差。标准化后的变量值围绕0上下波动，大于0说明高于平均水平，小于0说明低于平均水平。</p>
 <p>这里我们将数据类型为字符串的poutcome和job两列数据转化为数字索引，便于标准化。</p>
 <p>本作业中处理后的数据形式如下所示：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTllODgwNTUxMTg0OTQ4MGJjMDE2YTZlNTI0MDEwNDRfSFdJVUZJVlFJdXJIWWVEQ09aU0VPVTBRQVFnVnNLMjJfVG9rZW46Ym94Y25CVUpxTXVYd2Vwc3JBSnJSRXp4RGlHXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://moe.photo/images/2023/04/08/10.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:80%;" />
+
 <h2 id="Task-2-Clustering-algorithms"><a href="#Task-2-Clustering-algorithms" class="headerlink" title="Task 2 Clustering algorithms"></a><strong>Task 2</strong> <strong>Clustering</strong> <strong>algorithms</strong></h2><h3 id="Kmeans聚类算法的实现"><a href="#Kmeans聚类算法的实现" class="headerlink" title="Kmeans聚类算法的实现"></a>Kmeans聚类算法的实现</h3><p>实现流程如下：</p>
 <ol>
 <li>在数据集中随机选取k个数据，作为初始质心；</li>
 </ol>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MWIzMWE0NTYyOWM5MGNlMjQ0N2EzMjJlOGE2OTM4MjZfOWFISzgwM3JFbEtMRlBBaFpyQjdOVXV4dm1nSmdnVEFfVG9rZW46Ym94Y25IWHpOR3I4N2NsRmFrRXBQMHhuS3dnXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://moe.photo/images/2023/04/08/11.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:80%;" />
+
 <ol start="2">
 <li>计算数据集中每个样本到每个质心的距离，把样本划分到距离最小的质心所属的类别；</li>
 </ol>
 <p>​		计算欧氏距离的函数：即x1与x2平方和的平方根</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NGI0MDRiMDk2MjIxZDg1OGM4NDJjYWVjN2M4MDM4YWFfRFNVZ1RoNWkwTm9FNTVOTEFBMUpyWUo4WGJLdVZRZ05fVG9rZW46Ym94Y25rY0o5MEZVV0lxTlB5R05NMWFpdEdnXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://moe.photo/images/2023/04/08/12.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:80%;" />
+
 <p>​		计算每个样本到质心的距离，并把样本划分到距离最小的质心所属的类别：这里采用字典作为数据结构，通过键值对的形式为样本划类</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ZmEyMjA2ZmZkMTZlOWU2NmU3NmJmY2E3YmIyNmU3YjFfUjdOTUZEQVN0YjFoblhWUTltSmY4OW80YWVvUlZqU25fVG9rZW46Ym94Y25HRlZsSnBpT1oySTF2YUxRRFV5T0JlXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://moe.photo/images/2023/04/08/13.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:80%;" />
+
 <ol start="3">
 <li>根据聚类结果，重新计算质心，当本次计算的质心与上一次质心完全一样（或者收敛）时，停止迭代；</li>
 </ol>
 <p>​		否则更新质心，继续执行步骤1、2、3。</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MzdhOTI2MTRmNWU5OWRiZDg5NTE3NDU0Y2QxNWMzNjhfU0hpTnFLNUdwNFA5WFlMN3o4Zm04bVVCVnJCblV2cUpfVG9rZW46Ym94Y25mMm1GUzVMWVNjRVRjbjlKS0RTRDhjXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://moe.photo/images/2023/04/08/14.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:80%;" />
+
 <ol start="4">
 <li>最后产生聚类结果y_preds:</li>
 </ol>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ODUyZGYyMjgwZmI4NGI4Zjg4NTc1N2YyN2RlZWZiNDdfdVliYjdGa05veTZRTkI1NTVRczRvZW1Xc3lEc21DNVdfVG9rZW46Ym94Y24xOWRjQ2piRWIxZWVpVzZoc2NnR3BoXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://moe.photo/images/2023/04/08/15.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:80%;" />
+
 <h3 id="算法实现的困难"><a href="#算法实现的困难" class="headerlink" title="算法实现的困难"></a>算法实现的困难</h3><ol>
 <li>K值的选取不好把握</li>
 <li>采用迭代方法，得到的结果只是局部最优。</li>
@@ -417,27 +432,33 @@
 <ol>
 <li>从输入的数据点集合中随机选择一个点作为第一个聚类中心；</li>
 </ol>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=OGJlNWVmODc2MzM2YjI1NzRiZDYxNmYwZTNhNzYyNmFfa0E5dHNKazNDY0FUbXViZzd0QUhLdzdRbnZRNkhQYnhfVG9rZW46Ym94Y25Ua3NucHVBTk1QT1RSR3V1b2pNN3ljXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://moe.photo/images/2023/04/08/16.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:80%;" />
+
 <ol start="2">
 <li>对于数据集中的每一个点xi，计算它与已选择的聚类中心中最近聚类中心的距离D(x)；</li>
 </ol>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=YTliNGZjNTEyMDcyZGE4YjM4MDlhYjJhMzBjZGVhMjZfN3hvUUJPZzlYSm55STB4RVNwdmQ0eFMyQ2FqRno5aUlfVG9rZW46Ym94Y25ONjJ1VXI2S2VLdFMwdlVMNGVCZm5iXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://s2.loli.net/2023/04/08/qYe5AdtjL1aWCZl.png" srcset="/img/loading.gif" lazyload alt="42245b50-f3fb-4b8d-ba70-d1071e7bc6d4" style="zoom:80%;" />
+
 <ol start="3">
 <li>选择一个新的数据点作为新的聚类中心，选择的原则是：D(x)较大的点，被选取作为聚类中心的概率较大；</li>
 </ol>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ODkyMjRkZDc2YzA2N2UyMDhmNTk4NjJjNDBmYmQyM2NfMDZFSTUzUFZERnlCMTBLT2tlb3AwdHpuSVdUM29nZkZfVG9rZW46Ym94Y25BMU1Xa24wY0JRZGxsN1VBZUJSbWFkXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://s2.loli.net/2023/04/08/z8cKdkAqC4QanNO.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+
 <ol start="4">
 <li>重复2和3直到选择出k个聚类质心；</li>
 </ol>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MmU4MzhmZjc4ODlkMjMwMTMxNjdjNzg5NDRiNDk1ZDVfRUFLY3NRbTdoMm15VVFxNzE4S1B4VVp1ME5zYXc2eW9fVG9rZW46Ym94Y244QTRMdmxQcWVNUFFMQzB4YWUxY3VnXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://s2.loli.net/2023/04/08/59FJ28NIXMkcmvx.png" srcset="/img/loading.gif" lazyload alt="2" style="zoom:80%;" />
+
 <ol start="5">
 <li>利用这k个质心来作为初始化质心去运行标准的K-Means算法；</li>
 </ol>
 <h4 id="n-init二次优化"><a href="#n-init二次优化" class="headerlink" title="n_init二次优化:"></a>n_init二次优化:</h4><p>该优化即算法执行n_init次，最终结果取最优的一次（所有样本点到所属的聚类质心的距离之和最小，即为最优）</p>
 <p>数学表现如下：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MTAxYWEyYTAxZDFiMWRkMDcwMzZjZTQzYzJmN2M2MzZfNVJkcXRueHczcTVvMEd5dktRM3NRazV6dkQ4VWVWTFhfVG9rZW46Ym94Y25HanRQb1RhREFLdE9LSVo1Qk1PTFNqXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://s2.loli.net/2023/04/08/6lgpvwCBmDL5uAF.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+
 <p>在Kmeans++方法选取质心的基础上，再添加参数n_init来优化聚类的准确性和稳定性，为此我们定义函数select_optimal：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=Y2E4NjYwMjAyMDEwMjI1ZWVlZGQzNTFhZTUyMDBkYzlfRHBNSW11ejNhOHBZbmpVM2xRakdUWVJ6dlVOd1lzaTlfVG9rZW46Ym94Y25NSDZNWFdNRWVWNGJLM1NFZGJSUGlkXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://s2.loli.net/2023/04/08/I5xHO9qNWrU8A2o.png" srcset="/img/loading.gif" lazyload alt="5" style="zoom:80%;" />
+
 <p>该函数找到n_init次运行中，J最小时，对应的聚类质心，即为最优解。</p>
 <h4 id="k值选取方法优化："><a href="#k值选取方法优化：" class="headerlink" title="k值选取方法优化："></a>k值选取方法优化：</h4><p>传统的k值选取方法使用肘部图法，我们这里采用从簇内的稠密程度和簇间的离散程度来评估聚类的效果。常见的</p>
 <p>方法有轮廓系数Silhouette Coefficient和Calinski-Harabasz Index。</p>
@@ -445,36 +466,40 @@
 <p>它的得分越高，聚类效果越好，得分最高时，就是最佳的k值。</p>
 <p>具体过程如下：</p>
 <p>k&#x3D;5：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MGM4NTE3Mjk3NDA4ZTI5YWVmMzZjMDQ5NGYwMzQ0NGRfOVlXeDhiSUZoVGx1MWZvcVZ0MW1aeGY5WU92ald0QnJfVG9rZW46Ym94Y25WNGlLOTBVTUhtNUlRUzdJUDJWM2JoXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://s2.loli.net/2023/04/08/HVTQZIGzicOPU8X.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+
 <p>k&#x3D;6：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MzIwMzVlNTFmZTBlNjc0ODdjM2M1YWY0MjVkYTIxNDFfdVdVZHJrbEs4OWRQcUwyZEg3NWlUN3M4REpsU0VuenhfVG9rZW46Ym94Y25QbDdPcG5vbGwyRlNFQjJ3VFlGMVViXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://s2.loli.net/2023/04/08/LzxTF7wZobyU4kc.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+
 <p>k&#x3D;7：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTE2NjU2M2M3MDU2NjhmNjRjMzczYzQxMWQzNWI3YTdfQm9CYmJITnBmZmV2TVk0V0FwN0JoRkVYWmZHcnNtZ0NfVG9rZW46Ym94Y24xUzRIenFaeEVvcE5IbjlueFhiMFRlXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://s2.loli.net/2023/04/08/R94HVUFAB6lNSIy.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+
 <p>可以看到，K&#x3D;6的时候，得分最高，6就是我们要找的k值。</p>
 <h3 id="实验结果及比较分析"><a href="#实验结果及比较分析" class="headerlink" title="实验结果及比较分析"></a>实验结果及比较分析</h3><h4 id="结果展现绘图"><a href="#结果展现绘图" class="headerlink" title="结果展现绘图"></a>结果展现绘图</h4><p>结果展现形式：散点图</p>
 <p>由于我们的数据是6维的，要绘制散点图需要进行降维，这里我们采用PCA法（主成分分析）降到二维：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ZTUwY2YyNjFjOWZhYThlYmU1MGQzMTIxNjY4ZTE3ODRfdW9xWDJYcFQ3RXEyM1RLV004R0hhTXlibFZZVDVGT0NfVG9rZW46Ym94Y25FeDNENzRQdTJxVUtZbWg2MGkzenFlXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://s2.loli.net/2023/04/08/mtLNHZTYIfuwlyM.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+
 <h4 id="传统Kmeans聚类结果"><a href="#传统Kmeans聚类结果" class="headerlink" title="传统Kmeans聚类结果"></a>传统Kmeans聚类结果</h4><p>在自主实现的Kmeans类中，我们指定init参数为random即可实现传统Kmeans聚类</p>
 <p>第一次聚类：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ODVmYWYwZGM4MDNkYWYwODk1ZjM2YTkxNmQyYWUyMjhfZ29VZnVsNFhQZFVIb20zekw5YzVNQ3RBMmhrMDl3U3BfVG9rZW46Ym94Y25CNXhyTDhXTzB5WEpiTjBRWW9BWm1oXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NzZkOWNlMTllZmNiODkwNjYwM2Q0ZWE0ODE2MmU2MTdfSWpSWlZFVlNKa1V0NFJIMFNDT3VRdDdPVENyNFFEbVNfVG9rZW46Ym94Y25xelVjajN5eEtlVTRjeDVvYmVMNWZjXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://s2.loli.net/2023/04/08/sRvFGAw7lgih3BY.png" srcset="/img/loading.gif" lazyload alt="image-20230408163734866" style="zoom:80%;" />
+
 <p>第二次聚类：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MGRlNWQzOTA3MTU0MTllNGIwMDgzYzUzYTNhNzNmZGJfNUpzdVhkdld5Y1lYWExjeThDc2RpUnVzNm81VEZiOE1fVG9rZW46Ym94Y25LMnhYdE5HZzRFcnRpVUNYOTNJMTliXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=M2EzNzVlZTA5NWJhYTY0M2JhYmNmMWMwZDNhNDUyNzBfa3VMRmtGVDFaRHlBeVJocEk2NmZEOTZ3dGRnb1lGN1FfVG9rZW46Ym94Y25oaHBDZ1o5M3dQUWlkUnNjaWRmdWpmXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://s2.loli.net/2023/04/08/n9DpaW7UcJyLIBM.png" srcset="/img/loading.gif" lazyload alt="image-20230408163815155" style="zoom:80%;" />
+
 <p>第三次聚类</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=YjIwMDc2MjY2YjhkZTg0ZmQ3YjAxZTcxYTZhMTM4ZmJfRWpSTHRXSGNZMXF1ekZsU3dhUm1jOWQycjIxWEU5R3VfVG9rZW46Ym94Y253ZHRJY3Q4QWZwUXdWZUF1Q05vaHhiXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=Njg2YWIwM2Q0MDQ2YzFiYTEzYmU1ODEwODgwZjA2NGJfNzAzZVVnbFZHZENRcGVIWVVWZzA2TTRNRElXZUNSR0hfVG9rZW46Ym94Y25HMHNva1dlOG16bk1CWjlRMFk4cWVoXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://s2.loli.net/2023/04/08/uaEcXNw7syzrRx6.png" srcset="/img/loading.gif" lazyload alt="image-20230408163848246" style="zoom:80%;" />
+
 <p>从calinski_harabasz_score得分和散点图可以看出，每次聚类的效果都不一致，这说明传统Kmeans的聚类很不稳定</p>
 <h4 id="优化算法聚类结果"><a href="#优化算法聚类结果" class="headerlink" title="优化算法聚类结果"></a>优化算法聚类结果</h4><p>在自主实现的Kmeans类中，我们指定init参数为Kmeans++即可实现传统Kmenas聚类</p>
 <p>第一次聚类：</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NzVjNTM5NjM0N2E1YzkzYTg1YTZlNjJhMjE2MWU0MTNfY05vZnp6WVNQazFlbVFYUndxWGI3VHlRNERxUDFaRlZfVG9rZW46Ym94Y25yVWZZM0pmSVJmeldkQXVuNUJua01iXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=MGRkMGZjOTNkNDg1YWM5OGI1NzIzZGM0MTNjMzAzMTZfVm56Wkk2YkloS1pTcG5oblVma0FNN0RGNG1lTDR6dk1fVG9rZW46Ym94Y25rNm5HWnJYbzdsSmxMdmlGZ21FVjVjXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://s2.loli.net/2023/04/08/MTvXxlkH6esuS3I.png" srcset="/img/loading.gif" lazyload alt="image-20230408163924359" style="zoom:80%;" />
+
 <p>第二次聚类</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=Nzc3MjM0M2Y4ODliMWI4NzMxYjhmYmM2MjRmODhmOTNfVTY5bGVQaHEyWWhMZllUQW91RllLdWJ0eDFDQ25wTVRfVG9rZW46Ym94Y255bFNuY2IxZWdEMDZiajFFd3lzQ2JoXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NzRhYmEwODBhZGEwNjNkMTJhNjVjMTYyY2YxMWU5OWJfTnZMRDdQa3h4dmJBOTEyOXBXRW1obDd5bHZ5Zk5LSGRfVG9rZW46Ym94Y25oTzd4Q29GNlVxQ2JsclNJbVpndzZkXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://s2.loli.net/2023/04/08/1p4F6mtRToNlPMK.png" srcset="/img/loading.gif" lazyload alt="image-20230408163951245" style="zoom:80%;" />
+
 <p>第三次聚类</p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NjEwYzAyZGVkMmQ1MzI4MTY4MjJjNThhMGNhMTg3ZmRfZGJKeDQ2aDdTWVhhZjdNZk85ZzVuUWJ4SEExME1mY2dfVG9rZW46Ym94Y25GUnJha3hLeTA2RlNPSGlVa01zTThlXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=OGNmZmRlMmUwZDAxZDk4ZDNmNGI1NjUxYmFkNDg4MGJfYmM2ZXdtcWd1djk5TzVlcG1CQ3NvZEd6cjNDM2VZUE5fVG9rZW46Ym94Y25mTjI0T0s1SUFKRE1SOU05bjRWYzdlXzE2Nzk1NDAyNzI6MTY3OTU0Mzg3Ml9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://s2.loli.net/2023/04/08/Q9dGwRYAZ7kDuqx.png" srcset="/img/loading.gif" lazyload alt="image-20230408164013129" style="zoom:80%;" />
+
 <p>不难看出，相比于传统Kmeans方法，我们的优化算法聚类效果稳定的多，且从calinski_harabasz_score得分可以看出，优化算法的平均聚类效果更好。</p>
 
                 

@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://moe.photo/images/2023/04/06/8e96f5479a51e5e5db13f1ddfc317b831.png">
 <meta property="article:published_time" content="2023-04-06T13:17:25.000Z">
-<meta property="article:modified_time" content="2023-04-06T13:35:28.984Z">
+<meta property="article:modified_time" content="2023-04-08T08:46:14.706Z">
 <meta property="article:author" content="Lumie">
 <meta property="article:tag" content="数据库">
 <meta property="article:tag" content="MySQL">
@@ -348,17 +348,21 @@
 <li>列式数据库</li>
 <li>图形数据库(Neo4j)</li>
 </ol>
-<h2 id="SQL之五种JOIN连接及各类型JOIN解析"><a href="#SQL之五种JOIN连接及各类型JOIN解析" class="headerlink" title="SQL之五种JOIN连接及各类型JOIN解析"></a>SQL之五种JOIN连接及各类型JOIN解析</h2><h3 id="JOIN连接之内连接-INNER-JOIN"><a href="#JOIN连接之内连接-INNER-JOIN" class="headerlink" title="JOIN连接之内连接(INNER JOIN)"></a><strong>JOIN连接之内连接(INNER JOIN)</strong></h3><p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NjA0MjUxM2Q2YjA4MzllYzZhNjQzYTQ4MjkyYjFmOWNfWFQxbzNtdVl2NHJBRFg4a3B2bnVmcDJubjg4RzhZd2RfVG9rZW46Ym94Y251RjNScmNmSnk1MW00bmZJZVZ0bmdiXzE2ODA3ODcwMjA6MTY4MDc5MDYyMF9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="SQL之五种JOIN连接及各类型JOIN解析"><a href="#SQL之五种JOIN连接及各类型JOIN解析" class="headerlink" title="SQL之五种JOIN连接及各类型JOIN解析"></a>SQL之五种JOIN连接及各类型JOIN解析</h2><h3 id="JOIN连接之内连接-INNER-JOIN"><a href="#JOIN连接之内连接-INNER-JOIN" class="headerlink" title="JOIN连接之内连接(INNER JOIN)"></a><strong>JOIN连接之内连接(INNER JOIN)</strong></h3><img src="https://s2.loli.net/2023/04/08/Gr9TKSBVvzqx8fM.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+
 <ul>
 <li>INNER JOIN内连接也叫显性内连接,展示的是两表之间的交集，即获取的是符合查询条件的信息</li>
 <li>隐形内连接：where连接</li>
 </ul>
-<h3 id="JOIN连接之左连接-x2F-左外连接-LEFT-JOIN-x2F-LEFT-OUTER-JOIN"><a href="#JOIN连接之左连接-x2F-左外连接-LEFT-JOIN-x2F-LEFT-OUTER-JOIN" class="headerlink" title="JOIN连接之左连接&#x2F;左外连接(LEFT JOIN&#x2F;LEFT OUTER JOIN)"></a><strong>JOIN连接之左连接&#x2F;左外连接(LEFT JOIN&#x2F;LEFT OUTER JOIN)</strong></h3><p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=YjE3NWJkZGVlNGFjODkyYzhmNDkwOTJhNWE4NzNlNmRfQWJnV0VCVzlmaTFtMHFTUzhnOGMzdW9VaFgwR0hOMUZfVG9rZW46Ym94Y252TGJ4Ulh2OEwyYVRHRjUwNGhzeDljXzE2ODA3ODcwMjA6MTY4MDc5MDYyMF9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="JOIN连接之左连接-x2F-左外连接-LEFT-JOIN-x2F-LEFT-OUTER-JOIN"><a href="#JOIN连接之左连接-x2F-左外连接-LEFT-JOIN-x2F-LEFT-OUTER-JOIN" class="headerlink" title="JOIN连接之左连接&#x2F;左外连接(LEFT JOIN&#x2F;LEFT OUTER JOIN)"></a><strong>JOIN连接之左连接&#x2F;左外连接(LEFT JOIN&#x2F;LEFT OUTER JOIN)</strong></h3><img src="https://s2.loli.net/2023/04/08/4ZOPyFW1k8hjVQ7.png" srcset="/img/loading.gif" lazyload alt="image-20230408164357987" style="zoom:80%;" />
+
 <p>左连接是以LEFT JOIN为基准进行查询，左连接查询的就是左表的全部信息和符合查询条件的信息两部分。</p>
 <p>如果左表展示出来的全部信息，右表没有相对应的信息，则右表记录为null。</p>
-<h3 id="JOIN连接之右连接-x2F-右外连接-RIGHT-JOIN-x2F-RIGHT-OUTER-JOIN"><a href="#JOIN连接之右连接-x2F-右外连接-RIGHT-JOIN-x2F-RIGHT-OUTER-JOIN" class="headerlink" title="JOIN连接之右连接&#x2F;右外连接(RIGHT JOIN&#x2F;RIGHT OUTER JOIN)"></a><strong>JOIN连接之右连接&#x2F;右外连接(RIGHT JOIN&#x2F;RIGHT OUTER JOIN)</strong></h3><p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=ODRmOTVhY2ExMzRlYTYwYmUzMGYwZjk2YjA4NDI3OGZfdjV3MEhHS3M5TURaRGhNclVtRVRLR0dVamtmMHNYSWZfVG9rZW46Ym94Y25OUW9aOTNxaFFrZkI5Z2Z1UnM0TGhkXzE2ODA3ODcwMjA6MTY4MDc5MDYyMF9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="JOIN连接之右连接-x2F-右外连接-RIGHT-JOIN-x2F-RIGHT-OUTER-JOIN"><a href="#JOIN连接之右连接-x2F-右外连接-RIGHT-JOIN-x2F-RIGHT-OUTER-JOIN" class="headerlink" title="JOIN连接之右连接&#x2F;右外连接(RIGHT JOIN&#x2F;RIGHT OUTER JOIN)"></a><strong>JOIN连接之右连接&#x2F;右外连接(RIGHT JOIN&#x2F;RIGHT OUTER JOIN)</strong></h3><img src="https://s2.loli.net/2023/04/08/zWknsq5RJ7IXlDj.png" srcset="/img/loading.gif" lazyload alt="image-20230408164419438" style="zoom:80%;" />
+
 <p>右连接与左连接正好相反，以RIGHT JOIN为基准，展示的信息是RIGHT JOIN右边右表的全部信息加上左右两边符合关联查询条件的。 如果右表展示出来的全部信息，左表没有相对应的信息，则左表记录为null。</p>
-<h3 id="JOIN连接之全连接-FULL-JOIN"><a href="#JOIN连接之全连接-FULL-JOIN" class="headerlink" title="JOIN连接之全连接(FULL JOIN)"></a><strong>JOIN连接之全连接(FULL JOIN)</strong></h3><p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=OTE3NTQ1ODY2NjAwMTRiNTZiOWIyMDUyZWM5NmUxOGRfSXR5MHU3eG5xbWowSU1HNTN6VHJiMVNWRWd5TGxXREpfVG9rZW46Ym94Y25tamtSdmEzbE9LckI4VmpORmRYcHNkXzE2ODA3ODcwMjA6MTY4MDc5MDYyMF9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="JOIN连接之全连接-FULL-JOIN"><a href="#JOIN连接之全连接-FULL-JOIN" class="headerlink" title="JOIN连接之全连接(FULL JOIN)"></a><strong>JOIN连接之全连接(FULL JOIN)</strong></h3><img src="https://s2.loli.net/2023/04/08/7FeB1rECdGUNpSH.png" srcset="/img/loading.gif" lazyload alt="image-20230408164444018" style="zoom:80%;" />
+
 <p>Full outer join展示的是a表和b表的全部信息(a和b的并集)。但需要注意的是，对于没有匹配的记录(即a.id和b.id没有一一对应的)，则会以null作为值。可以使用IFNULL判断。</p>
 <h3 id="JOIN连接之交叉连接-笛卡尔积-CROSS-JOIN"><a href="#JOIN连接之交叉连接-笛卡尔积-CROSS-JOIN" class="headerlink" title="JOIN连接之交叉连接(笛卡尔积)(CROSS JOIN)"></a><strong>JOIN连接之交叉连接(笛卡尔积)(CROSS JOIN)</strong></h3><p>不带where条件子句，它返回的是被连接的两个表的笛卡尔积，返回结果的行数等于两个表行数的乘积</p>
 <p>如果带where，返回或显示的是匹配条件成立的行</p>
@@ -450,16 +454,14 @@
 <h4 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h4><p>乐观锁顾名思义，比较乐观。相比于悲观锁，它是<strong>不锁住资源</strong>的，因为它觉得自己在操作资源时并不会有其他线程干扰。因此，为了保障数据的正确性，它在操作之前，会<strong>先判断在自己操作期间，其他线程是否有操作</strong>。如果没有，直接操作；如果有，则根据业务选择报错或者重试。</p>
 <p>乐观锁的这把锁，其实就是依赖的 CAS （compare and swap：比较并交换）算法或版本号机制。所以，<strong>它在操作资源之前并不需要获得锁，直接读取资源到自己的工作内存内操作。</strong></p>
 <p><strong>乐观锁通常多于写比较少的情况下（多读场景），避免频繁加锁影响性能，大大提升了系统的吞吐量</strong></p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=YzY4MmNjZDQ2ZThlMTA4MDdlOTkzYjk4OWI5YmRlZTlfc3lnRk85WkFuU0F1NFoyMFR6R2V3VUoyTEhvYVc3OXFfVG9rZW46Ym94Y240dlViZEdBZFFQVDdrWlI1SlhvODN2XzE2ODA3ODcwMjA6MTY4MDc5MDYyMF9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=YjcyNTExNTI1NjRjOWZmYjI3OWI5N2UyMTBlMWQyYTFfSUVPdDBwTjBDc2lEa2dVWElrOWk2VmVwZVlQWUZCZFRfVG9rZW46Ym94Y24wc3JVT3pGOGFXbmo1Zk5CSElwZURjXzE2ODA3ODcwMjA6MTY4MDc5MDYyMF9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://gffwfxl68b.feishu.cn/space/api/box/stream/download/asynccode/?code=NjBkYTliNGQyYTVhY2VjZWFjOGM4YTgwNzkzOTgxMzFfeW1BQzNYekN4VzM4S2NETWNxZmtvR3lHdUdMRzVyQ2tfVG9rZW46Ym94Y25WVFN5bUd4bktOeVlGcGNOSWV4dlJjXzE2ODA3ODcwMjA6MTY4MDc5MDYyMF9WNA" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="https://s2.loli.net/2023/04/08/AkMp4eNcrEwu1Ot.png" srcset="/img/loading.gif" lazyload alt="image-20230408164519615" style="zoom:70%;" />
+
 <h4 id="数据库的乐观锁和悲观锁"><a href="#数据库的乐观锁和悲观锁" class="headerlink" title="数据库的乐观锁和悲观锁"></a>数据库的乐观锁和悲观锁</h4><ul>
-<li><p><strong>悲观锁</strong>：假定会发生并发冲突，屏蔽一切可能违反数据完整性的操作。在查询完数据的时候就把事务锁起来，直到提交事务。</p>
-<pre><code class="hljs">   实现方式：使用数据库中的锁机制
-</code></pre>
-</li>
-<li><p><strong>乐观锁</strong>：假设不会发生并发冲突，只在事务提交时检查是否违反数据完整性。乐观锁并不会使用数据库提供的锁机制。一般的实现乐观锁的方式就是记录数据版本。</p>
-</li>
+<li><strong>悲观锁</strong>：假定会发生并发冲突，屏蔽一切可能违反数据完整性的操作。在查询完数据的时候就把事务锁起来，直到提交事务。</li>
+</ul>
+<p>​     	实现方式：使用数据库中的锁机制</p>
+<ul>
+<li><strong>乐观锁</strong>：假设不会发生并发冲突，只在事务提交时检查是否违反数据完整性。乐观锁并不会使用数据库提供的锁机制。一般的实现乐观锁的方式就是记录数据版本。</li>
 </ul>
 <p>​     	实现方式：一般会使用版本号机制或CAS算法实现。</p>
 <h2 id="数据库优化"><a href="#数据库优化" class="headerlink" title="数据库优化"></a>数据库优化</h2><h3 id="选取最适用的字段属性"><a href="#选取最适用的字段属性" class="headerlink" title="选取最适用的字段属性"></a>选取最适用的字段属性</h3><ul>
